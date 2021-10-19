@@ -5,14 +5,14 @@ import lombok.Data;
 import javax.persistence.*;
 
 @Data
-@Entity
-public class CorCabo {
+@Entity(name = "marca")
+public class Brand {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
-    private String corCabo;
+    @Column(nullable = false, name = "marca")
+    private String brand;
 
 }

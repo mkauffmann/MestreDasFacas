@@ -1,7 +1,7 @@
 package br.com.rd.MestreDasFacas.controller;
 
-import br.com.rd.MestreDasFacas.model.dto.CorCaboDTO;
-import br.com.rd.MestreDasFacas.service.CorCaboService;
+import br.com.rd.MestreDasFacas.model.dto.CableColorDTO;
+import br.com.rd.MestreDasFacas.service.CableColorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -9,30 +9,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/corCabo")
-public class CorCaboController {
+@RequestMapping("/cableColor")
+public class CableColorController {
 
     @Autowired
-    CorCaboService corCaboService;
+    CableColorService corCaboService;
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public CorCaboDTO create(@RequestBody CorCaboDTO dto) {
-        return this.corCaboService.addCorCabo(dto);
+    public CableColorDTO create(@RequestBody CableColorDTO dto) {
+        return this.corCaboService.addCableColor(dto);
     }
 
     @GetMapping
-    public List<CorCaboDTO> showList() {
-        return this.corCaboService.showListCorCabo();
+    public List<CableColorDTO> showList() {
+        return this.corCaboService.showListCableColor();
     }
 
     @GetMapping("/{id}")
-    public CorCaboDTO find(@PathVariable("id") Long id) {
-        return this.corCaboService.findCorCaboById(id);
+    public CableColorDTO find(@PathVariable("id") Long id) {
+        return this.corCaboService.findCableColorById(id);
     }
 
     @PutMapping("/{id}")
-    public CorCaboDTO update(@RequestBody CorCaboDTO dto, @PathVariable("id") Long id) {
+    public CableColorDTO update(@RequestBody CableColorDTO dto, @PathVariable("id") Long id) {
         return this.corCaboService.updateById(dto, id);
     }
 
