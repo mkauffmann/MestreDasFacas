@@ -1,0 +1,27 @@
+package br.com.rd.MestreDasFacas.model.dto;
+
+
+import br.com.rd.MestreDasFacas.model.entity.Address;
+import br.com.rd.MestreDasFacas.model.entity.CreditCard;
+import br.com.rd.MestreDasFacas.model.entity.Gender;
+import br.com.rd.MestreDasFacas.model.entity.Telephone;
+import lombok.Data;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+@Data
+public class ClientDTO {
+    private Integer id;
+    private String name;
+    private String email;
+    private String cpf;
+    private Date birthDate;
+    private String password;
+    private GenderDTO gender;
+    private List<TelephoneDTO> telephones;
+    private List<AddressDTO> addresses;
+    private List<CreditCardDTO> creditCards;
+
+}
