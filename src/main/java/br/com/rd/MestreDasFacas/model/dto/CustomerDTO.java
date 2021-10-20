@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
-public class ClientDTO {
+public class CustomerDTO {
     private Integer id;
     private String name;
     private String email;
