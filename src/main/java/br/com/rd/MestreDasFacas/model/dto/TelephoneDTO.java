@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Data
 public class TelephoneDTO {
-    private Integer id;
+    private Long id;
     private String ddd;
     private String phoneNumber;
 

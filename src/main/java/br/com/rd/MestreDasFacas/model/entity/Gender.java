@@ -10,7 +10,7 @@ public class Gender {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_GENERO")
-    private Integer id;
+    private Long id;
 
     @Column(name = "DESCRICAO_GENERO", nullable = false, unique = true)
     private String description;

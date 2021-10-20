@@ -10,7 +10,7 @@ public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_CIDADE")
-    private Integer id;
+    private Long id;
 
     @Column(name = "NOME_CIDADE", nullable = false)
     private String cityName;

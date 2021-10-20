@@ -11,7 +11,7 @@ public class CardBrand {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_BANDEIRA")
-    private Integer id;
+    private Long id;
 
     @Column(name = "DESCRICAO_BANDEIRA", nullable = false, unique = true)
     private String cardBrandName;

@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Data
 public class CreditCardDTO {
-    private Integer id;
+    private Long id;
     private String cardNumber;
     private String cpf;
     private String holderName;

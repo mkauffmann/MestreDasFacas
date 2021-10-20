@@ -13,7 +13,7 @@ import java.util.List;
 
 @Data
 public class CustomerDTO {
-    private Integer id;
+    private Long id;
     private String name;
     private String email;
     private String cpf;

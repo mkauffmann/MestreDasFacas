@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Data
 public class AddressDTO {
-    private Integer id;
+    private Long id;
     private String street;
     private Integer number;
     private String complement;

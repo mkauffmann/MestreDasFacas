@@ -10,7 +10,7 @@ public class CreditCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_CARTAO_CREDITO")
-    private Integer id;
+    private Long id;
 
     @Column(name = "NUMERO_CARTAO", nullable = false)
     private String cardNumber;

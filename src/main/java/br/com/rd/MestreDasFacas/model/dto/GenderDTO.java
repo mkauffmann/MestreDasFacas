@@ -6,6 +6,6 @@ import javax.persistence.*;
 
 @Data
 public class GenderDTO {
-    private Integer id;
+    private Long id;
     private String description;
 }

@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Data
 public class CityDTO {
-    private Integer id;
+    private Long id;
     private String cityName;
 
 }
