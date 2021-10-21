@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,25 +37,91 @@ public class CustomerService {
     @Autowired
     GenderRepository genderRepository;
 
-//    public CustomerDTO add(CustomerDTO dto){
-//
-//    }
-//
-//    public CustomerDTO update(Long id, CustomerDTO dto){
-//
-//    }
-//
-//    public CustomerDTO findById(Long id){
-//
-//    }
-//
-//    public List<CustomerDTO> findAll(){
-//
-//    }
-//
-//    public void deleteById(Long id){
-//
-//    }
+    public CustomerDTO add(CustomerDTO dto){
+        Customer newCustomer = customerDtoToBusiness(dto);
+        newCustomer = customerRepository.save(newCustomer);
+        return customerBusinessToDto(newCustomer);
+    }
+
+    public CustomerDTO update(Long id, CustomerDTO dto) {
+        Optional<Customer> op = customerRepository.findById(id);
+        if(op.isPresent()){
+            Customer update = op.get();
+
+            if(dto.getName() != null){
+                update.setName(dto.getName());
+            }
+            if(dto.getEmail() != null){
+                update.setEmail(dto.getEmail());
+            }
+            if(dto.getCpf() != null){
+                update.setCpf(dto.getCpf());
+            }
+            if(dto.getBirthDate() != null){
+                update.setBirthDate(dto.getBirthDate());
+            }
+            if(dto.getPassword() != null){
+                update.setPassword(dto.getPassword());
+            }
+            if(dto.getGender() != null){
+                Gender gender = genderDtoToBusiness(dto.getGender());
+                update.setGender(gender);
+            }
+            if(dto.getTelephones() != null){
+                List<Telephone> listTel = telephoneListFromDto(dto.getTelephones());
+                List<Telephone> listUpdate = update.getTelephones();
+
+                for (Telephone t : listTel){
+                    t = telephoneRepository.save(t);
+                    listUpdate.add(t);
+                }
+                update.setTelephones(listUpdate);
+            }
+            if(dto.getAddresses() != null){
+                List<Address> listAdd = addressListFromDto(dto.getAddresses());
+                List<Address> listUpdate = update.getAddresses();
+                for (Address a : listAdd){
+                    a = addressRepository.save(a);
+                    listUpdate.add(a);
+                }
+                update.setAddresses(listUpdate);
+            }
+            if(dto.getCreditCards() != null){
+                List<CreditCard> listCard = creditCardListFromDto(dto.getCreditCards());
+                List<CreditCard> listUpdate = update.getCreditCards();
+                for (CreditCard c : listCard){
+                    c = creditCardRepository.save(c);
+                    listUpdate.add(c);
+                }
+                update.setCreditCards(listUpdate);
+            }
+
+            update = customerRepository.save(update);
+            return customerBusinessToDto(update);
+        }
+        return null;
+    }
+
+    public CustomerDTO findById(Long id){
+        Optional<Customer> op = customerRepository.findById(id);
+        if(op.isPresent()){
+            Customer customer = op.get();
+            return customerBusinessToDto(customer);
+        }
+        return null;
+    }
+
+    public List<CustomerDTO> findAll(){
+        List<Customer> list = customerRepository.findAll();
+
+        return customerListToDto(list);
+    }
+
+    public void deleteById(Long id){
+        if (customerRepository.existsById(id)){
+            customerRepository.deleteById(id);
+        }
+    }
 //
 //    //CONVERSOES LISTAS INICIO
      private List<CustomerDTO> customerListToDto(List<Customer> list){
@@ -143,14 +208,18 @@ public class CustomerService {
              dto.setGender(gender);
          }
 
-         List<TelephoneDTO> telephones = telephoneListToDto(customer.getTelephones());
-         dto.setTelephones(telephones);
-
-         List<AddressDTO> addresses = addressListToDto(customer.getAddresses());
-         dto.setAddresses(addresses);
-
-         List<CreditCardDTO> creditCards = creditCardListToDto(customer.getCreditCards());
-         dto.setCreditCards(creditCards);
+         if(customer.getTelephones() != null){
+             List<TelephoneDTO> telephones = telephoneListToDto(customer.getTelephones());
+             dto.setTelephones(telephones);
+         }
+         if(customer.getAddresses() != null){
+             List<AddressDTO> addresses = addressListToDto(customer.getAddresses());
+             dto.setAddresses(addresses);
+         }
+         if(customer.getCreditCards() != null){
+             List<CreditCardDTO> creditCards = creditCardListToDto(customer.getCreditCards());
+             dto.setCreditCards(creditCards);
+         }
 
          return dto;
      }
@@ -263,15 +332,18 @@ public class CustomerService {
             customer.setGender(gender);
         }
 
-        List<Telephone> telephones = telephoneListFromDto(dto.getTelephones());
-        customer.setTelephones(telephones);
-
-        List<Address> addresses = addressListFromDto(dto.getAddresses());
-        customer.setAddresses(addresses);
-
-        List<CreditCard> cards = creditCardListFromDto(dto.getCreditCards());
-        customer.setCreditCards(cards);
-
+        if(dto.getTelephones() != null){
+            List<Telephone> telephones = telephoneListFromDto(dto.getTelephones());
+            customer.setTelephones(telephones);
+        }
+        if(dto.getAddresses() != null){
+            List<Address> addresses = addressListFromDto(dto.getAddresses());
+            customer.setAddresses(addresses);
+        }
+        if(dto.getCreditCards() != null){
+            List<CreditCard> cards = creditCardListFromDto(dto.getCreditCards());
+            customer.setCreditCards(cards);
+        }
         return customer;
      }
 
@@ -391,16 +463,22 @@ public class CustomerService {
     }
 
     private CardBrand cardBrandDtoToBusiness(CardBrandDTO dto){
-        CardBrand brand = new CardBrand();
-
+        //se foi passado id
         if(dto.getId() != null){
             Optional<CardBrand> op = cardBrandRepository.findById(dto.getId());
             if(op.isPresent()){
                 return op.get();
             }
         }
-        brand.setCardBrandName(dto.getCardBrandName());
-        return brand;
+        //checar se nome já existe
+        Optional<CardBrand> op = cardBrandRepository.findByCardBrandName(dto.getCardBrandName());
+        if(op.isPresent()){
+            return op.get();
+        } else {
+            CardBrand brand = new CardBrand();
+            brand.setCardBrandName(dto.getCardBrandName());
+            return brand;
+        }
     }
     //CREDIT CARD FIM
 

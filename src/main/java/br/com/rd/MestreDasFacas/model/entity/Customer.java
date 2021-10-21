@@ -21,7 +21,7 @@ public class Customer {
     @Column(name = "EMAIL", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "CPF", nullable = false, unique = true)
+    @Column(name = "CPF", nullable = false)
     private String cpf;
 
     @Column(name = "DATA_NASCIMENTO")
