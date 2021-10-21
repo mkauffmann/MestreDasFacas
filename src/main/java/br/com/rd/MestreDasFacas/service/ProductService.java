@@ -1,8 +1,6 @@
 package br.com.rd.MestreDasFacas.service;
 
-import br.com.rd.MestreDasFacas.model.dto.BrandDTO;
-import br.com.rd.MestreDasFacas.model.dto.CableColorDTO;
-import br.com.rd.MestreDasFacas.model.dto.ProductDTO;
+import br.com.rd.MestreDasFacas.model.dto.*;
 import br.com.rd.MestreDasFacas.model.entity.Brand;
 import br.com.rd.MestreDasFacas.model.entity.CableColor;
 import br.com.rd.MestreDasFacas.model.entity.Product;
@@ -107,9 +105,9 @@ public class ProductService {
 
     // Método para barra de busca:
 
-    public List<ProductDTO> listProductsSearch(String search) {
+    public List<ProductDTO2> listProductsSearch(String search) {
         List<Product> productList = this.productRepository.myFindAllBySearch(search);
-        return listToDto(productList);
+        return listToDto2(productList);
     }
 
     // Métodos de conversão:
@@ -218,6 +216,54 @@ public class ProductService {
 
         for(Product p : list) {
             listDto.add(businessToDto(p));
+        }
+
+        return listDto;
+    }
+
+    // MÉTODOS DE CONVERSÃO 2:
+
+    private BrandDTO2 brandBusinessToDto2(Brand business) {
+
+        BrandDTO2 dto = new BrandDTO2();
+
+        dto.setBrand(business.getBrand());
+
+        return dto;
+    }
+
+    private CableColorDTO2 cableColorBusinessToDto2(CableColor business) {
+
+        CableColorDTO2 dto = new CableColorDTO2();
+
+        dto.setCableColor(business.getCableColor());
+
+        return dto;
+    }
+
+    private ProductDTO2 businessToDto2(Product business) {
+
+        ProductDTO2 dto = new ProductDTO2();
+        BrandDTO2 brandDto = brandBusinessToDto2(business.getBrand());
+        CableColorDTO2 cableDto = cableColorBusinessToDto2(business.getCableColor());
+
+        dto.setProductName(business.getProductName());
+        dto.setDescriptionProduct(business.getDescriptionProduct());
+        dto.setHeight(business.getHeight());
+        dto.setLength(business.getLength());
+        dto.setWeight(business.getWeight());
+        dto.setWidth(business.getWidth());
+        dto.setBrand(brandDto);
+        dto.setCableColor(cableDto);
+
+        return dto;
+    }
+
+    private List<ProductDTO2> listToDto2(List<Product> list) {
+        List<ProductDTO2> listDto = new ArrayList<>();
+
+        for(Product p : list) {
+            listDto.add(businessToDto2(p));
         }
 
         return listDto;
