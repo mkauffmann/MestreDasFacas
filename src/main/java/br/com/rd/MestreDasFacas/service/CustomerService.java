@@ -59,13 +59,23 @@ public class CustomerService {
 //    }
 //
 //    //CONVERSOES LISTAS INICIO
-//     private List<CustomerDTO> customerListToDto(List<Customer> list){
-//
-//     }
-//
-//    private List<TelephoneDTO> telephoneListToDto(List<Telephone> list){
-//
-//    }
+     private List<CustomerDTO> customerListToDto(List<Customer> list){
+        List<CustomerDTO> listDto = new ArrayList<CustomerDTO>();
+
+        for (Customer c : list){
+            listDto.add(customerBusinessToDto(c));
+        }
+        return listDto;
+     }
+
+    private List<TelephoneDTO> telephoneListToDto(List<Telephone> list){
+        List<TelephoneDTO> listDto = new ArrayList<TelephoneDTO>();
+
+        for (Telephone t : list){
+            listDto.add(telephoneBusinessToDto(t));
+        }
+        return listDto;
+    }
 
     private List<Telephone> telephoneListFromDto(List<TelephoneDTO> dtoList){
         List<Telephone> listTel = new ArrayList<Telephone>();
@@ -77,9 +87,14 @@ public class CustomerService {
         return listTel;
     }
 
-//    private List<AddressDTO> addressListToDto(List<Address> list){
-//
-//    }
+    private List<AddressDTO> addressListToDto(List<Address> list){
+         List<AddressDTO> listDto = new ArrayList<AddressDTO>();
+
+         for(Address a : list){
+             listDto.add(addressBusinessToDto(a));
+         }
+         return listDto;
+    }
 
     private List<Address> addressListFromDto(List<AddressDTO> dtoList){
         List<Address> listAddress = new ArrayList<Address>();
@@ -91,9 +106,14 @@ public class CustomerService {
         return listAddress;
     }
 
-//    private List<CreditCardDTO> creditCardListToDto(List<CreditCard> list){
-//
-//    }
+    private List<CreditCardDTO> creditCardListToDto(List<CreditCard> list){
+         List<CreditCardDTO> listDto = new ArrayList<CreditCardDTO>();
+
+         for(CreditCard card : list){
+             listDto.add(creditCardBusinessToDto(card));
+         }
+         return listDto;
+    }
 
     private List<CreditCard> creditCardListFromDto(List<CreditCardDTO> dtoList){
         List<CreditCard> listCard = new ArrayList<CreditCard>();
@@ -107,35 +127,127 @@ public class CustomerService {
      //CONVERSOES LISTAS FIM
 
      //CONVERSOES BUSINESS TO DTO INICIO
-//     private CustomerDTO customerBusinessToDto(Customer customer){
-//
-//     }
-//
-//     private GenderDTO genderBusinessToDto(Gender gender){
-//
-//     }
-//
-//    private TelephoneDTO telephoneBusinessToDto(Telephone telephone){
-//
-//    }
-//
-//
-//    private AddressDTO addressBusinessToDto(Address address){
-//
-//    }
-//
-//    private CreditCardDTO creditCardBusinessToDto(CreditCard creditCard){
-//
-//    }
-//
-//    private CardBrandDTO cardBrandBusinessToDto(CardBrand brand){
-//
-//    }
+     private CustomerDTO customerBusinessToDto(Customer customer){
+         CustomerDTO dto = new CustomerDTO();
+
+         dto.setId(customer.getId());
+         dto.setName(customer.getName());
+         dto.setEmail(customer.getEmail());
+         dto.setCpf(customer.getCpf());
+         dto.setPassword(customer.getPassword());
+         if(customer.getBirthDate() != null){
+             dto.setBirthDate(customer.getBirthDate());
+         }
+         if(customer.getGender() != null){
+             GenderDTO gender = genderBusinessToDto(customer.getGender());
+             dto.setGender(gender);
+         }
+
+         List<TelephoneDTO> telephones = telephoneListToDto(customer.getTelephones());
+         dto.setTelephones(telephones);
+
+         List<AddressDTO> addresses = addressListToDto(customer.getAddresses());
+         dto.setAddresses(addresses);
+
+         List<CreditCardDTO> creditCards = creditCardListToDto(customer.getCreditCards());
+         dto.setCreditCards(creditCards);
+
+         return dto;
+     }
+
+     private GenderDTO genderBusinessToDto(Gender gender){
+        GenderDTO dto = new GenderDTO();
+
+        dto.setId(gender.getId());
+        dto.setDescription(gender.getDescription());
+
+        return dto;
+     }
+
+    private TelephoneDTO telephoneBusinessToDto(Telephone telephone){
+        TelephoneDTO dto = new TelephoneDTO();
+
+        dto.setId(telephone.getId());
+        dto.setDdd(telephone.getDdd());
+        dto.setPhoneNumber(telephone.getPhoneNumber());
+
+        return dto;
+    }
+
+
+    private AddressDTO addressBusinessToDto(Address address){
+        AddressDTO dto = new AddressDTO();
+
+        dto.setId(address.getId());
+        dto.setStreet(address.getStreet());
+        dto.setNumber(address.getNumber());
+        if(address.getComplement() != null){
+            dto.setComplement(address.getComplement());
+        }
+        dto.setCep(address.getCep());
+        dto.setNeighborhood(address.getNeighborhood());
+
+        CityDTO cityDto = cityBusinessToDto(address.getCity());
+        dto.setCity(cityDto);
+
+        StateDTO stateDto = stateBusinessToDto(address.getState());
+        dto.setState(stateDto);
+
+        return dto;
+    }
+
+    private CityDTO cityBusinessToDto(City city){
+        CityDTO dto = new CityDTO();
+
+        dto.setId(city.getId());
+        dto.setCityName(city.getCityName());
+
+        return dto;
+    }
+
+    private StateDTO stateBusinessToDto(State state){
+        StateDTO dto = new StateDTO();
+
+        dto.setUf(state.getUf());
+        dto.setStateName(state.getStateName());
+
+        return dto;
+    }
+
+    private CreditCardDTO creditCardBusinessToDto(CreditCard creditCard){
+        CreditCardDTO dto = new CreditCardDTO();
+
+        dto.setId(creditCard.getId());
+        dto.setCardNumber(creditCard.getCardNumber());
+        dto.setCpf(creditCard.getCpf());
+        dto.setHolderName(creditCard.getHolderName());
+
+        CardBrandDTO brandDto = cardBrandBusinessToDto(creditCard.getCardBrand());
+        dto.setCardBrand(brandDto);
+
+        return dto;
+    }
+
+    private CardBrandDTO cardBrandBusinessToDto(CardBrand brand){
+        CardBrandDTO dto = new CardBrandDTO();
+
+        dto.setId(brand.getId());
+        dto.setCardBrandName(brand.getCardBrandName());
+
+        return dto;
+    }
 
     //CONVERSOES BUSINESS TO DTO FIM
 
     //CONVERSORES DTO TO BUSINESS INICIO
      private Customer customerDtoToBusiness(CustomerDTO dto){
+        //se foi passado um id
+         if(dto.getId() != null){
+             Optional<Customer> op = customerRepository.findById(dto.getId());
+             if(op.isPresent()){
+                 return op.get();
+             }
+         }
         Customer customer = new Customer();
         customer.setName(dto.getName());
         customer.setEmail(dto.getEmail());
