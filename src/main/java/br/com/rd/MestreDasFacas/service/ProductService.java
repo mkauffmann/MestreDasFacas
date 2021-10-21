@@ -105,6 +105,13 @@ public class ProductService {
         }
     }
 
+    // Método para barra de busca:
+
+    public List<ProductDTO> listProductsSearch(String search) {
+        List<Product> productList = this.productRepository.myFindAllBySearch(search);
+        return listToDto(productList);
+    }
+
     // Métodos de conversão:
 
     // Métodos de conversão para Brand:

@@ -43,4 +43,11 @@ public class ProductController {
         this.productService.deleteById(id);
     }
 
+    // Barra de busca:
+
+    @GetMapping("/search/{busca}")
+    public List<ProductDTO> searchProducts(@PathVariable("busca") String search) {
+        return this.productService.listProductsSearch(search);
+    }
+
 }
