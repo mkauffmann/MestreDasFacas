@@ -31,7 +31,7 @@ public class Customer {
     @Column(name = "SENHA", nullable = false)
     private String password;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "ID_GENERO")
     private Gender gender;
 
