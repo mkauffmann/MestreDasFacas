@@ -120,6 +120,13 @@ public class ProductService {
         return listToDto2(productList);
     }
 
+    // Método para listar produtos pelo id de categoria:
+
+    public List<ProductDTO2> listProductByCategory(Long id) {
+        List<Product> productList = this.productRepository.myFindAllByIdCategory(id);
+        return listToDto2(productList);
+    }
+
     // Métodos de conversão:
 
     // Métodos de conversão para Brand:

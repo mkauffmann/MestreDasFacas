@@ -51,4 +51,11 @@ public class ProductController {
         return this.productService.listProductsSearch(search);
     }
 
+    // Buscar por categoria:
+
+    @GetMapping("/category/{id}")
+    public List<ProductDTO2> searchByCategory(@PathVariable("id") Long id) {
+        return this.productService.listProductByCategory(id);
+    }
+
 }
