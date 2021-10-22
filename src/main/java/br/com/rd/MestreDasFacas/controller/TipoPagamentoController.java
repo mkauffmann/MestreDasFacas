@@ -1,8 +1,8 @@
-package br.com.rd.HPProjetoServico.controller;
+package br.com.rd.MestreDasFacas.controller;
 
 
-import br.com.rd.HPProjetoServico.model.dto.TipoPagamentoDTO;
-import br.com.rd.HPProjetoServico.service.TipoPagamentoService;
+import br.com.rd.MestreDasFacas.model.dto.TipoPagamentoDTO;
+import br.com.rd.MestreDasFacas.service.TipoPagamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

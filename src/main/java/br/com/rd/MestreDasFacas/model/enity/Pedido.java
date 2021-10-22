@@ -1,11 +1,4 @@
-package br.com.rd.HPProjetoServico.model.enity;
-
-import br.com.rd.HPProjetoServico.model.dto.StatusPedidoDTO;
-import br.com.rd.HPProjetoServico.model.dto.TipoPagamentoDTO;
-import lombok.Data;
-
-import javax.persistence.*;
-import java.sql.Date;
+package br.com.rd.MestreDasFacas.model.enity;
 
 //@Data
 //@Entity(name = "pedido")

@@ -1,18 +1,19 @@
-package br.com.rd.HPProjetoServico.model.enity;
+package br.com.rd.MestreDasFacas.model.enity;
 
 import lombok.Data;
 
 import javax.persistence.*;
 
 @Data
-@Entity(name = "tipo_pagamento")
-public class TipoPagamento {
+@Entity(name = "status_pedido")
+public class StatusPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_tipo_pagamento;
+    private Long id_status_pedido;
     //    @NotNull(message = "Brand field is empty")
     @Column(nullable = false)
-    private String descricao_tipo_pagamento;
+    private String description_status_pedido;
     //    @NotNull(message = "Model field is empty")
 
 }
+

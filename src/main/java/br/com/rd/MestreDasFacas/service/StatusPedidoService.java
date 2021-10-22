@@ -1,8 +1,8 @@
-package br.com.rd.HPProjetoServico.service;
+package br.com.rd.MestreDasFacas.service;
 
-import br.com.rd.HPProjetoServico.model.dto.StatusPedidoDTO;
-import br.com.rd.HPProjetoServico.model.enity.StatusPedido;
-import br.com.rd.HPProjetoServico.repository.contract.StatusPedidoRepository;
+import br.com.rd.MestreDasFacas.model.dto.StatusPedidoDTO;
+import br.com.rd.MestreDasFacas.model.enity.StatusPedido;
+import br.com.rd.MestreDasFacas.repository.contract.StatusPedidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

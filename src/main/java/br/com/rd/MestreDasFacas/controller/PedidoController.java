@@ -1,11 +1,4 @@
-package br.com.rd.HPProjetoServico.controller;
-
-import br.com.rd.HPProjetoServico.model.dto.PedidoDTO;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+package br.com.rd.MestreDasFacas.controller;
 
 //@RestController
 //@RequestMapping("/Pedido")

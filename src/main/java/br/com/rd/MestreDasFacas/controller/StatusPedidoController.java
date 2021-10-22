@@ -1,8 +1,8 @@
-package br.com.rd.HPProjetoServico.controller;
+package br.com.rd.MestreDasFacas.controller;
 
 
-import br.com.rd.HPProjetoServico.model.dto.StatusPedidoDTO;
-import br.com.rd.HPProjetoServico.service.StatusPedidoService;
+import br.com.rd.MestreDasFacas.model.dto.StatusPedidoDTO;
+import br.com.rd.MestreDasFacas.service.StatusPedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

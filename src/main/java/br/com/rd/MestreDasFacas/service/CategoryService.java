@@ -1,8 +1,8 @@
-package br.com.rd.HPProjetoServico.service;
+package br.com.rd.MestreDasFacas.service;
 
-import br.com.rd.HPProjetoServico.model.dto.CategoryDTO;
-import br.com.rd.HPProjetoServico.model.enity.Category;
-import br.com.rd.HPProjetoServico.repository.contract.CategoryRepository;
+import br.com.rd.MestreDasFacas.model.dto.CategoryDTO;
+import br.com.rd.MestreDasFacas.model.enity.Category;
+import br.com.rd.MestreDasFacas.repository.contract.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,8 @@
-package br.com.rd.HPProjetoServico.service;
+package br.com.rd.MestreDasFacas.service;
 
-import br.com.rd.HPProjetoServico.model.dto.TipoPagamentoDTO;
-import br.com.rd.HPProjetoServico.model.enity.TipoPagamento;
-import br.com.rd.HPProjetoServico.repository.contract.TipoPagamentoRepository;
+import br.com.rd.MestreDasFacas.model.dto.TipoPagamentoDTO;
+import br.com.rd.MestreDasFacas.model.enity.TipoPagamento;
+import br.com.rd.MestreDasFacas.repository.contract.TipoPagamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

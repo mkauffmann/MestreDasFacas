@@ -1,4 +1,4 @@
-package br.com.rd.HPProjetoServico.model.dto;
+package br.com.rd.MestreDasFacas.model.dto;
 
 
 import lombok.Data;
