@@ -1,13 +1,13 @@
-package br.com.rd.HPBack;
+package br.com.rd.HPProjetoServico;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class HpBackApplication {
+public class MestreDasFacas {
 
 	public static void main(String[] args) {
-		SpringApplication.run(HpBackApplication.class, args);
+		SpringApplication.run(MestreDasFacas.class, args);
 	}
 
 }
