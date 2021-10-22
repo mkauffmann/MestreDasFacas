@@ -1,5 +1,6 @@
 package br.com.rd.MestreDasFacas.model.entity;
 
+import br.com.rd.MestreDasFacas.model.enity.Category;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -38,5 +39,9 @@ public class Product {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ID_COR_CABO")
     private CableColor cableColor;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "ID_CATEGORIA")
+    private Category category;
 
 }

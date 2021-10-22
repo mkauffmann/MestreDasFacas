@@ -1,12 +1,14 @@
 package br.com.rd.MestreDasFacas.service;
 
 import br.com.rd.MestreDasFacas.model.dto.*;
+import br.com.rd.MestreDasFacas.model.enity.Category;
 import br.com.rd.MestreDasFacas.model.entity.Brand;
 import br.com.rd.MestreDasFacas.model.entity.CableColor;
 import br.com.rd.MestreDasFacas.model.entity.Product;
 import br.com.rd.MestreDasFacas.repository.BrandRepository;
 import br.com.rd.MestreDasFacas.repository.CableColorRepository;
 import br.com.rd.MestreDasFacas.repository.ProductRepository;
+import br.com.rd.MestreDasFacas.repository.contract.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,9 @@ public class ProductService {
 
     @Autowired
     CableColorRepository cableColorRepository;
+
+    @Autowired
+    CategoryRepository categoryRepository;
 
     // Métodos de adição:
 
@@ -88,6 +93,11 @@ public class ProductService {
             if(dto.getCableColor() != null) {
                 CableColor newCable = cableColorDtoToBusiness(dto.getCableColor());
                 obj.setCableColor(newCable);
+            }
+
+            if(dto.getCategory() != null) {
+                Category newCategory = categoryDtoToBusiness(dto.getCategory());
+                obj.setCategory(newCategory);
             }
 
             productRepository.save(obj);
@@ -173,12 +183,43 @@ public class ProductService {
         return dto;
     }
 
+    // Métodos de conversão para Categoryr:
+
+    private Category categoryDtoToBusiness(CategoryDTO dto) {
+        Category business = new Category();
+
+        if(dto.getId_categoria() != null) {
+            Long ctgId = dto.getId_categoria();
+
+            if (categoryRepository.existsById(ctgId)) {
+                business = categoryRepository.getById(ctgId);
+            } else {
+                business.setDescription_category(dto.getDescription_category());
+            }
+        } else {
+            business.setDescription_category(dto.getDescription_category());
+        }
+        return business;
+    }
+
+    private CategoryDTO categoryBusinessToDto(Category business) {
+
+        CategoryDTO dto = new CategoryDTO();
+
+        dto.setId_categoria(business.getId_categoria());
+        dto.setDescription_category(business.getDescription_category());
+
+        return dto;
+
+    }
+
     // Métodos de conversão para Produto:
 
     private Product dtoToBusiness(ProductDTO dto) {
         Product business = new Product();
         Brand brand = brandDtoToBusiness(dto.getBrand());
         CableColor cableColor = cableColorDtoToBusiness(dto.getCableColor());
+        Category category = categoryDtoToBusiness(dto.getCategory());
 
         business.setProductName(dto.getProductName());
         business.setDescriptionProduct(dto.getDescriptionProduct());
@@ -188,6 +229,7 @@ public class ProductService {
         business.setWidth(dto.getWidth());
         business.setBrand(brand);
         business.setCableColor(cableColor);
+        business.setCategory(category);
 
         return business;
     }
@@ -197,6 +239,7 @@ public class ProductService {
         ProductDTO dto = new ProductDTO();
         BrandDTO brandDto = brandBusinessToDto(business.getBrand());
         CableColorDTO cableDto = cableColorBusinessToDto(business.getCableColor());
+        CategoryDTO categoryDto = categoryBusinessToDto(business.getCategory());
 
         dto.setId(business.getId());
         dto.setProductName(business.getProductName());
@@ -207,6 +250,7 @@ public class ProductService {
         dto.setWidth(business.getWidth());
         dto.setBrand(brandDto);
         dto.setCableColor(cableDto);
+        dto.setCategory(categoryDto);
 
         return dto;
     }
@@ -241,11 +285,21 @@ public class ProductService {
         return dto;
     }
 
+    private CategoryDTO2 categoryBusinessToDto2(Category business) {
+
+        CategoryDTO2 dto = new CategoryDTO2();
+
+        dto.setDescription_category(business.getDescription_category());
+
+        return dto;
+    }
+
     private ProductDTO2 businessToDto2(Product business) {
 
         ProductDTO2 dto = new ProductDTO2();
         BrandDTO2 brandDto = brandBusinessToDto2(business.getBrand());
         CableColorDTO2 cableDto = cableColorBusinessToDto2(business.getCableColor());
+        CategoryDTO2 categoryDTO2 = categoryBusinessToDto2(business.getCategory());
 
         dto.setProductName(business.getProductName());
         dto.setDescriptionProduct(business.getDescriptionProduct());
@@ -255,6 +309,7 @@ public class ProductService {
         dto.setWidth(business.getWidth());
         dto.setBrand(brandDto);
         dto.setCableColor(cableDto);
+        dto.setCategory(categoryDTO2);
 
         return dto;
     }

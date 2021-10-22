@@ -16,5 +16,6 @@ public class ProductDTO {
     private Double width;
     private BrandDTO brand;
     private CableColorDTO cableColor;
+    private CategoryDTO category;
 
 }
