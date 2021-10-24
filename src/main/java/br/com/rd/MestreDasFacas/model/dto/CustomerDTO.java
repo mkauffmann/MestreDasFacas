@@ -1,13 +1,8 @@
 package br.com.rd.MestreDasFacas.model.dto;
 
 
-import br.com.rd.MestreDasFacas.model.entity.Address;
-import br.com.rd.MestreDasFacas.model.entity.CreditCard;
-import br.com.rd.MestreDasFacas.model.entity.Gender;
-import br.com.rd.MestreDasFacas.model.entity.Telephone;
 import lombok.Data;
 
-import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 

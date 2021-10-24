@@ -1,10 +1,6 @@
 package br.com.rd.MestreDasFacas.model.dto;
 
-import br.com.rd.MestreDasFacas.model.entity.City;
-import br.com.rd.MestreDasFacas.model.entity.State;
 import lombok.Data;
-
-import javax.persistence.*;
 
 @Data
 public class AddressDTO {
