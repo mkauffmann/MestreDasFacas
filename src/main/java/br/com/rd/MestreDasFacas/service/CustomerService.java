@@ -5,6 +5,7 @@ import br.com.rd.MestreDasFacas.model.dto.*;
 import br.com.rd.MestreDasFacas.model.entity.*;
 import br.com.rd.MestreDasFacas.repository.contract.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -37,6 +38,9 @@ public class CustomerService {
     @Autowired
     GenderRepository genderRepository;
 
+    @Autowired
+    PasswordEncoder encoder;
+
     public CustomerDTO add(CustomerDTO dto){
         Customer newCustomer = customerDtoToBusiness(dto);
         newCustomer = customerRepository.save(newCustomer);
@@ -61,7 +65,9 @@ public class CustomerService {
                 update.setBirthDate(dto.getBirthDate());
             }
             if(dto.getPassword() != null){
-                update.setPassword(dto.getPassword());
+                //encriptar senha
+                String passwordCrypt = encoder.encode(dto.getPassword());
+                update.setPassword(passwordCrypt);
             }
             if(dto.getGender() != null){
                 Gender gender = genderDtoToBusiness(dto.getGender());
@@ -321,7 +327,10 @@ public class CustomerService {
         customer.setName(dto.getName());
         customer.setEmail(dto.getEmail());
         customer.setCpf(dto.getCpf());
-         customer.setPassword(dto.getPassword());
+
+        //encriptar senha
+         String passwordCrypt = encoder.encode(dto.getPassword());
+        customer.setPassword(passwordCrypt);
 
         if(dto.getBirthDate() != null){
             customer.setBirthDate(dto.getBirthDate());

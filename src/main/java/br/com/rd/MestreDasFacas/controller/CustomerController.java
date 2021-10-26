@@ -3,6 +3,7 @@ package br.com.rd.MestreDasFacas.controller;
 import br.com.rd.MestreDasFacas.model.dto.CustomerDTO;
 import br.com.rd.MestreDasFacas.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
