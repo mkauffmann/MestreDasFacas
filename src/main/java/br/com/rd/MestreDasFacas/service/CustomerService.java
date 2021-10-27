@@ -30,12 +30,16 @@ public class CustomerService {
     @Autowired
     DtoConversion conversion;
 
-
     @Autowired
     PasswordEncoder encoder;
 
     public CustomerDTO add(CustomerDTO dto){
         Customer newCustomer = conversion.customerDtoToBusiness(dto);
+
+        //encriptar senha
+        String passwordCrypt = encoder.encode(dto.getPassword());
+        newCustomer.setPassword(passwordCrypt);
+
         newCustomer = customerRepository.save(newCustomer);
         return conversion.customerBusinessToDto(newCustomer);
     }
