@@ -29,9 +29,16 @@ public class CustomerService {
     @Autowired
     DtoConversion conversion;
 
+    @Autowired
+    PasswordEncoder encoder;
 
     public CustomerDTO add(CustomerDTO dto){
         Customer newCustomer = conversion.customerDtoToBusiness(dto);
+
+        //encriptar senha
+        String passwordCrypt = encoder.encode(dto.getPassword());
+        newCustomer.setPassword(passwordCrypt);
+
         newCustomer = customerRepository.save(newCustomer);
         return conversion.customerBusinessToDto(newCustomer);
     }
@@ -54,7 +61,9 @@ public class CustomerService {
                 update.setBirthDate(dto.getBirthDate());
             }
             if(dto.getPassword() != null){
-                update.setPassword(dto.getPassword());
+                //encriptar senha
+                String passwordCrypt = encoder.encode(dto.getPassword());
+                update.setPassword(passwordCrypt);
             }
             if(dto.getGender() != null){
                 Gender gender = conversion.genderDtoToBusiness(dto.getGender());
