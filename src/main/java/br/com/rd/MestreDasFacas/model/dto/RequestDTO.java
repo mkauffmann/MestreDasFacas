@@ -13,6 +13,7 @@ public class RequestDTO {
     private Date paymentDate;
     private TypePaymentDTO typePayment;
     private DeliveryStatusDTO deliveryStatus;
+    private AddressDTO address;
 
 
 }

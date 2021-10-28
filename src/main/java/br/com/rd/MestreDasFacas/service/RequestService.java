@@ -75,8 +75,11 @@ public class RequestService {
             }
 
             if (dto.getTypePayment() != null) {
-                TypePayment newCable = typePaymentDtoToBusiness(dto.getTypePayment());
-                obj.setTypePayment(newCable);
+                TypePayment newPayment = typePaymentDtoToBusiness(dto.getTypePayment());
+                obj.setTypePayment(newPayment);
+            }if(dto.getAddress() !=null){
+                Address newAdress = addressDtoToBusiness(dto.getAddress());
+                obj.setAddress(newAdress);
             }
 
             requestRepository.save(obj);

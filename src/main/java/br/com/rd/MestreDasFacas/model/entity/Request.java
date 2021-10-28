@@ -31,4 +31,8 @@ public class Request {
     @JoinColumn(name = "ID_TIPO_PAGAMENTO")
     private TypePayment typePayment;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "ID_ENDERECO")
+    private Address address;
+
 }
