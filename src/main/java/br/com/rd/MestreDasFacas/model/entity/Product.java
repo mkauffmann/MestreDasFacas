@@ -44,4 +44,8 @@ public class Product {
     @JoinColumn(name = "ID_CATEGORIA")
     private Category category;
 
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "ID_PRECO_PRODUTO")
+    private ProductPrice productPrice;
+
 }

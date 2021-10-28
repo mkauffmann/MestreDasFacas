@@ -5,10 +5,12 @@ import br.com.rd.MestreDasFacas.model.enity.Category;
 import br.com.rd.MestreDasFacas.model.entity.Brand;
 import br.com.rd.MestreDasFacas.model.entity.CableColor;
 import br.com.rd.MestreDasFacas.model.entity.Product;
+import br.com.rd.MestreDasFacas.model.entity.ProductPrice;
 import br.com.rd.MestreDasFacas.repository.BrandRepository;
 import br.com.rd.MestreDasFacas.repository.CableColorRepository;
 import br.com.rd.MestreDasFacas.repository.ProductRepository;
 import br.com.rd.MestreDasFacas.repository.contract.CategoryRepository;
+import br.com.rd.MestreDasFacas.repository.contract.ProductPriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +32,9 @@ public class ProductService {
 
     @Autowired
     CategoryRepository categoryRepository;
+
+    @Autowired
+    ProductPriceRepository productPriceRepository;
 
     // Métodos de adição:
 
@@ -190,7 +195,7 @@ public class ProductService {
         return dto;
     }
 
-    // Métodos de conversão para Categoryr:
+    // Métodos de conversão para Category:
 
     private Category categoryDtoToBusiness(CategoryDTO dto) {
         Category business = new Category();
@@ -220,6 +225,35 @@ public class ProductService {
 
     }
 
+    // Métodos de conversão para Preço do Produto:
+
+    private ProductPrice productPriceDtoToBusiness(ProductPriceDTO dto) {
+        ProductPrice business = new ProductPrice();
+
+        if(dto.getId() != null) {
+            Long ppId = dto.getId();
+
+            if (productPriceRepository.existsById(ppId)) {
+                business = productPriceRepository.getById(ppId);
+            } else {
+                business.setValue(dto.getValue());
+            }
+        } else {
+            business.setValue(dto.getValue());
+        }
+        return business;
+    }
+
+    private ProductPriceDTO productPriceBusinessToDto(ProductPrice business) {
+
+        ProductPriceDTO dto = new ProductPriceDTO();
+
+        dto.setId(business.getId());
+        dto.setValue(business.getValue());
+
+        return dto;
+    }
+
     // Métodos de conversão para Produto:
 
     private Product dtoToBusiness(ProductDTO dto) {
@@ -227,6 +261,7 @@ public class ProductService {
         Brand brand = brandDtoToBusiness(dto.getBrand());
         CableColor cableColor = cableColorDtoToBusiness(dto.getCableColor());
         Category category = categoryDtoToBusiness(dto.getCategory());
+        ProductPrice pp = productPriceDtoToBusiness(dto.getProductPrice());
 
         business.setProductName(dto.getProductName());
         business.setDescriptionProduct(dto.getDescriptionProduct());
@@ -237,6 +272,7 @@ public class ProductService {
         business.setBrand(brand);
         business.setCableColor(cableColor);
         business.setCategory(category);
+        business.setProductPrice(pp);
 
         return business;
     }
@@ -247,6 +283,7 @@ public class ProductService {
         BrandDTO brandDto = brandBusinessToDto(business.getBrand());
         CableColorDTO cableDto = cableColorBusinessToDto(business.getCableColor());
         CategoryDTO categoryDto = categoryBusinessToDto(business.getCategory());
+        ProductPriceDTO pdDto = productPriceBusinessToDto(business.getProductPrice());
 
         dto.setId(business.getId());
         dto.setProductName(business.getProductName());
@@ -258,6 +295,7 @@ public class ProductService {
         dto.setBrand(brandDto);
         dto.setCableColor(cableDto);
         dto.setCategory(categoryDto);
+        dto.setProductPrice(pdDto);
 
         return dto;
     }
@@ -301,12 +339,23 @@ public class ProductService {
         return dto;
     }
 
+    private ProductPriceDTO2 productPriceBusinessToDto2(ProductPrice business) {
+
+        ProductPriceDTO2 dto = new ProductPriceDTO2();
+
+        dto.setValue(business.getValue());
+
+        return dto;
+
+    }
+
     private ProductDTO2 businessToDto2(Product business) {
 
         ProductDTO2 dto = new ProductDTO2();
         BrandDTO2 brandDto = brandBusinessToDto2(business.getBrand());
         CableColorDTO2 cableDto = cableColorBusinessToDto2(business.getCableColor());
         CategoryDTO2 categoryDTO2 = categoryBusinessToDto2(business.getCategory());
+        ProductPriceDTO2 ppdto = productPriceBusinessToDto2(business.getProductPrice());
 
         dto.setProductName(business.getProductName());
         dto.setDescriptionProduct(business.getDescriptionProduct());
@@ -317,6 +366,7 @@ public class ProductService {
         dto.setBrand(brandDto);
         dto.setCableColor(cableDto);
         dto.setCategory(categoryDTO2);
+        dto.setProductPrice(ppdto);
 
         return dto;
     }

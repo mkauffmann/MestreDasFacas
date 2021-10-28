@@ -14,5 +14,6 @@ public class ProductDTO2 {
     private BrandDTO2 brand;
     private CableColorDTO2 cableColor;
     private CategoryDTO2 category;
+    private ProductPriceDTO2 productPrice;
 
 }
