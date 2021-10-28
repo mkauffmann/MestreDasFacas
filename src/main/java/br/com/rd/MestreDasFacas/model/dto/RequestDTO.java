@@ -14,4 +14,5 @@ public class RequestDTO {
     private TypePaymentDTO typePayment;
     private DeliveryStatusDTO deliveryStatus;
 
+
 }
