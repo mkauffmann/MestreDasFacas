@@ -1,6 +1,5 @@
 package br.com.rd.MestreDasFacas.model.entity;
 
-import br.com.rd.MestreDasFacas.model.enity.TipoPagamento;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -31,5 +30,9 @@ public class Request {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ID_TIPO_PAGAMENTO")
     private TypePayment typePayment;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "ID_ENDERECO")
+    private Address address;
 
 }

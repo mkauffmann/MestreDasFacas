@@ -2,11 +2,10 @@ package br.com.rd.MestreDasFacas.model.dto;
 
 import lombok.Data;
 
-import javax.persistence.*;
-
 @Data
-public class CityDTO {
+public class ProductPriceDTO {
+
     private Long id;
-    private String cityName;
+    private Double value;
 
 }
