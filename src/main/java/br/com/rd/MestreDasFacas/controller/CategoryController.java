@@ -1,6 +1,7 @@
 package br.com.rd.MestreDasFacas.controller;
 
 
+
 import br.com.rd.MestreDasFacas.model.dto.CategoryDTO;
 import br.com.rd.MestreDasFacas.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/categoria")
+@RequestMapping("/category")
 public class CategoryController {
     @Autowired
     CategoryService categoryService;
@@ -21,7 +22,7 @@ public class CategoryController {
 
     @GetMapping
     public List<CategoryDTO> findAll(){
-        return categoryService.findAllCategory();
+        return categoryService.findAll();
     }
 
     @PutMapping("/{id}")

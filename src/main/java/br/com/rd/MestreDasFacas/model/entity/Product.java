@@ -1,6 +1,6 @@
 package br.com.rd.MestreDasFacas.model.entity;
 
-import br.com.rd.MestreDasFacas.model.enity.Category;
+
 import lombok.Data;
 
 import javax.persistence.*;

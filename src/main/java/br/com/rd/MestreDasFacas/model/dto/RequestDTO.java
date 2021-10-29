@@ -11,7 +11,9 @@ public class RequestDTO {
     private Double freightFixed;
     private Date purchaseDate;
     private Date paymentDate;
-    private TypePaymentDTO TypePayment;
+    private TypePaymentDTO typePayment;
     private DeliveryStatusDTO deliveryStatus;
+    private AddressDTO address;
+
 
 }

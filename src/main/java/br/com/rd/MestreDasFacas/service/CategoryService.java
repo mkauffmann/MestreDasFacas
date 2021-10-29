@@ -1,7 +1,7 @@
 package br.com.rd.MestreDasFacas.service;
 
 import br.com.rd.MestreDasFacas.model.dto.CategoryDTO;
-import br.com.rd.MestreDasFacas.model.enity.Category;
+import br.com.rd.MestreDasFacas.model.entity.Category;
 import br.com.rd.MestreDasFacas.repository.contract.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,7 @@ public class CategoryService {
     @Autowired
     CategoryRepository categoryRepository;
 
+    // Create
 
     public CategoryDTO createCategory(CategoryDTO category){
         Category newCategory = this.dtoToBusiness(category);
@@ -22,7 +23,9 @@ public class CategoryService {
         return this.businessToDto(newCategory);
     }
 
-    public List<CategoryDTO> findAllCategory() {
+    // Show all
+
+    public List<CategoryDTO> findAll() {
         List<Category> allList = categoryRepository.findAll();
         return this.listToDto(allList);
     }
@@ -34,6 +37,9 @@ public class CategoryService {
         }
         return listDto;
     }
+
+    // Update by id
+
     public CategoryDTO updateById(CategoryDTO dto, Long id){
         Optional<Category> op = categoryRepository.findById(id);
 
@@ -51,11 +57,15 @@ public class CategoryService {
         return null;
     }
 
+    //delete by id
+
     public void deleteById(Long id){
         if(categoryRepository.existsById(id)){
             categoryRepository.deleteById(id);
         }
     }
+
+    // Show by id
 
     public CategoryDTO searchCategoryById(Long id) {
         Optional<Category> op = categoryRepository.findById(id);
@@ -75,7 +85,7 @@ public class CategoryService {
 
     public CategoryDTO businessToDto(Category business) {
         CategoryDTO dto = new CategoryDTO();
-        dto.setId_categoria(business.getId_categoria());
+        dto.setId(business.getId());
         dto.setDescription_category(business.getDescription_category());
         return dto;
     }
