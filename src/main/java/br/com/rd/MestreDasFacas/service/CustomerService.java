@@ -60,6 +60,7 @@ public class CustomerService {
                 Gender gender = conversion.genderDtoToBusiness(dto.getGender());
                 update.setGender(gender);
             }
+
             if(dto.getTelephones() != null){
                 List<Telephone> listTel = conversion.telephoneListFromDto(dto.getTelephones());
                 List<Telephone> listUpdate = update.getTelephones();
@@ -89,6 +90,28 @@ public class CustomerService {
                 update.setCreditCards(listUpdate);
             }
 
+//            if(dto.getTelephones() != null){
+//                List<Telephone> listTel = conversion.telephoneListFromDto(dto.getTelephones());
+//                List<Telephone> listUpdate = update.getTelephones();
+//
+//                for (Telephone t : listTel){
+//                    t = telephoneRepository.save(t);
+//                    listUpdate.add(t);
+//                }
+//                update.setTelephones(listUpdate);
+//            }
+//
+//            if(dto.getCreditCards() != null){
+//                List<CreditCard> listCard = conversion.creditCardListFromDto(dto.getCreditCards());
+//                List<CreditCard> listUpdate = update.getCreditCards();
+//                for (CreditCard c : listCard){
+//                    c = creditCardRepository.save(c);
+//                    listUpdate.add(c);
+//                }
+//                update.setCreditCards(listUpdate);
+//            }
+
+
             update = customerRepository.save(update);
             return conversion.customerBusinessToDto(update);
         }
@@ -114,6 +137,51 @@ public class CustomerService {
         if (customerRepository.existsById(id)){
             customerRepository.deleteById(id);
         }
+    }
+
+
+    public CustomerDTO addAddressToUser(AddressDTO addressDTO, Long customerId){
+        Optional<Customer> op = customerRepository.findById(customerId);
+
+        if(op.isPresent()){
+            Customer customer = op.get();
+            if(customer.getAddresses() != null){
+                List<Address> listAddress = customer.getAddresses();
+                Address newAddress = conversion.addressDtoToBusiness(addressDTO);
+                newAddress = addressRepository.save(newAddress);
+
+                listAddress.add(newAddress);
+                customer.setAddresses(listAddress);
+                customer = customerRepository.save(customer);
+                return conversion.customerBusinessToDto(customer);
+            }
+        }
+        return null;
+    }
+
+    public CustomerDTO removeAddressFromCustomer(Long customerId, Long addressId){
+        Optional<Customer> opCustomer = customerRepository.findById(customerId);
+        Optional<Address> opAddress = addressRepository.findById(addressId);
+
+        if(opCustomer.isPresent() && opAddress.isPresent()){
+            Customer customer = opCustomer.get();
+            Address address = opAddress.get();
+
+            if(customer.getAddresses() != null){
+                List<Address> customerAddressList = customer.getAddresses();
+
+                for(Address a : customerAddressList){
+                    if(a.getId() == addressId){
+                        customerAddressList.remove(address);
+                        break;
+                    }
+                }
+                customer.setAddresses(customerAddressList);
+                customer = customerRepository.save(customer);
+                return conversion.customerBusinessToDto(customer);
+            }
+        }
+        return null;
     }
 
 }
