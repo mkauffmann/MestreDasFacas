@@ -1,7 +1,9 @@
 package br.com.rd.MestreDasFacas.controller;
 
 import br.com.rd.MestreDasFacas.model.dto.AddressDTO;
+import br.com.rd.MestreDasFacas.model.dto.CreditCardDTO;
 import br.com.rd.MestreDasFacas.model.dto.CustomerDTO;
+import br.com.rd.MestreDasFacas.model.dto.TelephoneDTO;
 import br.com.rd.MestreDasFacas.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,9 +31,14 @@ public class CustomerController {
         return customerService.findById(id);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable("id") Long id){
+        customerService.deleteById(id);
+    }
+
     @PutMapping("/{id}")
     public CustomerDTO updateById(@PathVariable("id") Long id, @RequestBody CustomerDTO dto){
-       return customerService.update(id, dto);
+        return customerService.update(id, dto);
     }
 
     @PutMapping("/removeAddress")
@@ -39,13 +46,28 @@ public class CustomerController {
         return customerService.removeAddressFromCustomer(customerId, addressId);
     }
 
-    @PutMapping("/addAddress/{id}")
-    public CustomerDTO addAddressToCustomer(@RequestBody AddressDTO address, @PathVariable("id") Long customerId){
-        return customerService.addAddressToUser(address, customerId);
+    @PutMapping("/addAddress/{customerId}")
+    public CustomerDTO addAddressToCustomer(@RequestBody AddressDTO address, @PathVariable("customerId") Long customerId){
+        return customerService.addAddressToCustomer(address, customerId);
     }
 
-    @DeleteMapping("/{id}")
-    public void deleteById(@PathVariable("id") Long id){
-        customerService.deleteById(id);
+    @PutMapping("/removeTelephone")
+    public CustomerDTO removeTelephoneFromCustomer(@RequestParam("customer") Long customerId, @RequestParam("telephone") Long telephoneId){
+        return customerService.removeTelephoneFromCustomer(customerId, telephoneId);
+    }
+
+    @PutMapping("/addTelephone/{customerId}")
+    public CustomerDTO addTelephoneToCustomer(@RequestBody TelephoneDTO telephone, @PathVariable("customerId") Long customerId){
+        return customerService.addTelephoneToCustomer(telephone, customerId);
+    }
+
+    @PutMapping("/removeCreditCard")
+    public CustomerDTO removeCreditCardFromCustomer(@RequestParam("customer") Long customerId, @RequestParam("creditCard") Long creditCardId){
+        return customerService.removeCreditCardFromCustomer(customerId, creditCardId);
+    }
+
+    @PutMapping("/addCreditCard/{customerId}")
+    public CustomerDTO addCreditCardToCustomer(@RequestBody CreditCardDTO creditCard, @PathVariable("customerId") Long customerId){
+        return customerService.addCreditCardToCustomer(creditCard, customerId);
     }
 }
