@@ -14,6 +14,7 @@ public class RequestDTO {
     private TypePaymentDTO typePayment;
     private DeliveryStatusDTO deliveryStatus;
     private AddressDTO address;
+    private CustomerDTO customer;
 
 
 }
