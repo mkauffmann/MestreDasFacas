@@ -1,0 +1,1057 @@
+{
+	"info": {
+		"_postman_id": "e727c065-04b9-4aa7-bb54-25ccc810874e",
+		"name": "Mestre das facas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Pagina Contato",
+			"item": [
+				{
+					"name": "Metodo Post CONTATO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n\r\n    \r\n    \"email\" : \"rafael.silva@gmail.com\",\r\n    \"nome\" : \"Rafael Oliveira da Silva\",\r\n    \"titulo\" : \"Mensagem de teste\",\r\n    \"mensagem\" : \"Ola isso é uma mensagem de teste !\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/contato",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"contato"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pagina Home",
+			"item": [
+				{
+					"name": "FIND ALL CATEGORY",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/category",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pagina Categoria",
+			"item": [
+				{
+					"name": "CREATE CATEGORY",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n    \"id_categoria\" : 1,\r\n    \"description_category\" : \"Tradicional\"\r\n\r\n\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/category",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pagina Catalogo",
+			"item": [
+				{
+					"name": "ADD - PRODUCT",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productName\": \"Knivete5\",\r\n    \"descriptionProduct\": \"primeira faca\",\r\n    \"weight\": 25.00,\r\n    \"length\": 12,\r\n    \"height\": 10,\r\n    \"width\": 15,\r\n    \"offer\" : true,\r\n    \"brand\":\r\n        {\r\n            \"brand\": \"Tramontina\"\r\n        },\r\n    \"cableColor\":\r\n        {\r\n            \"cableColor\": \"Azul\"\r\n        },\r\n    \"category\" : {\r\n\r\n        \"description_category\" : \"Tradiconal\"\r\n    },\r\n    \"productPrice\" :{\r\n    \"id\" : 1,\r\n    \"value\" : 17.50\r\n    }\r\n\r\n    \r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/product",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LISTALL - PRODUCT",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productName\": \"faca1\",\r\n    \"descriptionProduct\": \"primeira faca\",\r\n    \"weight\": 25.00,\r\n    \"length\": 12,\r\n    \"height\": 10,\r\n    \"width\": 15,\r\n    \"brand\":\r\n        {\r\n            \"brand\": \"Tramontina\"\r\n        },\r\n    \"cableColor\":\r\n        {\r\n            \"cableColor\": \"Azul\"\r\n        }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/product",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LISTID - PRODUCT",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productName\": \"faca1\",\r\n    \"descriptionProduct\": \"primeira faca\",\r\n    \"weight\": 25.00,\r\n    \"length\": 12,\r\n    \"height\": 10,\r\n    \"width\": 15,\r\n    \"brand\":\r\n        {\r\n            \"brand\": \"Tramontina\"\r\n        },\r\n    \"cableColor\":\r\n        {\r\n            \"cableColor\": \"Azul\"\r\n        }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/product/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE - PRODUCT",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productName\": \"faca651651\",\r\n    \"descriptionProduct\": \"primeira faca atualizada\",\r\n    \"weight\": 25.00,\r\n    \"length\": 12,\r\n    \"height\": 10,\r\n    \"width\": 15,\r\n    \"brand\":\r\n        {\r\n            \"brand\": \"KitchenAid\"\r\n        },\r\n    \"cableColor\":\r\n        {\r\n            \"cableColor\": \"Bege\"\r\n        }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/product/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE - PRODUCT",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"productName\": \"faca1\",\r\n    \"descriptionProduct\": \"primeira faca atualizada\",\r\n    \"weight\": 25.00,\r\n    \"length\": 12,\r\n    \"height\": 10,\r\n    \"width\": 15,\r\n    \"brand\":\r\n        {\r\n            \"brand\": \"KitchenAid\"\r\n        },\r\n    \"cableColor\":\r\n        {\r\n            \"cableColor\": \"Bege\"\r\n        }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/product/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BARRA_BUSCA - PESQUISA",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "localhost:8080/product/search/Knivete",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product",
+								"search",
+								"Knivete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "BUSCA_PRODUTO - CATEGORIA",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/product/category/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"product",
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pagina Login",
+			"item": [
+				{
+					"name": "localhost:8080/login/validatePassword",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\" : \"rafa2@gmail.com\",\n    \"password\" :  \"rafa1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/testlogin/validatePassword",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"testlogin",
+								"validatePassword"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "maria3@gmail.com",
+									"disabled": true
+								},
+								{
+									"key": "password",
+									"value": "12343",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\" : \"maria4@gmail.com\",\n    \"password\" : \"1234\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pagina Carrinho",
+			"item": []
+		},
+		{
+			"name": "Pagina Checkout",
+			"item": [
+				{
+					"name": "GET CheckOut",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Adicionar Cartao de credito cliente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"cardNumber\" : \"1234.5678.9098\",\n    \"cpf\" : \"12345678909\",\n    \"holderName\" : \"Fulana Fulnada\",\n    \"cardBrand\" : \n    {\n        \"cardBrandName\" : \"VISA\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/customers/addCreditCard/22",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"addCreditCard",
+								"22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PUT Adicionar endereco usuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n         {\n            \"street\" : \"Avenida Mutirão\",\n            \"number\" : 1895,\n            \"cep\" : \"13145-678\",\n            \"neighborhood\" : \"Bueno\",\n            \"city\" :\n            {\n                \"cityName\" : \"Goiânia\"\n            },\n            \"state\" :\n            {\n                \"uf\" : \"GO\"\n            }\n         }\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/customers/addAddress/22",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"addAddress",
+								"22"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pagina Pedido Finalizado",
+			"item": []
+		},
+		{
+			"name": "Pagina DashBoard",
+			"item": [
+				{
+					"name": "Endereco",
+					"item": [
+						{
+							"name": "PUT Adicionar endereco usuario",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\n         {\n            \"street\" : \"Avenida Mutirão\",\n            \"number\" : 1895,\n            \"cep\" : \"13145-678\",\n            \"neighborhood\" : \"Bueno\",\n            \"city\" :\n            {\n                \"cityName\" : \"Goiânia\"\n            },\n            \"state\" :\n            {\n                \"uf\" : \"GO\"\n            }\n         }\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/customers/addAddress/22",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"customers",
+										"addAddress",
+										"22"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT Remover endereço de usuário",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/customers/removeAddress?customer=22&address=19",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"customers",
+										"removeAddress"
+									],
+									"query": [
+										{
+											"key": "customer",
+											"value": "22"
+										},
+										{
+											"key": "address",
+											"value": "19"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Listar endereços de usuario",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/addresses/showAllByCustomer/12",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"addresses",
+										"showAllByCustomer",
+										"12"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Buscar endereço por id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/addresses/6",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"addresses",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT Alterar Dados Endereço",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"neighborhood\" : \"Consolação\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/addresses/16",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"addresses",
+										"16"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Telefone",
+					"item": [
+						{
+							"name": "PUT Adicionar Telefone usuario",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"ddd\" : \"13\", \n    \"phoneNumber\" : \"123456789\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/customers/addTelephone/22",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"customers",
+										"addTelephone",
+										"22"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT Remover Telefone usuario",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/customers/removeTelephone?customer=22&telephone=4",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"customers",
+										"removeTelephone"
+									],
+									"query": [
+										{
+											"key": "customer",
+											"value": "22"
+										},
+										{
+											"key": "telephone",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Listar Telefone usuario",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/telephones/showAllByCustomer/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"telephones",
+										"showAllByCustomer",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Buscar telefone por id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/telephones/4",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"telephones",
+										"4"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT Alterar dados telefone",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"phoneNumber\" : \"13131313\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/telephones/4",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"telephones",
+										"4"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cartao",
+					"item": [
+						{
+							"name": "PUT Adicionar Cartao de credito cliente",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"cardNumber\" : \"1234.5678.9098\",\n    \"cpf\" : \"12345678909\",\n    \"holderName\" : \"Fulana Fulnada\",\n    \"cardBrand\" : \n    {\n        \"cardBrandName\" : \"VISA\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/customers/addCreditCard/22",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"customers",
+										"addCreditCard",
+										"22"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT Remover Cartao de cliente",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/customers/removeCreditCard/?customer=22&creditCard=5",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"customers",
+										"removeCreditCard",
+										""
+									],
+									"query": [
+										{
+											"key": "customer",
+											"value": "22"
+										},
+										{
+											"key": "creditCard",
+											"value": "5"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Listar cartoes de cliente",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/creditCards/showAllByCustomer/22",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"creditCards",
+										"showAllByCustomer",
+										"22"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Buscar cartao por id",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8080/creditCards/5",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"creditCards",
+										"5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PUT alterar dados cartao",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"holderName\" : \"Rita Lee\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/creditCards/5",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"creditCards",
+										"5"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cliente",
+					"item": [
+						{
+							"name": "PUT Alterar dados usuario",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\" : \"Milton alves da silva\",\n    \"password\" : \"aisuhdiaushd\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8080/customers/1",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"customers",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET Buscar Usuario por id",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJpYTRAZ21haWwuY29tIiwiZXhwIjoxNjM1MzAyMDI0fQ.UrK05UERxCl9JZO880Sr7peZC8R1FV46uS6igvEjdh2qjI_2wNHov74WEk7aK1HP6gQ-iVg7q9KoqBqGeaoizQ",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost:8080/customers/4?",
+									"host": [
+										"localhost"
+									],
+									"port": "8080",
+									"path": [
+										"customers",
+										"4"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Pagina Cadastro",
+			"item": [
+				{
+					"name": "POST Cadastrar Usuario (2 telefones, 1 endereco, 0 cartoes)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Maria da Silva\",\n    \"email\": \"maria5@gmail.com\",\n    \"cpf\" : \"845.456.729-09\",\n    \"birthDate\": \"1982-09-08\",\n    \"password\" : \"1234\",\n    \"gender\" : \n    {\n        \"description\" : \"Masculino\"\n    },\n    \"telephones\" : \n    [\n        {\n            \"ddd\" : \"11\",\n            \"phoneNumber\" : \"333333333\"\n        },\n        {\n            \"ddd\" : \"11\",\n            \"phoneNumber\" : \"11111111\"\n        }\n    ],\n    \"addresses\":\n    [\n        {\n            \"street\" : \"Largo Senador Raul Cardoso\",\n            \"number\" : 126,\n            \"cep\" : \"12345-678\",\n            \"neighborhood\" : \"Vila Clementino\",\n            \"city\" :\n            {\n                \"cityName\" : \"São Paulo\"\n            },\n            \"state\" :\n            {\n                \"uf\" : \"SP\"\n            }\n        }\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/customers/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Cadastrar Usuario (1 telefone, 1 endereco, 1 cartao)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Maria Aparecida Silva\",\n    \"email\": \"mariadasilva@gmail.com\",\n    \"cpf\" : \"123456.729-09\",\n    \"password\" : \"1234\",\n    \"gender\" : \n    {\n        \"id\" : \"2\"\n    },\n    \"telephones\" : \n    [\n        {\n            \"ddd\" : \"11\",\n            \"phoneNumber\" : \"333333333\"\n        }\n    ],\n    \"addresses\":\n    [\n        {\n            \"street\" : \"Rua das Rosas\",\n            \"number\" : 560,\n            \"cep\" : \"12345-678\",\n            \"neighborhood\" : \"Vila Mariana\",\n            \"city\" :\n            {\n                \"cityName\" : \"São Paulo\"\n            },\n            \"state\" :\n            {\n                \"uf\" : \"SP\"\n            }\n        }\n    ],\n    \"creditCards\":\n    [\n        {\n            \"cardNumber\" : \"5678.7543.4567.2940\",\n            \"cpf\" : \"123.456.789-09\",\n            \"holderName\" : \"Maria Aparecida Silva\",\n            \"cardBrand\" : \n            {\n                \"cardBrandName\" : \"Visa\"\n            }\n        }\n        \n\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/customers/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST Cadastrar Usuario (1 telefone, 1 endereco, 1 cartao) Copy",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"Maria Aparecida Silva\",\n    \"email\": \"mariadasilasda@gmail.com\",\n    \"cpf\" : \"123456.729-09\",\n    \"password\" : \"1234\",\n    \"gender\" : \n    {\n        \"id\" : \"2\"\n    },\n    \"telephones\" : \n    [\n        {\n            \"ddd\" : \"11\",\n            \"phoneNumber\" : \"333333333\"\n        }\n    ],\n    \"addresses\":\n    [\n        {\n            \"street\" : \"Rua das Rosas\",\n            \"number\" : 560,\n            \"cep\" : \"12345-678\",\n            \"neighborhood\" : \"Vila Mariana\",\n            \"city\" :\n            {\n                \"cityName\" : \"São Paulo\"\n            },\n            \"state\" :\n            {\n                \"uf\" : \"SP\"\n            }\n        }\n    ],\n    \"creditCards\":\n    [\n        {\n            \"cardNumber\" : \"5678.7543.4567.2940\",\n            \"cpf\" : \"123.456.789-09\",\n            \"holderName\" : \"Maria Aparecida Silva\",\n            \"cardBrand\" : \n            {\n                \"cardBrandName\" : \"Visa\"\n            }\n        }\n        \n\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/customers/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Outros",
+			"item": [
+				{
+					"name": "GET Lista de usuarios",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYXJpYTRAZ21haWwuY29tIiwiZXhwIjoxNjM1MzAyMDI0fQ.UrK05UERxCl9JZO880Sr7peZC8R1FV46uS6igvEjdh2qjI_2wNHov74WEk7aK1HP6gQ-iVg7q9KoqBqGeaoizQ",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/customers",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE Usuario por Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/customers/5",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"customers",
+								"5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
