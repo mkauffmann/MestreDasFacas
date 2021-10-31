@@ -2,7 +2,7 @@ package br.com.rd.MestreDasFacas.service;
 
 import br.com.rd.MestreDasFacas.model.dto.CableColorDTO;
 import br.com.rd.MestreDasFacas.model.entity.CableColor;
-import br.com.rd.MestreDasFacas.repository.CableColorRepository;
+import br.com.rd.MestreDasFacas.repository.contract.CableColorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

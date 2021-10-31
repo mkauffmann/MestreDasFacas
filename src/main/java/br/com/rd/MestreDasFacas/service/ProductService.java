@@ -3,8 +3,8 @@ package br.com.rd.MestreDasFacas.service;
 import br.com.rd.MestreDasFacas.model.dto.*;
 
 import br.com.rd.MestreDasFacas.model.entity.*;
-import br.com.rd.MestreDasFacas.repository.BrandRepository;
-import br.com.rd.MestreDasFacas.repository.CableColorRepository;
+import br.com.rd.MestreDasFacas.repository.contract.BrandRepository;
+import br.com.rd.MestreDasFacas.repository.contract.CableColorRepository;
 import br.com.rd.MestreDasFacas.repository.ProductRepository;
 import br.com.rd.MestreDasFacas.repository.contract.CategoryRepository;
 import br.com.rd.MestreDasFacas.repository.contract.ProductPriceRepository;
