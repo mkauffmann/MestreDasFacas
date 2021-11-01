@@ -1,9 +1,9 @@
-package br.com.rd.MestreDasFacas.repository;
+package br.com.rd.MestreDasFacas.repository.contract;
 
 import br.com.rd.MestreDasFacas.model.entity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long>, ProductRepositoryCustom{
+public interface ProductRepository extends JpaRepository<Product, Long>, ProductRepositoryCustom {
 }
