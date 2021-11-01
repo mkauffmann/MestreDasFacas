@@ -1,7 +1,8 @@
 package br.com.rd.MestreDasFacas.service;
 
 import br.com.rd.MestreDasFacas.model.dto.*;
-import br.com.rd.MestreDasFacas.model.enity.Category;
+
+import br.com.rd.MestreDasFacas.model.entity.Category;
 import br.com.rd.MestreDasFacas.model.entity.Brand;
 import br.com.rd.MestreDasFacas.model.entity.CableColor;
 import br.com.rd.MestreDasFacas.model.entity.Product;
@@ -9,6 +10,7 @@ import br.com.rd.MestreDasFacas.model.entity.ProductPrice;
 import br.com.rd.MestreDasFacas.repository.contract.BrandRepository;
 import br.com.rd.MestreDasFacas.repository.contract.CableColorRepository;
 import br.com.rd.MestreDasFacas.repository.contract.ProductRepository;
+
 import br.com.rd.MestreDasFacas.repository.contract.CategoryRepository;
 import br.com.rd.MestreDasFacas.repository.contract.ProductPriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -200,8 +202,8 @@ public class ProductService {
     private Category categoryDtoToBusiness(CategoryDTO dto) {
         Category business = new Category();
 
-        if(dto.getId_categoria() != null) {
-            Long ctgId = dto.getId_categoria();
+        if(dto.getId() != null) {
+            Long ctgId = dto.getId();
 
             if (categoryRepository.existsById(ctgId)) {
                 business = categoryRepository.getById(ctgId);
@@ -218,7 +220,7 @@ public class ProductService {
 
         CategoryDTO dto = new CategoryDTO();
 
-        dto.setId_categoria(business.getId_categoria());
+        dto.setId(business.getId());
         dto.setDescription_category(business.getDescription_category());
 
         return dto;
