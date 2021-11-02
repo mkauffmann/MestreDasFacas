@@ -11,7 +11,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import java.util.Properties;
 
 @Configuration
-@PropertySource(value = "mail.properties") // ou classpath
+@PropertySource("classpath:src/main/java/br/com/rd/MestreDasFacas/service/email/send/mail.properties") // ou classpath
 public class MailConfig {
 
     @Autowired
