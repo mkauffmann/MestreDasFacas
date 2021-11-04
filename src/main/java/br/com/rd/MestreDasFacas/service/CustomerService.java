@@ -38,6 +38,9 @@ public class CustomerService {
     @Autowired
     GenderRepository genderRepository;
 
+    @Autowired
+    PasswordEncoder encoder;
+
     public CustomerDTO add(CustomerDTO dto){
         Customer newCustomer = customerDtoToBusiness(dto);
         newCustomer = customerRepository.save(newCustomer);
