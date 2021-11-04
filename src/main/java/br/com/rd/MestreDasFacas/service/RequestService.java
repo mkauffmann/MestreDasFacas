@@ -31,6 +31,20 @@ public class RequestService {
     @Autowired
     CityRepository cityRepository;
 
+    @Autowired
+    GenderRepository genderRepository;
+
+    @Autowired
+    TelephoneRepository telephoneRepository;
+
+    @Autowired
+    CardBrandRepository cardBrandRepository;
+
+    @Autowired
+    CreditCardRepository creditCardRepository;
+
+    @Autowired
+    CustomerRepository customerRepository;
 
     // Create
 
@@ -295,7 +309,6 @@ public class RequestService {
         RequestDTO dto = new RequestDTO();
         TypePaymentDTO typePaymentDTO = typePaymentBusinessToDto(business.getTypePayment());
         DeliveryStatusDTO deliveryDto = deliveryBusinessToDto(business.getDeliveryStatus());
-
         AddressDTO addressDTO = addressBusinessToDto(business.getAddress());
 
 

@@ -5,6 +5,7 @@ import br.com.rd.MestreDasFacas.model.dto.*;
 import br.com.rd.MestreDasFacas.model.entity.*;
 import br.com.rd.MestreDasFacas.repository.contract.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -61,7 +62,9 @@ public class CustomerService {
                 update.setBirthDate(dto.getBirthDate());
             }
             if(dto.getPassword() != null){
-                update.setPassword(dto.getPassword());
+                //encriptar senha
+                String passwordCrypt = encoder.encode(dto.getPassword());
+                update.setPassword(passwordCrypt);
             }
             if(dto.getGender() != null){
                 Gender gender = genderDtoToBusiness(dto.getGender());

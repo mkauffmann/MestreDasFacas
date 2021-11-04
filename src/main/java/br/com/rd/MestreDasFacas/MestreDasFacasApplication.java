@@ -2,6 +2,10 @@ package br.com.rd.MestreDasFacas;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootApplication
 public class MestreDasFacasApplication {
@@ -11,6 +15,10 @@ public class MestreDasFacasApplication {
 
 	}
 
-
+	@Bean
+	public PasswordEncoder getPasswordEncoder(){
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		return encoder;
+	}
 
 }
