@@ -32,20 +32,20 @@ public class RequestService {
     @Autowired
     CityRepository cityRepository;
 
-    @Autowired
-    GenderRepository genderRepository;
-
-    @Autowired
-    TelephoneRepository telephoneRepository;
-
-    @Autowired
-    CardBrandRepository cardBrandRepository;
-
-    @Autowired
-    CreditCardRepository creditCardRepository;
-
-    @Autowired
-    CustomerRepository customerRepository;
+//    @Autowired
+//    GenderRepository genderRepository;
+//
+//    @Autowired
+//    TelephoneRepository telephoneRepository;
+//
+//    @Autowired
+//    CardBrandRepository cardBrandRepository;
+//
+//    @Autowired
+//    CreditCardRepository creditCardRepository;
+//
+//    @Autowired
+//    CustomerRepository customerRepository;
 
     @Autowired
     DtoConversion conversion;
@@ -150,6 +150,10 @@ public class RequestService {
         return null;
     }
 
+    public List<RequestDTO> listAllByCustomers(Long id) {
+        List<Request> requestList = this.requestRepository.myFindAllRequestByCustomer(id);
+        return listToDto(requestList);
+    }
 
     //Convertion;
 
