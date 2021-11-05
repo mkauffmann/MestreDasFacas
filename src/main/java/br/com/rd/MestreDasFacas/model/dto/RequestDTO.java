@@ -3,6 +3,7 @@ package br.com.rd.MestreDasFacas.model.dto;
 import lombok.Data;
 
 import java.sql.Date;
+import java.util.List;
 
 @Data
 public class RequestDTO {
@@ -15,6 +16,7 @@ public class RequestDTO {
     private DeliveryStatusDTO deliveryStatus;
     private AddressDTO address;
     private CustomerDTO customer;
+    private List<ItemRequestDTO> itemRequest;
 
 
 }
