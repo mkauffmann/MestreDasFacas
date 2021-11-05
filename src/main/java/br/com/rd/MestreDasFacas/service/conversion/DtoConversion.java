@@ -52,6 +52,9 @@ public class DtoConversion {
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    InventoryRepository inventoryRepository;
+
     /*
     *
     * CONVERSORES CUSTOMER INICIO
@@ -616,9 +619,43 @@ public class DtoConversion {
         return listDto;
     }
 
+    // Conversões de Estoque (Inventory):
 
+    public Inventory inventoryDtoToBusiness(InventoryDTO dto) {
+        Inventory business = new Inventory();
+        business.setQuantityInventory(dto.getQuantityInventory());
 
+        if (dto.getProduct() != null) {
+            Product product = productDtoToBusiness(dto.getProduct());
+            business.setProduct(product);
+        }
 
+        return business;
+    }
+
+    public InventoryDTO inventoryBusinessToDto(Inventory business) {
+        InventoryDTO dto = new InventoryDTO();
+
+        dto.setId(business.getId());
+        dto.setQuantityInventory(business.getQuantityInventory());
+
+        if(business.getProduct() != null) {
+            ProductDTO productDTO = productBusinessToDto(business.getProduct());
+            dto.setProduct(productDTO);
+        }
+
+        return dto;
+    }
+
+    public List<InventoryDTO> inventoryListToDto(List<Inventory> list) {
+        List<InventoryDTO> listDto = new ArrayList<>();
+
+        for (Inventory iv : list) {
+            listDto.add(inventoryBusinessToDto(iv));
+        }
+
+        return listDto;
+    }
 
 
 
