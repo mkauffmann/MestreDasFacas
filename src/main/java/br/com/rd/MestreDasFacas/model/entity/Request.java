@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @Data
 @Entity(name = "PEDIDO")
@@ -38,5 +39,17 @@ public class Request {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ID_CLIENTE")
     private Customer customer;
+
+    @ManyToMany(cascade = {CascadeType.PERSIST})
+    @JoinTable(
+            name = "ITEM_PEDIDO_PEDIDO",
+            joinColumns = {@JoinColumn(name = "ID_PEDIDO")},
+            inverseJoinColumns = {@JoinColumn(name = "ID_ITEM_PEDIDO")})
+    private List<ItemRequest> itemrequests;
+
+
+
+
+
 
 }

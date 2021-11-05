@@ -3,6 +3,7 @@ package br.com.rd.MestreDasFacas.service;
 import br.com.rd.MestreDasFacas.model.dto.*;
 import br.com.rd.MestreDasFacas.model.entity.*;
 import br.com.rd.MestreDasFacas.repository.contract.*;
+import br.com.rd.MestreDasFacas.service.conversion.DtoConversion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +46,14 @@ public class RequestService {
 
     @Autowired
     CustomerRepository customerRepository;
+
+    @Autowired
+    DtoConversion conversion;
+
+    @Autowired
+    ItemRequestRepository itemRequestRepository;
+
+
 
 
 
@@ -94,9 +103,24 @@ public class RequestService {
             if (dto.getTypePayment() != null) {
                 TypePayment newPayment = typePaymentDtoToBusiness(dto.getTypePayment());
                 obj.setTypePayment(newPayment);
+
             }if(dto.getAddress() !=null){
                 Address newAdress = addressDtoToBusiness(dto.getAddress());
                 obj.setAddress(newAdress);
+            }
+            if(dto.getItemRequest() !=null){
+                List<ItemRequest> itemRequest = conversion.itemRequestListFromDto(dto.getItemRequest());
+                List<ItemRequest> listUpdate = obj.getItemrequests();
+
+                for(ItemRequest i : itemRequest) {
+                    i = itemRequestRepository.save(i);
+                    listUpdate.add(i);
+
+
+
+                }
+                obj.setItemrequests(listUpdate);
+
             }
 
             requestRepository.save(obj);
@@ -553,6 +577,7 @@ public class RequestService {
         TypePayment typePayment = typePaymentDtoToBusiness(dto.getTypePayment());
         Address address = addressDtoToBusiness(dto.getAddress());
         Customer customer = customerDtoToBusiness(dto.getCustomer());
+        List<ItemRequest> itemRequests = conversion.itemRequestListFromDto(dto.getItemRequest());
 
 
         business.setFreightFixed(dto.getFreightFixed());
@@ -562,6 +587,7 @@ public class RequestService {
         business.setTypePayment(typePayment);
         business.setAddress(address);
         business.setCustomer(customer);
+        business.setItemrequests(itemRequests);
 
 
         return business;
@@ -574,6 +600,9 @@ public class RequestService {
         DeliveryStatusDTO deliveryDto = deliveryBusinessToDto(business.getDeliveryStatus());
         CustomerDTO customerDTO = customerBusinessToDto(business.getCustomer());
         AddressDTO addressDTO = addressBusinessToDto(business.getAddress());
+        List <ItemRequestDTO> itemRequestDTO = conversion.itemRequestListToDto(business.getItemrequests());
+
+
 
 
         dto.setId(business.getId());
@@ -584,6 +613,7 @@ public class RequestService {
         dto.setDeliveryStatus(deliveryDto);
         dto.setAddress(addressDTO);
         dto.setCustomer(customerDTO);
+        dto.setItemRequest(itemRequestDTO);
 
         return dto;
     }
