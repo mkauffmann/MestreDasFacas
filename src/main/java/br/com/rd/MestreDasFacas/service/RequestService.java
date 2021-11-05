@@ -318,7 +318,7 @@ public class RequestService {
         DeliveryStatus deliveryStatus = deliveryDtoToBusiness(dto.getDeliveryStatus());
         TypePayment typePayment = typePaymentDtoToBusiness(dto.getTypePayment());
         Address address = addressDtoToBusiness(dto.getAddress());
-        Customer customer = customerDtoToBusiness(dto.getCustomer());
+        Customer customer = conversion.customerDtoToBusiness(dto.getCustomer());
         List<ItemRequest> itemRequests = conversion.itemRequestListFromDto(dto.getItemRequest());
 
 
@@ -342,9 +342,7 @@ public class RequestService {
         DeliveryStatusDTO deliveryDto = deliveryBusinessToDto(business.getDeliveryStatus());
         AddressDTO addressDTO = addressBusinessToDto(business.getAddress());
         List <ItemRequestDTO> itemRequestDTO = conversion.itemRequestListToDto(business.getItemrequests());
-
-
-
+        CustomerDTO customerDTO = conversion.customerBusinessToDto(business.getCustomer());
 
         dto.setId(business.getId());
         dto.setFreightFixed(business.getFreightFixed());
