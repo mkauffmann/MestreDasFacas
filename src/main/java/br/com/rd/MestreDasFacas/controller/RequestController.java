@@ -43,7 +43,7 @@ public class RequestController {
         return this.requestService.findById(id);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/customer/{id}")
     public List<RequestDTO> showListAllByCustomer(@PathVariable("id") Long id) {
         return this.requestService.listAllByCustomers(id);
     }
