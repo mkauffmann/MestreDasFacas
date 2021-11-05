@@ -2,7 +2,6 @@ package br.com.rd.MestreDasFacas.service.conversion;
 
 import br.com.rd.MestreDasFacas.model.dto.*;
 import br.com.rd.MestreDasFacas.model.entity.*;
-
 import br.com.rd.MestreDasFacas.repository.contract.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -49,6 +48,9 @@ public class DtoConversion {
 
     @Autowired
     ProductPriceRepository productPriceRepository;
+
+    @Autowired
+    ProductRepository productRepository;
 
     /*
     *
@@ -548,7 +550,19 @@ public class DtoConversion {
 
     // Métodos de conversão para Produto:
 
+
+
+
+
     public Product productDtoToBusiness(ProductDTO dto) {
+        if(dto.getId() != null){
+            Optional<Product> op = productRepository.findById(dto.getId());
+            if(op.isPresent()){
+                return op.get();
+
+            }
+
+        }
         Product business = new Product();
         Brand brand = brandDtoToBusiness(dto.getBrand());
         CableColor cableColor = cableColorDtoToBusiness(dto.getCableColor());

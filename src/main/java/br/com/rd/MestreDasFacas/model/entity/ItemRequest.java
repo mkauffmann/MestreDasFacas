@@ -12,10 +12,10 @@ public class ItemRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "QUANTIDADE", nullable = false, unique = true)
+    @Column(name = "QUANTIDADE", nullable = false)
     private Long quantity;
 
-    @Column(name = "VALOR_TOTAL", nullable = false, unique = true)
+    @Column(name = "VALOR_TOTAL", nullable = false)
     private Double total_value;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
