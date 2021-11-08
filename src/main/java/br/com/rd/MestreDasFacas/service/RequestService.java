@@ -602,9 +602,6 @@ public class RequestService {
         AddressDTO addressDTO = addressBusinessToDto(business.getAddress());
         List <ItemRequestDTO> itemRequestDTO = conversion.itemRequestListToDto(business.getItemrequests());
 
-
-
-
         dto.setId(business.getId());
         dto.setFreightFixed(business.getFreightFixed());
         dto.setPurchaseDate(business.getPurchaseDate());

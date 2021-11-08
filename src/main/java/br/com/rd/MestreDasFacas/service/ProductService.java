@@ -309,14 +309,7 @@ public class ProductService {
 
     // MÉTODOS DE CONVERSÃO 2:
 
-    private BrandDTO2 brandBusinessToDto2(Brand business) {
 
-        BrandDTO2 dto = new BrandDTO2();
-
-        dto.setBrand(business.getBrand());
-
-        return dto;
-    }
 
     private CableColorDTO2 cableColorBusinessToDto2(CableColor business) {
 
@@ -349,7 +342,7 @@ public class ProductService {
     private ProductDTO2 businessToDto2(Product business) {
 
         ProductDTO2 dto = new ProductDTO2();
-        BrandDTO2 brandDto = brandBusinessToDto2(business.getBrand());
+
         CableColorDTO2 cableDto = cableColorBusinessToDto2(business.getCableColor());
         CategoryDTO2 categoryDTO2 = categoryBusinessToDto2(business.getCategory());
         ProductPriceDTO2 ppdto = productPriceBusinessToDto2(business.getProductPrice());
@@ -360,7 +353,7 @@ public class ProductService {
         dto.setLength(business.getLength());
         dto.setWeight(business.getWeight());
         dto.setWidth(business.getWidth());
-        dto.setBrand(brandDto);
+
         dto.setCableColor(cableDto);
         dto.setCategory(categoryDTO2);
         dto.setProductPrice(ppdto);
