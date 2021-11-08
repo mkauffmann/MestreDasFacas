@@ -61,6 +61,11 @@ public class RequestService {
     public RequestDTO addRequest(RequestDTO dto) {
         Request newRequest = dtoToBusiness(dto);
         newRequest = requestRepository.save(newRequest);
+
+        for (ItemRequest i : newRequest.getItemrequests()) {
+            inventoryRepository.myInventoryUpdate(i.getProduct().getId());
+        }
+
         return businessToDto(newRequest);
     }
 
