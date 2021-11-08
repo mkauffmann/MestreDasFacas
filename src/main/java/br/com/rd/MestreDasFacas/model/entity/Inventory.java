@@ -9,11 +9,11 @@ import javax.persistence.*;
 public class Inventory {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_ESTOQUE")
     private Long id;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @OneToOne
+    @MapsId
     @JoinColumn(name = "ID_PRODUTO")
     private Product product;
 

@@ -5,6 +5,7 @@ import br.com.rd.MestreDasFacas.model.dto.ItemRequestDTO;
 import br.com.rd.MestreDasFacas.model.dto.ProductDTO;
 import br.com.rd.MestreDasFacas.model.entity.ItemRequest;
 import br.com.rd.MestreDasFacas.model.entity.Product;
+import br.com.rd.MestreDasFacas.repository.contract.InventoryRepository;
 import br.com.rd.MestreDasFacas.repository.contract.ItemRequestRepository;
 import br.com.rd.MestreDasFacas.service.conversion.DtoConversion;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,13 @@ public class ItemRequestService {
     @Autowired
     ItemRequestRepository itemRequestRepository;
 
-
+//    @Autowired
+//    InventoryRepository inventoryRepository;
 
     public ItemRequestDTO addItem(ItemRequestDTO dto) {
         ItemRequest newItemRequest = conversion.itemRequestDtoToBusiness(dto);
         newItemRequest = itemRequestRepository.save(newItemRequest);
+//        inventoryRepository.myInventoryUpdate(newItemRequest.getProduct().getId());
         return conversion.itemRequestbusinessToDto(newItemRequest);
     }
 

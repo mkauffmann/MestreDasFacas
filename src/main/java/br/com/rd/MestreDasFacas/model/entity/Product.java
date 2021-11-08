@@ -48,4 +48,8 @@ public class Product {
     @JoinColumn(name = "ID_PRECO_PRODUTO")
     private ProductPrice productPrice;
 
+    @OneToOne(mappedBy = "product", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
+    private Inventory inventory;
+
 }

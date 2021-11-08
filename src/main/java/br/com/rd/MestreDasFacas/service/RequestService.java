@@ -53,10 +53,8 @@ public class RequestService {
     @Autowired
     ItemRequestRepository itemRequestRepository;
 
-
-
-
-
+//    @Autowired
+//    InventoryRepository inventoryRepository;
 
     // Create
 
@@ -325,7 +323,6 @@ public class RequestService {
         Customer customer = conversion.customerDtoToBusiness(dto.getCustomer());
         List<ItemRequest> itemRequests = conversion.itemRequestListFromDto(dto.getItemRequest());
 
-
         business.setFreightFixed(dto.getFreightFixed());
         business.setPaymentDate(dto.getPaymentDate());
         business.setPurchaseDate(dto.getPurchaseDate());
@@ -345,8 +342,9 @@ public class RequestService {
         TypePaymentDTO typePaymentDTO = typePaymentBusinessToDto(business.getTypePayment());
         DeliveryStatusDTO deliveryDto = deliveryBusinessToDto(business.getDeliveryStatus());
         AddressDTO addressDTO = addressBusinessToDto(business.getAddress());
-        List <ItemRequestDTO> itemRequestDTO = conversion.itemRequestListToDto(business.getItemrequests());
         CustomerDTO customerDTO = conversion.customerBusinessToDto(business.getCustomer());
+        List <ItemRequestDTO> itemRequestDTO = conversion.itemRequestListToDto(business.getItemrequests());
+
 
         dto.setId(business.getId());
         dto.setFreightFixed(business.getFreightFixed());
