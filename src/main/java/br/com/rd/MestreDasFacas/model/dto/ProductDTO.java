@@ -2,6 +2,7 @@ package br.com.rd.MestreDasFacas.model.dto;
 
 import br.com.rd.MestreDasFacas.model.entity.Brand;
 import br.com.rd.MestreDasFacas.model.entity.CableColor;
+import br.com.rd.MestreDasFacas.model.entity.ProductPrice;
 import lombok.Data;
 
 @Data
@@ -17,5 +18,6 @@ public class ProductDTO {
     private BrandDTO brand;
     private CableColorDTO cableColor;
     private CategoryDTO category;
+    private ProductPriceDTO productPrice;
 
 }

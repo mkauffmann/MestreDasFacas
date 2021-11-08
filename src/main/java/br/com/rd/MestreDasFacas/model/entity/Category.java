@@ -1,6 +1,7 @@
-package br.com.rd.MestreDasFacas.model.enity;
+package br.com.rd.MestreDasFacas.model.entity;
 
 import lombok.Data;
+
 import javax.persistence.*;
 
 @Data
@@ -8,10 +9,11 @@ import javax.persistence.*;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_categoria;
-    //    @NotNull(message = "Brand field is empty")
-    @Column(nullable = false)
+    @Column(name = "ID_CATEGORIA")
+    private Long id;
+
+    @Column(nullable = false, name = "DESCRICAO_CATEGORIA")
     private String description_category;
-    //    @NotNull(message = "Model field is empty")
+
 
 }
