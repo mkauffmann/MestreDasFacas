@@ -53,8 +53,8 @@ public class RequestService {
     @Autowired
     ItemRequestRepository itemRequestRepository;
 
-//    @Autowired
-//    InventoryRepository inventoryRepository;
+    @Autowired
+    InventoryRepository inventoryRepository;
 
     // Create
 
@@ -344,7 +344,6 @@ public class RequestService {
         AddressDTO addressDTO = addressBusinessToDto(business.getAddress());
         CustomerDTO customerDTO = conversion.customerBusinessToDto(business.getCustomer());
         List <ItemRequestDTO> itemRequestDTO = conversion.itemRequestListToDto(business.getItemrequests());
-
 
         dto.setId(business.getId());
         dto.setFreightFixed(business.getFreightFixed());
