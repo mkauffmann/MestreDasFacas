@@ -64,7 +64,7 @@ public class RequestService {
 
         for (ItemRequest i : newRequest.getItemrequests()) {
             Product product = i.getProduct();
-            Optional<Inventory> op = inventoryRepository.findById(product.getInventory().getId());
+            Optional<Inventory> op = inventoryRepository.myFindById(product.getId());
 
             if(op.isPresent()) {
                 Inventory obj = op.get();
