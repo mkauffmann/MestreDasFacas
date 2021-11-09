@@ -676,14 +676,16 @@ public class DtoConversion {
         ItemRequest business = new ItemRequest();
 
         business.setQuantity(dto.getQuantity());
-        business.setTotal_value(dto.getTotal_value());
+
         if(dto.getProduct() != null){
             Product product =  productDtoToBusiness(dto.getProduct());
             business.setProduct(product);
 
+            Double precoProduto = product.getProductPrice().getValue();
+            Double precoTotal = precoProduto * dto.getQuantity();
+            business.setTotal_value(precoTotal);
+
         }
-
-
 
         return business;
     }
@@ -698,6 +700,10 @@ public class DtoConversion {
         if(business.getProduct() != null){
             ProductDTO pdto = productBusinessToDto(business.getProduct());
             dto.setProduct(pdto);
+
+            Double precoProduto = pdto.getProductPrice().getValue();
+            Double precoTotal = precoProduto * business.getQuantity();
+            dto.setTotal_value(precoTotal);
 
         }
 

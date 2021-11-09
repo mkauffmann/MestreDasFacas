@@ -68,8 +68,9 @@ public class RequestService {
 
             if(op.isPresent()) {
                 Inventory obj = op.get();
-                Integer qtd = obj.getQuantityInventory();
-                obj.setQuantityInventory(qtd - 1);
+                Integer qtdEstoque = obj.getQuantityInventory();
+                Integer qtdCompra = Math.toIntExact(i.getQuantity());
+                obj.setQuantityInventory(qtdEstoque - qtdCompra);
 //                inventoryRepository.myInventoryUpdate(obj.getId());
                 inventoryRepository.save(obj);
             }
