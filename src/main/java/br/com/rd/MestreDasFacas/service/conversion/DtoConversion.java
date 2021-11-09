@@ -572,6 +572,7 @@ public class DtoConversion {
         Category category = categoryDtoToBusiness(dto.getCategory());
         ProductPrice pp = productPriceDtoToBusiness(dto.getProductPrice());
 
+
         business.setProductName(dto.getProductName());
         business.setDescriptionProduct(dto.getDescriptionProduct());
         business.setWeight(dto.getWeight());
@@ -582,6 +583,7 @@ public class DtoConversion {
         business.setCableColor(cableColor);
         business.setCategory(category);
         business.setProductPrice(pp);
+
 
         return business;
     }
@@ -594,6 +596,7 @@ public class DtoConversion {
         CategoryDTO categoryDto = categoryBusinessToDto(business.getCategory());
         ProductPriceDTO pdDto = productPriceBusinessToDto(business.getProductPrice());
 
+
         dto.setId(business.getId());
         dto.setProductName(business.getProductName());
         dto.setDescriptionProduct(business.getDescriptionProduct());
@@ -605,6 +608,7 @@ public class DtoConversion {
         dto.setCableColor(cableDto);
         dto.setCategory(categoryDto);
         dto.setProductPrice(pdDto);
+
 
         return dto;
     }
