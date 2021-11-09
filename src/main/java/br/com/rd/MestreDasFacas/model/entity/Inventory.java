@@ -9,7 +9,7 @@ import javax.persistence.*;
 public class Inventory {
 
     @Id
-    @Column(name = "ID_ESTOQUE")
+    @Column(name = "ID_PRODUTO")
     private Long id;
 
     @OneToOne

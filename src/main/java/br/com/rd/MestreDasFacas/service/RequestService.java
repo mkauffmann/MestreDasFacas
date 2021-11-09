@@ -63,7 +63,17 @@ public class RequestService {
         newRequest = requestRepository.save(newRequest);
 
         for (ItemRequest i : newRequest.getItemrequests()) {
-            inventoryRepository.myInventoryUpdate(i.getProduct().getId());
+            Product product = i.getProduct();
+            Optional<Inventory> op = inventoryRepository.findById(product.getInventory().getId());
+
+            if(op.isPresent()) {
+                Inventory obj = op.get();
+                inventoryRepository.myInventoryUpdate(obj.getId());
+                inventoryRepository.save(obj);
+            }
+
+//            Product product = i.getProduct();
+//            inventoryRepository.findById(id);
         }
 
         return businessToDto(newRequest);
