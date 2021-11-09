@@ -583,6 +583,7 @@ public class DtoConversion {
         business.setCableColor(cableColor);
         business.setCategory(category);
         business.setProductPrice(pp);
+        business.setImage(dto.getImage());
 
 
         return business;
@@ -608,6 +609,7 @@ public class DtoConversion {
         dto.setCableColor(cableDto);
         dto.setCategory(categoryDto);
         dto.setProductPrice(pdDto);
+        dto.setImage(business.getImage());
 
 
         return dto;

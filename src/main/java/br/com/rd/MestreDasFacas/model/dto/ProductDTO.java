@@ -19,5 +19,6 @@ public class ProductDTO {
     private CableColorDTO cableColor;
     private CategoryDTO category;
     private ProductPriceDTO productPrice;
+    private String image;
 
 }

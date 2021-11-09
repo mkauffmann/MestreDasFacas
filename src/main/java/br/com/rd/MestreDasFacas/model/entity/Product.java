@@ -52,4 +52,7 @@ public class Product {
 //    @PrimaryKeyJoinColumn
 //    private Inventory inventory;
 
+    @Column(columnDefinition = "TEXT", name = "IMAGEM")
+    private String image;
+
 }
