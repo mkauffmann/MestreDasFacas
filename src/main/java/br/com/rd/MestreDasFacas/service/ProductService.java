@@ -139,6 +139,20 @@ public class ProductService {
         return listToDto2(productList);
     }
 
+    // Método para ordenar produtos pelo preço decrescente:
+
+    public List<ProductDTO> listProductsByPriceDesc() {
+        List<Product> productList = this.productRepository.myFindByPriceDesc();
+        return dtoConversion.productListToDto(productList);
+    }
+
+    // Método para ordenar produtos pelo preço decrescente:
+
+    public List<ProductDTO> listProductsByPriceAsc() {
+        List<Product> productList = this.productRepository.myFindByPriceAsc();
+        return dtoConversion.productListToDto(productList);
+    }
+
     // Métodos de conversão:
 
     // Métodos de conversão para Brand:

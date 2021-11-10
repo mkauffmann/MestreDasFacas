@@ -58,4 +58,18 @@ public class ProductController {
         return this.productService.listProductByCategory(id);
     }
 
+    // Ordenar em Decrescente:
+
+    @GetMapping("/orderDesc")
+    public List<ProductDTO> listDesc() {
+        return this.productService.listProductsByPriceDesc();
+    }
+
+    // Ordenar em Crescente:
+
+    @GetMapping("/orderAsc")
+    public List<ProductDTO> listAsc() {
+        return this.productService.listProductsByPriceAsc();
+    }
+
 }
