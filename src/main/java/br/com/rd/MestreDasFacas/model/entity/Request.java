@@ -36,6 +36,7 @@ public class Request {
     @JoinColumn(name = "ID_ENDERECO")
     private Address address;
 
+<<<<<<< HEAD
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ID_CLIENTE")
     private Customer customer;
@@ -52,4 +53,6 @@ public class Request {
 
 
 
+=======
+>>>>>>> 7e99ba98dd0a3f7e7223ec9f34010b6d7c08095f
 }

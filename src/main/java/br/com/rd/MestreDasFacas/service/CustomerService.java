@@ -12,7 +12,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +37,7 @@ public class CustomerService {
     @Autowired
     PasswordEncoder encoder;
 
+
     @Autowired
     EmailRepository emailRepository;
 
@@ -55,6 +55,16 @@ public class CustomerService {
         sendSignUpEmail(newCustomer);
         return conversion.customerBusinessToDto(newCustomer);
 
+
+    public CustomerDTO add(CustomerDTO dto){
+        Customer newCustomer = conversion.customerDtoToBusiness(dto);
+
+        //encriptar senha
+        String passwordCrypt = encoder.encode(dto.getPassword());
+        newCustomer.setPassword(passwordCrypt);
+
+        newCustomer = customerRepository.save(newCustomer);
+        return conversion.customerBusinessToDto(newCustomer);
 
     }
 
@@ -197,6 +207,29 @@ public class CustomerService {
                 customer.setTelephones(telephoneList);
                 customer = customerRepository.save(customer);
 
+
+    public CustomerDTO removeTelephoneFromCustomer(Long customerId, Long telephoneId){
+        Optional<Customer> opCustomer = customerRepository.findById(customerId);
+        Optional<Telephone> opTelephone = telephoneRepository.findById(telephoneId);
+
+        if(opCustomer.isPresent() && opTelephone.isPresent()){
+            Customer customer = opCustomer.get();
+            Telephone telephone = opTelephone.get();
+
+            if(customer.getTelephones() != null){
+                List<Telephone> telephoneList = customer.getTelephones();
+
+                for (Telephone t : telephoneList){
+                    if(t.getId() == telephone.getId()){
+                        telephoneList.remove(telephone);
+                        break;
+                    }
+                }
+
+                customer.setTelephones(telephoneList);
+                customer = customerRepository.save(customer);
+
+
                 return conversion.customerBusinessToDto(customer);
             }
         }
@@ -224,6 +257,7 @@ public class CustomerService {
         return null;
     }
 
+
     public CustomerDTO removeCreditCardFromCustomer(Long customerId, Long creditCardId){
         Optional<Customer> opCustomer = customerRepository.findById(customerId);
         Optional<CreditCard> opCreditCard = creditCardRepository.findById(creditCardId);
@@ -234,6 +268,19 @@ public class CustomerService {
 
             if(customer.getCreditCards() != null){
                 List<CreditCard> creditCardList = customer.getCreditCards();
+
+
+    public CustomerDTO removeCreditCardFromCustomer(Long customerId, Long creditCardId){
+        Optional<Customer> opCustomer = customerRepository.findById(customerId);
+        Optional<CreditCard> opCreditCard = creditCardRepository.findById(creditCardId);
+
+        if(opCustomer.isPresent() && opCreditCard.isPresent()){
+            Customer customer = opCustomer.get();
+            CreditCard card = opCreditCard.get();
+
+            if(customer.getCreditCards() != null){
+                List<CreditCard> creditCardList = customer.getCreditCards();
+
 
                 for (CreditCard c : creditCardList){
                     if(c.getId() == card.getId()){
@@ -277,3 +324,16 @@ public class CustomerService {
         }
 
     }}
+
+
+                customer.setCreditCards(creditCardList);
+                customer = customerRepository.save(customer);
+
+                return conversion.customerBusinessToDto(customer);
+            }
+        }
+        return null;
+
+    }
+
+

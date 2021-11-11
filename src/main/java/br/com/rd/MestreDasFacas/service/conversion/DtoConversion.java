@@ -2,9 +2,12 @@ package br.com.rd.MestreDasFacas.service.conversion;
 
 import br.com.rd.MestreDasFacas.model.dto.*;
 import br.com.rd.MestreDasFacas.model.entity.*;
+<<<<<<< HEAD
 import br.com.rd.MestreDasFacas.repository.BrandRepository;
 import br.com.rd.MestreDasFacas.repository.CableColorRepository;
 import br.com.rd.MestreDasFacas.repository.ProductRepository;
+=======
+>>>>>>> 7e99ba98dd0a3f7e7223ec9f34010b6d7c08095f
 import br.com.rd.MestreDasFacas.repository.contract.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -39,6 +42,7 @@ public class DtoConversion {
     @Autowired
     GenderRepository genderRepository;
 
+<<<<<<< HEAD
 
     @Autowired
     BrandRepository brandRepository;
@@ -55,6 +59,8 @@ public class DtoConversion {
     @Autowired
     ProductRepository productRepository;
 
+=======
+>>>>>>> 7e99ba98dd0a3f7e7223ec9f34010b6d7c08095f
     /*
     *
     * CONVERSORES CUSTOMER INICIO
@@ -426,6 +432,7 @@ public class DtoConversion {
      * CONVERSORES CUSTOMER FIM
      *
      */
+<<<<<<< HEAD
 
 
 
@@ -706,4 +713,6 @@ public class DtoConversion {
 
 
 
+=======
+>>>>>>> 7e99ba98dd0a3f7e7223ec9f34010b6d7c08095f
 }

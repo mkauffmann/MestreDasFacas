@@ -51,20 +51,26 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		<dependency>
+<<<<<<< HEAD
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 		<dependency>
+=======
+>>>>>>> 7e99ba98dd0a3f7e7223ec9f34010b6d7c08095f
 			<groupId>com.auth0</groupId>
 			<artifactId>java-jwt</artifactId>
 			<version>3.16.0</version>
 		</dependency>
+<<<<<<< HEAD
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-mail</artifactId>
 		</dependency>
 
+=======
+>>>>>>> 7e99ba98dd0a3f7e7223ec9f34010b6d7c08095f
 	</dependencies>
 
 	<build>

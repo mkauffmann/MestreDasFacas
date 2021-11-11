@@ -1,10 +1,16 @@
 package br.com.rd.MestreDasFacas.service;
 
+<<<<<<< HEAD
 import br.com.rd.MestreDasFacas.enums.StatusEmail;
 import br.com.rd.MestreDasFacas.model.dto.*;
 import br.com.rd.MestreDasFacas.model.entity.*;
 import br.com.rd.MestreDasFacas.repository.contract.*;
 import br.com.rd.MestreDasFacas.service.conversion.DtoConversion;
+=======
+import br.com.rd.MestreDasFacas.model.dto.*;
+import br.com.rd.MestreDasFacas.model.entity.*;
+import br.com.rd.MestreDasFacas.repository.contract.*;
+>>>>>>> 7e99ba98dd0a3f7e7223ec9f34010b6d7c08095f
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -37,6 +43,7 @@ public class RequestService {
     @Autowired
     CityRepository cityRepository;
 
+<<<<<<< HEAD
     @Autowired
     GenderRepository genderRepository;
 
@@ -68,6 +75,8 @@ public class RequestService {
 
 
 
+=======
+>>>>>>> 7e99ba98dd0a3f7e7223ec9f34010b6d7c08095f
 
     // Create
 
@@ -114,6 +123,7 @@ public class RequestService {
             if (dto.getTypePayment() != null) {
                 TypePayment newPayment = typePaymentDtoToBusiness(dto.getTypePayment());
                 obj.setTypePayment(newPayment);
+<<<<<<< HEAD
 
             }if(dto.getAddress() !=null){
                 Address newAdress = addressDtoToBusiness(dto.getAddress());
@@ -132,6 +142,11 @@ public class RequestService {
                 }
                 obj.setItemrequests(listUpdate);
 
+=======
+            }if(dto.getAddress() !=null){
+                Address newAdress = addressDtoToBusiness(dto.getAddress());
+                obj.setAddress(newAdress);
+>>>>>>> 7e99ba98dd0a3f7e7223ec9f34010b6d7c08095f
             }
 
             requestRepository.save(obj);
@@ -227,6 +242,7 @@ public class RequestService {
         return dto;
     }
 
+<<<<<<< HEAD
     //////////////////////////////////////
 
     private CreditCard creditCardDtoToBusiness(CreditCardDTO dto){
@@ -485,6 +501,8 @@ public class RequestService {
         return dto;
     }
 
+=======
+>>>>>>> 7e99ba98dd0a3f7e7223ec9f34010b6d7c08095f
 
 
     //////////////////////////////////////
@@ -587,8 +605,11 @@ public class RequestService {
         DeliveryStatus deliveryStatus = deliveryDtoToBusiness(dto.getDeliveryStatus());
         TypePayment typePayment = typePaymentDtoToBusiness(dto.getTypePayment());
         Address address = addressDtoToBusiness(dto.getAddress());
+<<<<<<< HEAD
         Customer customer = customerDtoToBusiness(dto.getCustomer());
         List<ItemRequest> itemRequests = conversion.itemRequestListFromDto(dto.getItemRequest());
+=======
+>>>>>>> 7e99ba98dd0a3f7e7223ec9f34010b6d7c08095f
 
 
         business.setFreightFixed(dto.getFreightFixed());
@@ -597,8 +618,11 @@ public class RequestService {
         business.setDeliveryStatus(deliveryStatus);
         business.setTypePayment(typePayment);
         business.setAddress(address);
+<<<<<<< HEAD
         business.setCustomer(customer);
         business.setItemrequests(itemRequests);
+=======
+>>>>>>> 7e99ba98dd0a3f7e7223ec9f34010b6d7c08095f
 
 
         return business;
@@ -616,6 +640,9 @@ public class RequestService {
 
 
 
+        AddressDTO addressDTO = addressBusinessToDto(business.getAddress());
+
+
         dto.setId(business.getId());
         dto.setFreightFixed(business.getFreightFixed());
         dto.setPurchaseDate(business.getPurchaseDate());
@@ -623,8 +650,11 @@ public class RequestService {
         dto.setTypePayment(typePaymentDTO);
         dto.setDeliveryStatus(deliveryDto);
         dto.setAddress(addressDTO);
+<<<<<<< HEAD
         dto.setCustomer(customerDTO);
         dto.setItemRequest(itemRequestDTO);
+=======
+>>>>>>> 7e99ba98dd0a3f7e7223ec9f34010b6d7c08095f
 
         return dto;
     }
@@ -643,7 +673,10 @@ public class RequestService {
 
 
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 7e99ba98dd0a3f7e7223ec9f34010b6d7c08095f
 }

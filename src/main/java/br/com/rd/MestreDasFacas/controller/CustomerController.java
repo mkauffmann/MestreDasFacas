@@ -1,7 +1,14 @@
 package br.com.rd.MestreDasFacas.controller;
 
+<<<<<<< HEAD
 import br.com.rd.MestreDasFacas.model.dto.*;
 import br.com.rd.MestreDasFacas.model.entity.Customer;
+=======
+import br.com.rd.MestreDasFacas.model.dto.AddressDTO;
+import br.com.rd.MestreDasFacas.model.dto.CreditCardDTO;
+import br.com.rd.MestreDasFacas.model.dto.CustomerDTO;
+import br.com.rd.MestreDasFacas.model.dto.TelephoneDTO;
+>>>>>>> 7e99ba98dd0a3f7e7223ec9f34010b6d7c08095f
 import br.com.rd.MestreDasFacas.service.CustomerService;
 import br.com.rd.MestreDasFacas.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
