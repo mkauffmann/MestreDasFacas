@@ -40,8 +40,8 @@ public class DtoConversion {
     @Autowired
     BrandRepository brandRepository;
 
-    @Autowired
-    CableColorRepository cableColorRepository;
+//    @Autowired
+//    CableColorRepository cableColorRepository;
 
     @Autowired
     CategoryRepository categoryRepository;
@@ -462,35 +462,35 @@ public class DtoConversion {
 
     // Métodos de conversão para CableColor:
 
-    public CableColor cableColorDtoToBusiness(CableColorDTO dto) {
-
-        CableColor business = new CableColor();
-
-        if(dto.getId() != null) {
-
-            Long cableId = dto.getId();
-            if(cableColorRepository.existsById(cableId)){
-                business = cableColorRepository.getById(cableId);
-            } else {
-                business.setCableColor(dto.getCableColor());
-            }
-        } else {
-            business.setCableColor(dto.getCableColor());
-        }
-
-        return business;
-
-    }
-
-    public CableColorDTO cableColorBusinessToDto(CableColor business) {
-
-        CableColorDTO dto = new CableColorDTO();
-
-        dto.setId(business.getId());
-        dto.setCableColor(business.getCableColor());
-
-        return dto;
-    }
+//    public CableColor cableColorDtoToBusiness(CableColorDTO dto) {
+//
+//        CableColor business = new CableColor();
+//
+//        if(dto.getId() != null) {
+//
+//            Long cableId = dto.getId();
+//            if(cableColorRepository.existsById(cableId)){
+//                business = cableColorRepository.getById(cableId);
+//            } else {
+//                business.setCableColor(dto.getCableColor());
+//            }
+//        } else {
+//            business.setCableColor(dto.getCableColor());
+//        }
+//
+//        return business;
+//
+//    }
+//
+//    public CableColorDTO cableColorBusinessToDto(CableColor business) {
+//
+//        CableColorDTO dto = new CableColorDTO();
+//
+//        dto.setId(business.getId());
+//        dto.setCableColor(business.getCableColor());
+//
+//        return dto;
+//    }
 
     // Métodos de conversão para Category:
 
@@ -568,7 +568,7 @@ public class DtoConversion {
         }
         Product business = new Product();
         Brand brand = brandDtoToBusiness(dto.getBrand());
-        CableColor cableColor = cableColorDtoToBusiness(dto.getCableColor());
+//        CableColor cableColor = cableColorDtoToBusiness(dto.getCableColor());
         Category category = categoryDtoToBusiness(dto.getCategory());
         ProductPrice pp = productPriceDtoToBusiness(dto.getProductPrice());
 
@@ -580,7 +580,7 @@ public class DtoConversion {
         business.setHeight(dto.getHeight());
         business.setWidth(dto.getWidth());
         business.setBrand(brand);
-        business.setCableColor(cableColor);
+//        business.setCableColor(cableColor);
         business.setCategory(category);
         business.setProductPrice(pp);
         business.setImage(dto.getImage());
@@ -593,7 +593,7 @@ public class DtoConversion {
 
         ProductDTO dto = new ProductDTO();
         BrandDTO brandDto = brandBusinessToDto(business.getBrand());
-        CableColorDTO cableDto = cableColorBusinessToDto(business.getCableColor());
+//        CableColorDTO cableDto = cableColorBusinessToDto(business.getCableColor());
         CategoryDTO categoryDto = categoryBusinessToDto(business.getCategory());
         ProductPriceDTO pdDto = productPriceBusinessToDto(business.getProductPrice());
 
@@ -606,7 +606,7 @@ public class DtoConversion {
         dto.setWeight(business.getWeight());
         dto.setWidth(business.getWidth());
         dto.setBrand(brandDto);
-        dto.setCableColor(cableDto);
+//        dto.setCableColor(cableDto);
         dto.setCategory(categoryDto);
         dto.setProductPrice(pdDto);
         dto.setImage(business.getImage());

@@ -2,7 +2,7 @@ package br.com.rd.MestreDasFacas.controller;
 
 
 import br.com.rd.MestreDasFacas.model.dto.ProductDTO;
-import br.com.rd.MestreDasFacas.model.dto.ProductDTO2;
+//import br.com.rd.MestreDasFacas.model.dto.ProductDTO2;
 import br.com.rd.MestreDasFacas.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,14 +47,14 @@ public class ProductController {
     // Barra de busca:
 
     @GetMapping("/search/{busca}")
-    public List<ProductDTO2> searchProducts(@PathVariable("busca") String search) {
+    public List<ProductDTO> searchProducts(@PathVariable("busca") String search) {
         return this.productService.listProductsSearch(search);
     }
 
     // Buscar por categoria:
 
     @GetMapping("/category/{id}")
-    public List<ProductDTO2> searchByCategory(@PathVariable("id") Long id) {
+    public List<ProductDTO> searchByCategory(@PathVariable("id") Long id) {
         return this.productService.listProductByCategory(id);
     }
 

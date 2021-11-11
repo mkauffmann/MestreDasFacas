@@ -4,11 +4,11 @@ import br.com.rd.MestreDasFacas.model.dto.*;
 
 import br.com.rd.MestreDasFacas.model.entity.Category;
 import br.com.rd.MestreDasFacas.model.entity.Brand;
-import br.com.rd.MestreDasFacas.model.entity.CableColor;
+//import br.com.rd.MestreDasFacas.model.entity.CableColor;
 import br.com.rd.MestreDasFacas.model.entity.Product;
 import br.com.rd.MestreDasFacas.model.entity.ProductPrice;
 import br.com.rd.MestreDasFacas.repository.contract.BrandRepository;
-import br.com.rd.MestreDasFacas.repository.contract.CableColorRepository;
+//import br.com.rd.MestreDasFacas.repository.contract.CableColorRepository;
 import br.com.rd.MestreDasFacas.repository.contract.ProductRepository;
 
 import br.com.rd.MestreDasFacas.repository.contract.CategoryRepository;
@@ -30,8 +30,8 @@ public class ProductService {
     @Autowired
     BrandRepository brandRepository;
 
-    @Autowired
-    CableColorRepository cableColorRepository;
+//    @Autowired
+//    CableColorRepository cableColorRepository;
 
     @Autowired
     CategoryRepository categoryRepository;
@@ -102,10 +102,10 @@ public class ProductService {
                 obj.setBrand(newBrand);
             }
 
-            if(dto.getCableColor() != null) {
-                CableColor newCable = dtoConversion.cableColorDtoToBusiness(dto.getCableColor());
-                obj.setCableColor(newCable);
-            }
+//            if(dto.getCableColor() != null) {
+//                CableColor newCable = dtoConversion.cableColorDtoToBusiness(dto.getCableColor());
+//                obj.setCableColor(newCable);
+//            }
 
             if(dto.getCategory() != null) {
                 Category newCategory = dtoConversion.categoryDtoToBusiness(dto.getCategory());
@@ -127,16 +127,16 @@ public class ProductService {
 
     // Método para barra de busca:
 
-    public List<ProductDTO2> listProductsSearch(String search) {
+    public List<ProductDTO> listProductsSearch(String search) {
         List<Product> productList = this.productRepository.myFindAllBySearch(search);
-        return listToDto2(productList);
+        return dtoConversion.productListToDto(productList);
     }
 
     // Método para listar produtos pelo id de categoria:
 
-    public List<ProductDTO2> listProductByCategory(Long id) {
+    public List<ProductDTO> listProductByCategory(Long id) {
         List<Product> productList = this.productRepository.myFindAllByIdCategory(id);
-        return listToDto2(productList);
+        return dtoConversion.productListToDto(productList);
     }
 
     // Método para ordenar produtos pelo preço decrescente:
@@ -331,75 +331,75 @@ public class ProductService {
 //        return listDto;
 //    }
 
-    // MÉTODOS DE CONVERSÃO 2:
-
-    private BrandDTO2 brandBusinessToDto2(Brand business) {
-
-        BrandDTO2 dto = new BrandDTO2();
-
-        dto.setBrand(business.getBrand());
-
-        return dto;
-    }
-
-    private CableColorDTO2 cableColorBusinessToDto2(CableColor business) {
-
-        CableColorDTO2 dto = new CableColorDTO2();
-
-        dto.setCableColor(business.getCableColor());
-
-        return dto;
-    }
-
-    private CategoryDTO2 categoryBusinessToDto2(Category business) {
-
-        CategoryDTO2 dto = new CategoryDTO2();
-
-        dto.setDescription_category(business.getDescription_category());
-
-        return dto;
-    }
-
-    private ProductPriceDTO2 productPriceBusinessToDto2(ProductPrice business) {
-
-        ProductPriceDTO2 dto = new ProductPriceDTO2();
-
-        dto.setValue(business.getValue());
-
-        return dto;
-
-    }
-
-    private ProductDTO2 businessToDto2(Product business) {
-
-        ProductDTO2 dto = new ProductDTO2();
-        BrandDTO2 brandDto = brandBusinessToDto2(business.getBrand());
-        CableColorDTO2 cableDto = cableColorBusinessToDto2(business.getCableColor());
-        CategoryDTO2 categoryDTO2 = categoryBusinessToDto2(business.getCategory());
-        ProductPriceDTO2 ppdto = productPriceBusinessToDto2(business.getProductPrice());
-
-        dto.setProductName(business.getProductName());
-        dto.setDescriptionProduct(business.getDescriptionProduct());
-        dto.setHeight(business.getHeight());
-        dto.setLength(business.getLength());
-        dto.setWeight(business.getWeight());
-        dto.setWidth(business.getWidth());
-        dto.setBrand(brandDto);
-        dto.setCableColor(cableDto);
-        dto.setCategory(categoryDTO2);
-        dto.setProductPrice(ppdto);
-
-        return dto;
-    }
-
-    private List<ProductDTO2> listToDto2(List<Product> list) {
-        List<ProductDTO2> listDto = new ArrayList<>();
-
-        for(Product p : list) {
-            listDto.add(businessToDto2(p));
-        }
-
-        return listDto;
-    }
+//    // MÉTODOS DE CONVERSÃO 2:
+//
+//    private BrandDTO2 brandBusinessToDto2(Brand business) {
+//
+//        BrandDTO2 dto = new BrandDTO2();
+//
+//        dto.setBrand(business.getBrand());
+//
+//        return dto;
+//    }
+//
+//    private CableColorDTO2 cableColorBusinessToDto2(CableColor business) {
+//
+//        CableColorDTO2 dto = new CableColorDTO2();
+//
+//        dto.setCableColor(business.getCableColor());
+//
+//        return dto;
+//    }
+//
+//    private CategoryDTO2 categoryBusinessToDto2(Category business) {
+//
+//        CategoryDTO2 dto = new CategoryDTO2();
+//
+//        dto.setDescription_category(business.getDescription_category());
+//
+//        return dto;
+//    }
+//
+//    private ProductPriceDTO2 productPriceBusinessToDto2(ProductPrice business) {
+//
+//        ProductPriceDTO2 dto = new ProductPriceDTO2();
+//
+//        dto.setValue(business.getValue());
+//
+//        return dto;
+//
+//    }
+//
+//    private ProductDTO2 businessToDto2(Product business) {
+//
+//        ProductDTO2 dto = new ProductDTO2();
+//        BrandDTO2 brandDto = brandBusinessToDto2(business.getBrand());
+//        CableColorDTO2 cableDto = cableColorBusinessToDto2(business.getCableColor());
+//        CategoryDTO2 categoryDTO2 = categoryBusinessToDto2(business.getCategory());
+//        ProductPriceDTO2 ppdto = productPriceBusinessToDto2(business.getProductPrice());
+//
+//        dto.setProductName(business.getProductName());
+//        dto.setDescriptionProduct(business.getDescriptionProduct());
+//        dto.setHeight(business.getHeight());
+//        dto.setLength(business.getLength());
+//        dto.setWeight(business.getWeight());
+//        dto.setWidth(business.getWidth());
+//        dto.setBrand(brandDto);
+//        dto.setCableColor(cableDto);
+//        dto.setCategory(categoryDTO2);
+//        dto.setProductPrice(ppdto);
+//
+//        return dto;
+//    }
+//
+//    private List<ProductDTO2> listToDto2(List<Product> list) {
+//        List<ProductDTO2> listDto = new ArrayList<>();
+//
+//        for(Product p : list) {
+//            listDto.add(businessToDto2(p));
+//        }
+//
+//        return listDto;
+//    }
 
 }

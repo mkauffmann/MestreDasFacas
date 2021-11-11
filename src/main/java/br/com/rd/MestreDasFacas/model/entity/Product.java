@@ -36,9 +36,9 @@ public class Product {
     @JoinColumn(name = "ID_MARCA")
     private Brand brand;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "ID_COR_CABO")
-    private CableColor cableColor;
+//    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+//    @JoinColumn(name = "ID_COR_CABO")
+//    private CableColor cableColor;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ID_CATEGORIA")
