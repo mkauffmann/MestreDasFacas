@@ -16,6 +16,15 @@ public class CustomerUserDetailsData implements UserDetails {
         this.customer = customer;
     }
 
+    public String getId(){
+        String id =  Long.toString(customer.get().getId()) ;
+        return id;
+    }
+
+    public String getName(){
+        return customer.get().getName();
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return new ArrayList<>();
