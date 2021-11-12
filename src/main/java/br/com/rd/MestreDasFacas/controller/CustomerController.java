@@ -5,9 +5,12 @@ import br.com.rd.MestreDasFacas.model.entity.Customer;
 import br.com.rd.MestreDasFacas.service.CustomerService;
 import br.com.rd.MestreDasFacas.service.EmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.Email;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 
@@ -18,10 +21,8 @@ public class CustomerController {
     CustomerService customerService;
 
     @PostMapping
-    public CustomerDTO addCustomer(@RequestBody CustomerDTO dto){
-
+    public CustomerDTO addCustomer(@RequestBody CustomerDTO dto) throws SQLIntegrityConstraintViolationException {
         return customerService.add(dto);
-
     }
 
     @GetMapping
@@ -34,8 +35,9 @@ public class CustomerController {
         return customerService.findById(id);
     }
 
-    @GetMapping("/select/email}")
+    @GetMapping("/select/{email}")
     public CustomerDTO findByEmail(@PathVariable("email") String email){
+
         return customerService.findByEmail(email);
     }
 
@@ -47,6 +49,14 @@ public class CustomerController {
     @PutMapping("/{id}")
     public CustomerDTO updateById(@PathVariable("id") Long id, @RequestBody CustomerDTO dto){
         return customerService.update(id, dto);
+    }
+
+    @PutMapping("/changePassword")
+    public ResponseEntity<String> changeUserPassword(@RequestBody PasswordDTO dto){
+        if(customerService.changePassword(dto)){
+            return new ResponseEntity<>("Senha alterada com sucesso", HttpStatus.ACCEPTED);
+        }
+        return new ResponseEntity<>("Senha incorreta", HttpStatus.BAD_REQUEST);
     }
 
     @PutMapping("/removeAddress")
