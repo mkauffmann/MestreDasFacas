@@ -2,6 +2,9 @@ package br.com.rd.MestreDasFacas.service.conversion;
 
 import br.com.rd.MestreDasFacas.model.dto.*;
 import br.com.rd.MestreDasFacas.model.entity.*;
+import br.com.rd.MestreDasFacas.repository.contract.BrandRepository;
+//import br.com.rd.MestreDasFacas.repository.contract.CableColorRepository;
+import br.com.rd.MestreDasFacas.repository.contract.ProductRepository;
 import br.com.rd.MestreDasFacas.repository.contract.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -678,7 +681,6 @@ public class DtoConversion {
         ItemRequest business = new ItemRequest();
 
         business.setQuantity(dto.getQuantity());
-
         if(dto.getProduct() != null){
             Product product =  productDtoToBusiness(dto.getProduct());
             business.setProduct(product);

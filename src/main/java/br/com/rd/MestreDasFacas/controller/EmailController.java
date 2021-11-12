@@ -1,37 +1,50 @@
-//package br.com.rd.MestreDasFacas.controller;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.mail.SimpleMailMessage;
-//import org.springframework.mail.javamail.JavaMailSender;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.RequestMapping;
-//import org.springframework.web.bind.annotation.RequestMethod;
-//import org.springframework.web.bind.annotation.RestController;
-//
-//@RestController
-//public class EmailController {
-//
-//    @Autowired
-//    private JavaMailSender mailSender;
-//
-//    @GetMapping("/email-send")
-//    public String sendMail() {
-//        SimpleMailMessage message = new SimpleMailMessage();
-//        message.setText("Olá! Esse é um teste de Email");
-//        message.setSubject("Confirmação de cadastro!");
-//        message.setTo("fazeroquen@gmail.com");
-//        message.setFrom("fazeroquen@gmail.com");
-//
-//        try {
-//            mailSender.send(message);
-//            return "Email enviado com sucesso!";
-//        } catch (Exception e){
-//            e.printStackTrace();
-//            return "Falha ao enviar o email!";
-//        }
-//
-//
-//    }
-//
-//
-//}
+package br.com.rd.MestreDasFacas.controller;
+
+
+
+import br.com.rd.MestreDasFacas.model.dto.EmailDto;
+import br.com.rd.MestreDasFacas.model.entity.EmailModel;
+import br.com.rd.MestreDasFacas.service.EmailService;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.Optional;
+import java.util.UUID;
+
+@RestController
+public class EmailController {
+
+    @Autowired
+    EmailService emailService;
+
+    @PostMapping("/sending-email")
+    public ResponseEntity<EmailModel> sendingEmail(@RequestBody @Valid EmailDto emailDto) {
+        EmailModel emailModel = new EmailModel();
+        BeanUtils.copyProperties(emailDto, emailModel);
+        emailService.sendEmail(emailModel);
+        return new ResponseEntity<>(emailModel, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/emails")
+    public ResponseEntity<Page<EmailModel>> getAllEmails(@PageableDefault(page = 0, size = 5, sort = "emailId", direction = Sort.Direction.DESC) Pageable pageable){
+        return new ResponseEntity<>(emailService.findAll(pageable), HttpStatus.OK);
+    }
+
+    @GetMapping("/emails/{emailId}")
+    public ResponseEntity<Object> getOneEmail(@PathVariable(value="emailId") Long emailId){
+        Optional<EmailModel> emailModelOptional = emailService.findById(emailId);
+        if(!emailModelOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Email not found.");
+        }else {
+            return ResponseEntity.status(HttpStatus.OK).body(emailModelOptional.get());
+        }
+    }
+}

@@ -1,13 +1,19 @@
 package br.com.rd.MestreDasFacas.service;
 
 
+import br.com.rd.MestreDasFacas.enums.StatusEmail;
 import br.com.rd.MestreDasFacas.model.dto.*;
 import br.com.rd.MestreDasFacas.model.entity.*;
 import br.com.rd.MestreDasFacas.repository.contract.*;
+import br.com.rd.MestreDasFacas.service.conversion.DtoConversion;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailException;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,7 +27,7 @@ public class CustomerService {
     CreditCardRepository creditCardRepository;
 
     @Autowired
-    CardBrandRepository cardBrandRepository;
+    AddressRepository addressRepository;
 
     @Autowired
     StateRepository stateRepository;
@@ -30,21 +36,35 @@ public class CustomerService {
     CityRepository cityRepository;
 
     @Autowired
-    AddressRepository addressRepository;
+    PasswordEncoder encoder;
+
+    @Autowired
+    EmailRepository emailRepository;
+
+    @Autowired
+    private JavaMailSender emailSender;
+
+    @Autowired
+    DtoConversion conversion;
 
     @Autowired
     TelephoneRepository telephoneRepository;
 
     @Autowired
-    GenderRepository genderRepository;
-
-    @Autowired
     PasswordEncoder encoder;
 
     public CustomerDTO add(CustomerDTO dto){
-        Customer newCustomer = customerDtoToBusiness(dto);
+        Customer newCustomer = conversion.customerDtoToBusiness(dto);
+
+        //encriptar senha
+        String passwordCrypt = encoder.encode(dto.getPassword());
+        newCustomer.setPassword(passwordCrypt);
+
         newCustomer = customerRepository.save(newCustomer);
-        return customerBusinessToDto(newCustomer);
+        sendSignUpEmail(newCustomer);
+        return conversion.customerBusinessToDto(newCustomer);
+
+
     }
 
     public CustomerDTO update(Long id, CustomerDTO dto) {
@@ -70,40 +90,12 @@ public class CustomerService {
                 update.setPassword(passwordCrypt);
             }
             if(dto.getGender() != null){
-                Gender gender = genderDtoToBusiness(dto.getGender());
+                Gender gender = conversion.genderDtoToBusiness(dto.getGender());
                 update.setGender(gender);
-            }
-            if(dto.getTelephones() != null){
-                List<Telephone> listTel = telephoneListFromDto(dto.getTelephones());
-                List<Telephone> listUpdate = update.getTelephones();
-
-                for (Telephone t : listTel){
-                    t = telephoneRepository.save(t);
-                    listUpdate.add(t);
-                }
-                update.setTelephones(listUpdate);
-            }
-            if(dto.getAddresses() != null){
-                List<Address> listAdd = addressListFromDto(dto.getAddresses());
-                List<Address> listUpdate = update.getAddresses();
-                for (Address a : listAdd){
-                    a = addressRepository.save(a);
-                    listUpdate.add(a);
-                }
-                update.setAddresses(listUpdate);
-            }
-            if(dto.getCreditCards() != null){
-                List<CreditCard> listCard = creditCardListFromDto(dto.getCreditCards());
-                List<CreditCard> listUpdate = update.getCreditCards();
-                for (CreditCard c : listCard){
-                    c = creditCardRepository.save(c);
-                    listUpdate.add(c);
-                }
-                update.setCreditCards(listUpdate);
             }
 
             update = customerRepository.save(update);
-            return customerBusinessToDto(update);
+            return conversion.customerBusinessToDto(update);
         }
         return null;
     }
@@ -112,7 +104,16 @@ public class CustomerService {
         Optional<Customer> op = customerRepository.findById(id);
         if(op.isPresent()){
             Customer customer = op.get();
-            return customerBusinessToDto(customer);
+            return conversion.customerBusinessToDto(customer);
+        }
+        return null;
+    }
+
+    public CustomerDTO findByEmail(String email){
+        Optional<Customer> op2 = customerRepository.findByEmail(email);
+        if(op2.isPresent()){
+            Customer customer = op2.get();
+            return conversion.customerBusinessToDto(customer);
         }
         return null;
     }
@@ -120,7 +121,7 @@ public class CustomerService {
     public List<CustomerDTO> findAll(){
         List<Customer> list = customerRepository.findAll();
 
-        return customerListToDto(list);
+        return conversion.customerListToDto(list);
     }
 
     public void deleteById(Long id){
@@ -128,22 +129,12 @@ public class CustomerService {
             customerRepository.deleteById(id);
         }
     }
-//
-//    //CONVERSOES LISTAS INICIO
-     private List<CustomerDTO> customerListToDto(List<Customer> list){
-        List<CustomerDTO> listDto = new ArrayList<CustomerDTO>();
-
-        for (Customer c : list){
-            listDto.add(customerBusinessToDto(c));
-        }
-        return listDto;
-     }
 
     private List<TelephoneDTO> telephoneListToDto(List<Telephone> list){
         List<TelephoneDTO> listDto = new ArrayList<TelephoneDTO>();
 
         for (Telephone t : list){
-            listDto.add(telephoneBusinessToDto(t));
+            listDto.add(conversion.telephoneBusinessToDto(t));
         }
         return listDto;
     }
@@ -152,7 +143,7 @@ public class CustomerService {
         List<Telephone> listTel = new ArrayList<Telephone>();
 
         for (TelephoneDTO dto : dtoList){
-            listTel.add(telephoneDtoToBusiness(dto));
+            listTel.add(conversion.telephoneDtoToBusiness(dto));
         }
 
         return listTel;
@@ -162,7 +153,7 @@ public class CustomerService {
          List<AddressDTO> listDto = new ArrayList<AddressDTO>();
 
          for(Address a : list){
-             listDto.add(addressBusinessToDto(a));
+             listDto.add(conversion.addressBusinessToDto(a));
          }
          return listDto;
     }
@@ -171,7 +162,7 @@ public class CustomerService {
         List<Address> listAddress = new ArrayList<Address>();
 
         for (AddressDTO dto : dtoList){
-            listAddress.add(addressDtoToBusiness(dto));
+            listAddress.add(conversion.addressDtoToBusiness(dto));
         }
 
         return listAddress;
@@ -181,7 +172,7 @@ public class CustomerService {
          List<CreditCardDTO> listDto = new ArrayList<CreditCardDTO>();
 
          for(CreditCard card : list){
-             listDto.add(creditCardBusinessToDto(card));
+             listDto.add(conversion.creditCardBusinessToDto(card));
          }
          return listDto;
     }
@@ -190,64 +181,16 @@ public class CustomerService {
         List<CreditCard> listCard = new ArrayList<CreditCard>();
 
         for(CreditCardDTO dto : dtoList){
-            listCard.add(creditCardDtoToBusiness(dto));
+            listCard.add(conversion.creditCardDtoToBusiness(dto));
         }
         return listCard;
     }
 
-     //CONVERSOES LISTAS FIM
 
-     //CONVERSOES BUSINESS TO DTO INICIO
-     private CustomerDTO customerBusinessToDto(Customer customer){
-         CustomerDTO dto = new CustomerDTO();
 
-         dto.setId(customer.getId());
-         dto.setName(customer.getName());
-         dto.setEmail(customer.getEmail());
-         dto.setCpf(customer.getCpf());
-         dto.setPassword(customer.getPassword());
-         if(customer.getBirthDate() != null){
-             dto.setBirthDate(customer.getBirthDate());
-         }
-         if(customer.getGender() != null){
-             GenderDTO gender = genderBusinessToDto(customer.getGender());
-             dto.setGender(gender);
-         }
-
-         if(customer.getTelephones() != null){
-             List<TelephoneDTO> telephones = telephoneListToDto(customer.getTelephones());
-             dto.setTelephones(telephones);
-         }
-         if(customer.getAddresses() != null){
-             List<AddressDTO> addresses = addressListToDto(customer.getAddresses());
-             dto.setAddresses(addresses);
-         }
-         if(customer.getCreditCards() != null){
-             List<CreditCardDTO> creditCards = creditCardListToDto(customer.getCreditCards());
-             dto.setCreditCards(creditCards);
-         }
-
-         return dto;
-     }
-
-     private GenderDTO genderBusinessToDto(Gender gender){
-        GenderDTO dto = new GenderDTO();
-
-        dto.setId(gender.getId());
-        dto.setDescription(gender.getDescription());
-
-        return dto;
-     }
-
-    private TelephoneDTO telephoneBusinessToDto(Telephone telephone){
-        TelephoneDTO dto = new TelephoneDTO();
-
-        dto.setId(telephone.getId());
-        dto.setDdd(telephone.getDdd());
-        dto.setPhoneNumber(telephone.getPhoneNumber());
-
-        return dto;
-    }
+    public CustomerDTO removeTelephoneFromCustomer(Long customerId, Long telephoneId){
+        Optional<Customer> opCustomer = customerRepository.findById(customerId);
+        Optional<Telephone> opTelephone = telephoneRepository.findById(telephoneId);
 
 
     private AddressDTO addressBusinessToDto(Address address){
@@ -467,26 +410,39 @@ public class CustomerService {
 
 
     }
+    public void sendSignUpEmail(Customer newCustomer){
 
-    private CardBrand cardBrandDtoToBusiness(CardBrandDTO dto){
-        //se foi passado id
-        if(dto.getId() != null){
-            Optional<CardBrand> op = cardBrandRepository.findById(dto.getId());
-            if(op.isPresent()){
-                return op.get();
-            }
+        EmailModel email = new EmailModel();
+        email.setSendDateEmail(LocalDateTime.now());
+        email.setOwnerRef(newCustomer.getId());
+        email.setEmailTo(newCustomer.getEmail());
+        email.setEmailFrom("mestredasfacas2021@gmail.com");
+        email.setSubject("Bem-vido(a) a Mestre das facas");
+        email.setText(String.format("Ola, %s, seja bem-vindo(a) à Mestre Das Facas! Espero que goste.", newCustomer.getName()));
+
+        try{
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(email.getEmailFrom());
+            message.setTo(email.getEmailTo());
+            message.setSubject(email.getSubject());
+            message.setText(email.getText());
+            emailSender.send(message);
+            email.setStatusEmail(StatusEmail.SENT);
+        }catch (MailException e ) {
+            email.setStatusEmail(StatusEmail.ERROR);
+
+        }finally {
+            emailRepository.save(email);
         }
-        //checar se nome já existe
-        Optional<CardBrand> op = cardBrandRepository.findByCardBrandName(dto.getCardBrandName());
-        if(op.isPresent()){
-            return op.get();
-        } else {
-            CardBrand brand = new CardBrand();
-            brand.setCardBrandName(dto.getCardBrandName());
-            return brand;
-        }
+
+
+
+
+
     }
-    //CREDIT CARD FIM
+    ///// recuperar senhas
 
-    //CONVERSORES DTO TO BUSINESS FIM
+
+
+
 }
