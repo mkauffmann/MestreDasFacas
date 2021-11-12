@@ -7,6 +7,7 @@ import br.com.rd.MestreDasFacas.repository.contract.BrandRepository;
 import br.com.rd.MestreDasFacas.repository.contract.ProductRepository;
 import br.com.rd.MestreDasFacas.repository.contract.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -38,7 +39,6 @@ public class DtoConversion {
 
     @Autowired
     GenderRepository genderRepository;
-
 
     @Autowired
     BrandRepository brandRepository;
@@ -229,6 +229,7 @@ public class DtoConversion {
 
         dto.setId(creditCard.getId());
         dto.setCardNumber(creditCard.getCardNumber());
+        dto.setCardValidDate(creditCard.getCardValidDate());
         dto.setCpf(creditCard.getCpf());
         dto.setHolderName(creditCard.getHolderName());
 
@@ -397,6 +398,7 @@ public class DtoConversion {
         creditCard.setHolderName(dto.getHolderName());
         creditCard.setCpf(dto.getCpf());
         creditCard.setCardNumber(dto.getCardNumber());
+        creditCard.setCardValidDate(dto.getCardValidDate());
 
         return creditCard;
 

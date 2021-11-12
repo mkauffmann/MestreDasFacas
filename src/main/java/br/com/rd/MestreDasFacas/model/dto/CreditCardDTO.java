@@ -9,6 +9,7 @@ import javax.persistence.*;
 public class CreditCardDTO {
     private Long id;
     private String cardNumber;
+    private String cardValidDate;
     private String cpf;
     private String holderName;
     private CardBrandDTO cardBrand;
