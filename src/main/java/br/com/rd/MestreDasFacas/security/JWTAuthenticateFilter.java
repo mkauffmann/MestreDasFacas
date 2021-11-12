@@ -21,7 +21,7 @@ import java.util.Date;
 
 public class JWTAuthenticateFilter extends UsernamePasswordAuthenticationFilter {
 
-    public static final int TOKEN_EXPIRES = 900_000; //15min
+    public static final int TOKEN_EXPIRES = 1_800_000; //30min
     public static final String TOKEN_PASSWORD = "193f3ed4-fe82-4e24-88ef-5ab7579707d3"; //guid generator, não deve estar no código fonte
 
     private AuthenticationManager authenticationManager;
@@ -45,7 +45,7 @@ public class JWTAuthenticateFilter extends UsernamePasswordAuthenticationFilter 
         CustomerUserDetailsData customerData = (CustomerUserDetailsData) authResult.getPrincipal();
 
         String token = JWT.create()
-                .withSubject(customerData.getUsername())
+                .withSubject(customerData.getId())
                 .withExpiresAt(new Date(System.currentTimeMillis() + TOKEN_EXPIRES))
                 .sign(Algorithm.HMAC512(TOKEN_PASSWORD));
 
