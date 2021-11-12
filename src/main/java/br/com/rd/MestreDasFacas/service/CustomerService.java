@@ -30,10 +30,10 @@ public class CustomerService {
     AddressRepository addressRepository;
 
     @Autowired
-    StateRepository stateRepository;
+    TelephoneRepository telephoneRepository;
 
     @Autowired
-    CityRepository cityRepository;
+    DtoConversion conversion;
 
     @Autowired
     PasswordEncoder encoder;
@@ -44,14 +44,7 @@ public class CustomerService {
     @Autowired
     private JavaMailSender emailSender;
 
-    @Autowired
-    DtoConversion conversion;
 
-    @Autowired
-    TelephoneRepository telephoneRepository;
-
-    @Autowired
-    PasswordEncoder encoder;
 
     public CustomerDTO add(CustomerDTO dto){
         Customer newCustomer = conversion.customerDtoToBusiness(dto);
@@ -130,60 +123,68 @@ public class CustomerService {
         }
     }
 
-    private List<TelephoneDTO> telephoneListToDto(List<Telephone> list){
-        List<TelephoneDTO> listDto = new ArrayList<TelephoneDTO>();
+    public CustomerDTO addAddressToCustomer(AddressDTO addressDTO, Long customerId){
+        Optional<Customer> op = customerRepository.findById(customerId);
 
-        for (Telephone t : list){
-            listDto.add(conversion.telephoneBusinessToDto(t));
+        if(op.isPresent()){
+            Customer customer = op.get();
+            if(customer.getAddresses() != null){
+                List<Address> listAddress = customer.getAddresses();
+                Address newAddress = conversion.addressDtoToBusiness(addressDTO);
+                newAddress = addressRepository.save(newAddress);
+
+                listAddress.add(newAddress);
+                customer.setAddresses(listAddress);
+                customer = customerRepository.save(customer);
+                return conversion.customerBusinessToDto(customer);
+            }
         }
-        return listDto;
+        return null;
     }
 
-    private List<Telephone> telephoneListFromDto(List<TelephoneDTO> dtoList){
-        List<Telephone> listTel = new ArrayList<Telephone>();
+    public CustomerDTO removeAddressFromCustomer(Long customerId, Long addressId){
+        Optional<Customer> opCustomer = customerRepository.findById(customerId);
+        Optional<Address> opAddress = addressRepository.findById(addressId);
 
-        for (TelephoneDTO dto : dtoList){
-            listTel.add(conversion.telephoneDtoToBusiness(dto));
+        if(opCustomer.isPresent() && opAddress.isPresent()){
+            Customer customer = opCustomer.get();
+            Address address = opAddress.get();
+
+            if(customer.getAddresses() != null){
+                List<Address> customerAddressList = customer.getAddresses();
+
+                for(Address a : customerAddressList){
+                    if(a.getId() == addressId){
+                        customerAddressList.remove(address);
+                        break;
+                    }
+                }
+                customer.setAddresses(customerAddressList);
+                customer = customerRepository.save(customer);
+                return conversion.customerBusinessToDto(customer);
+            }
         }
-
-        return listTel;
+        return null;
     }
 
-    private List<AddressDTO> addressListToDto(List<Address> list){
-         List<AddressDTO> listDto = new ArrayList<AddressDTO>();
+    public CustomerDTO addTelephoneToCustomer(TelephoneDTO dto, Long customerId){
+        Optional<Customer> op = customerRepository.findById(customerId);
 
-         for(Address a : list){
-             listDto.add(conversion.addressBusinessToDto(a));
-         }
-         return listDto;
-    }
+        if(op.isPresent()){
+            Customer customer = op.get();
+            if(customer.getTelephones() != null){
+                List<Telephone> telephoneList = customer.getTelephones();
+                Telephone newTelephone = conversion.telephoneDtoToBusiness(dto);
 
-    private List<Address> addressListFromDto(List<AddressDTO> dtoList){
-        List<Address> listAddress = new ArrayList<Address>();
+                newTelephone = telephoneRepository.save(newTelephone);
+                telephoneList.add(newTelephone);
+                customer.setTelephones(telephoneList);
+                customer = customerRepository.save(customer);
 
-        for (AddressDTO dto : dtoList){
-            listAddress.add(conversion.addressDtoToBusiness(dto));
+                return conversion.customerBusinessToDto(customer);
+            }
         }
-
-        return listAddress;
-    }
-
-    private List<CreditCardDTO> creditCardListToDto(List<CreditCard> list){
-         List<CreditCardDTO> listDto = new ArrayList<CreditCardDTO>();
-
-         for(CreditCard card : list){
-             listDto.add(conversion.creditCardBusinessToDto(card));
-         }
-         return listDto;
-    }
-
-    private List<CreditCard> creditCardListFromDto(List<CreditCardDTO> dtoList){
-        List<CreditCard> listCard = new ArrayList<CreditCard>();
-
-        for(CreditCardDTO dto : dtoList){
-            listCard.add(conversion.creditCardDtoToBusiness(dto));
-        }
-        return listCard;
+        return null;
     }
 
 
@@ -192,222 +193,75 @@ public class CustomerService {
         Optional<Customer> opCustomer = customerRepository.findById(customerId);
         Optional<Telephone> opTelephone = telephoneRepository.findById(telephoneId);
 
+        if(opCustomer.isPresent() && opTelephone.isPresent()){
+            Customer customer = opCustomer.get();
+            Telephone telephone = opTelephone.get();
 
-    private AddressDTO addressBusinessToDto(Address address){
-        AddressDTO dto = new AddressDTO();
+            if(customer.getTelephones() != null){
+                List<Telephone> telephoneList = customer.getTelephones();
 
-        dto.setId(address.getId());
-        dto.setStreet(address.getStreet());
-        dto.setNumber(address.getNumber());
-        if(address.getComplement() != null){
-            dto.setComplement(address.getComplement());
-        }
-        dto.setCep(address.getCep());
-        dto.setNeighborhood(address.getNeighborhood());
+                for (Telephone t : telephoneList){
+                    if(t.getId() == telephone.getId()){
+                        telephoneList.remove(telephone);
+                        break;
+                    }
+                }
 
-        CityDTO cityDto = cityBusinessToDto(address.getCity());
-        dto.setCity(cityDto);
+                customer.setTelephones(telephoneList);
+                customer = customerRepository.save(customer);
 
-        StateDTO stateDto = stateBusinessToDto(address.getState());
-        dto.setState(stateDto);
-
-        return dto;
-    }
-
-    private CityDTO cityBusinessToDto(City city){
-        CityDTO dto = new CityDTO();
-
-        dto.setId(city.getId());
-        dto.setCityName(city.getCityName());
-
-        return dto;
-    }
-
-    private StateDTO stateBusinessToDto(State state){
-        StateDTO dto = new StateDTO();
-
-        dto.setUf(state.getUf());
-        dto.setStateName(state.getStateName());
-
-        return dto;
-    }
-
-    private CreditCardDTO creditCardBusinessToDto(CreditCard creditCard){
-        CreditCardDTO dto = new CreditCardDTO();
-
-        dto.setId(creditCard.getId());
-        dto.setCardNumber(creditCard.getCardNumber());
-        dto.setCpf(creditCard.getCpf());
-        dto.setHolderName(creditCard.getHolderName());
-
-        CardBrandDTO brandDto = cardBrandBusinessToDto(creditCard.getCardBrand());
-        dto.setCardBrand(brandDto);
-
-        return dto;
-    }
-
-    private CardBrandDTO cardBrandBusinessToDto(CardBrand brand){
-        CardBrandDTO dto = new CardBrandDTO();
-
-        dto.setId(brand.getId());
-        dto.setCardBrandName(brand.getCardBrandName());
-
-        return dto;
-    }
-
-    //CONVERSOES BUSINESS TO DTO FIM
-
-    //CONVERSORES DTO TO BUSINESS INICIO
-     private Customer customerDtoToBusiness(CustomerDTO dto){
-        //se foi passado um id
-         if(dto.getId() != null){
-             Optional<Customer> op = customerRepository.findById(dto.getId());
-             if(op.isPresent()){
-                 return op.get();
-             }
-         }
-        Customer customer = new Customer();
-        customer.setName(dto.getName());
-        customer.setEmail(dto.getEmail());
-        customer.setCpf(dto.getCpf());
-         customer.setPassword(dto.getPassword());
-
-        if(dto.getBirthDate() != null){
-            customer.setBirthDate(dto.getBirthDate());
-        }
-
-        if(dto.getGender() != null){
-            Gender gender = genderDtoToBusiness(dto.getGender());
-            customer.setGender(gender);
-        }
-
-        if(dto.getTelephones() != null){
-            List<Telephone> telephones = telephoneListFromDto(dto.getTelephones());
-            customer.setTelephones(telephones);
-        }
-        if(dto.getAddresses() != null){
-            List<Address> addresses = addressListFromDto(dto.getAddresses());
-            customer.setAddresses(addresses);
-        }
-        if(dto.getCreditCards() != null){
-            List<CreditCard> cards = creditCardListFromDto(dto.getCreditCards());
-            customer.setCreditCards(cards);
-        }
-        return customer;
-     }
-
-    private Gender genderDtoToBusiness(GenderDTO dto){
-        if(dto.getId() != null){
-            Optional<Gender> op = genderRepository.findById(dto.getId());
-            if(op.isPresent()){
-                return op.get();
+                return conversion.customerBusinessToDto(customer);
             }
         }
-        Optional<Gender> op = genderRepository.findByDescription(dto.getDescription());
+        return null;
+    }
+
+    public CustomerDTO addCreditCardToCustomer(CreditCardDTO dto, Long customerId){
+        Optional<Customer> op = customerRepository.findById(customerId);
+
         if(op.isPresent()){
-            return op.get();
-        } else {
-            Gender gender = new Gender();
-            gender.setDescription(dto.getDescription());
-            return gender;
-        }
-    }
+            Customer customer = op.get();
 
-    private Telephone telephoneDtoToBusiness(TelephoneDTO dto){
-        if(dto.getId() != null){
-            Optional<Telephone> op = telephoneRepository.findById(dto.getId());
-            if(op.isPresent()){
-                return op.get();
+            if(customer.getCreditCards() != null){
+                List<CreditCard> creditCardList = customer.getCreditCards();
+                CreditCard newCard = conversion.creditCardDtoToBusiness(dto);
+
+                newCard = creditCardRepository.save(newCard);
+                creditCardList.add(newCard);
+                customer.setCreditCards(creditCardList);
+                customer = customerRepository.save(customer);
+
+                return conversion.customerBusinessToDto(customer);
             }
         }
-
-        //checar se telefone existe
-        Optional<Telephone> op = telephoneRepository.findTelephone(dto.getDdd(), dto.getPhoneNumber());
-        if(op.isPresent()){
-            return op.get();
-        } else {
-            Telephone tel = new Telephone();
-            tel.setDdd(dto.getDdd());
-            tel.setPhoneNumber(dto.getPhoneNumber());
-            return tel;
-        }
+        return null;
     }
 
-    //ADDRESS INICIO
-    private Address addressDtoToBusiness(AddressDTO dto){
-        //se foi passado id
-        if(dto.getId() != null){
-            Optional<Address> op = addressRepository.findById(dto.getId());
-            if(op.isPresent()){
-                return op.get();
+    public CustomerDTO removeCreditCardFromCustomer(Long customerId, Long creditCardId){
+        Optional<Customer> opCustomer = customerRepository.findById(customerId);
+        Optional<CreditCard> opCreditCard = creditCardRepository.findById(creditCardId);
+
+        if(opCustomer.isPresent() && opCreditCard.isPresent()){
+            Customer customer = opCustomer.get();
+            CreditCard card = opCreditCard.get();
+
+            if(customer.getCreditCards() != null){
+                List<CreditCard> creditCardList = customer.getCreditCards();
+
+                for (CreditCard c : creditCardList){
+                    if(c.getId() == card.getId()){
+                        creditCardList.remove(card);
+                        break;
+                    }
+                }
+
+                customer.setCreditCards(creditCardList);
+                customer = customerRepository.save(customer);
+
+                return conversion.customerBusinessToDto(customer);
             }
         }
-        //se nao foi passado um id
-        Address address = new Address();
-        address.setStreet(dto.getStreet());
-        address.setNumber(dto.getNumber());
-        if(dto.getComplement() != null){
-            address.setComplement(dto.getComplement());
-        }
-        address.setCep(dto.getCep());
-        address.setNeighborhood(dto.getNeighborhood());
-
-        City city = cityDtoToBusiness(dto.getCity());
-        address.setCity(city);
-
-        State state = stateDtoToBusiness(dto.getState());
-        address.setState(state);
-
-        return address;
-    }
-
-    private City cityDtoToBusiness(CityDTO dto){
-        //se foi passado um id
-        if(dto.getId() != null){
-            Optional<City> op = cityRepository.findById(dto.getId());
-            if(op.isPresent()){
-                return op.get();
-            }
-        }
-
-        //checar se cidade já existe na base
-        Optional<City> op = cityRepository.findCityByName(dto.getCityName());
-        if(op.isPresent()){
-            return op.get();
-        } else {
-            City city = new City();
-            city.setCityName(dto.getCityName());
-            return city;
-        }
-
-    }
-
-    private State stateDtoToBusiness(StateDTO dto){
-        State state = stateRepository.getById(dto.getUf());
-        return state;
-    }
-
-    //ADDRESS FIM
-
-    //CREDIT CARD INICIO
-    private CreditCard creditCardDtoToBusiness(CreditCardDTO dto){
-        CreditCard creditCard = new CreditCard();
-
-        if(dto.getId() != null){
-            Optional<CreditCard> op = creditCardRepository.findById(dto.getId());
-            if(op.isPresent()){
-                return op.get();
-            }
-        }
-
-        CardBrand brandDto = cardBrandDtoToBusiness(dto.getCardBrand());
-        creditCard.setCardBrand(brandDto);
-        creditCard.setHolderName(dto.getHolderName());
-        creditCard.setCpf(dto.getCpf());
-        creditCard.setCardNumber(dto.getCardNumber());
-
-        return creditCard;
-
+        return null;
 
     }
     public void sendSignUpEmail(Customer newCustomer){

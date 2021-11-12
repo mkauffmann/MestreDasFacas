@@ -64,8 +64,8 @@ public class RequestService {
     @Autowired
     private JavaMailSender emailSender;
 
-
-
+    @Autowired
+    InventoryRepository inventoryRepository;
 
 
 
