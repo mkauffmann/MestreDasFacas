@@ -47,7 +47,7 @@ public class CustomerController {
     }
 
     @PutMapping("/{id}")
-    public CustomerDTO updateById(@PathVariable("id") Long id, @RequestBody CustomerDTO dto){
+    public CustomerDTO updateById(@PathVariable("id") Long id, @RequestBody CustomerDTO dto) throws Exception {
         return customerService.update(id, dto);
     }
 

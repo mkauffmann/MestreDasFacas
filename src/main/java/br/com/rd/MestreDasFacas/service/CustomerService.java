@@ -67,7 +67,7 @@ public class CustomerService {
 
     }
 
-    public CustomerDTO update(Long id, CustomerDTO dto) {
+    public CustomerDTO update(Long id, CustomerDTO dto) throws Exception {
         Optional<Customer> op = customerRepository.findById(id);
         if(op.isPresent()){
             Customer update = op.get();
@@ -94,8 +94,13 @@ public class CustomerService {
                 update.setGender(gender);
             }
 
-            update = customerRepository.save(update);
-            return conversion.customerBusinessToDto(update);
+            try{
+                update = customerRepository.save(update);
+                return conversion.customerBusinessToDto(update);
+            } catch (Exception e){
+                throw new Exception("Email já cadastrado em outro usuário", e);
+            }
+
         }
         return null;
     }
