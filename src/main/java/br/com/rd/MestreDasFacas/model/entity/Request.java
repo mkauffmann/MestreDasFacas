@@ -27,6 +27,9 @@ public class Request {
     @Column(nullable = false, name = "VALOR_TOTAL")
     private Double totalValue;
 
+    @Column(nullable = false, name = "VALOR_FINAL")
+    private Double finalValue;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ID_STATUS_PEDIDO")
     private DeliveryStatus deliveryStatus;

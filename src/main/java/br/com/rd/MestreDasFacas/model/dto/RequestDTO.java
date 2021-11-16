@@ -13,6 +13,7 @@ public class RequestDTO {
     private Date purchaseDate;
     private Date paymentDate;
     private Double totalValue;
+    private Double finalValue;
     private TypePaymentDTO typePayment;
     private DeliveryStatusDTO deliveryStatus;
     private AddressDTO address;

@@ -631,6 +631,7 @@ public class RequestService {
         business.setItemrequests(itemRequests);
 
         business.setTotalValue(calculateTotalValue(itemRequests));
+        business.setFinalValue(business.getFreightFixed() + business.getTotalValue());
 
         return business;
     }
@@ -652,6 +653,7 @@ public class RequestService {
         dto.setPurchaseDate(business.getPurchaseDate());
         dto.setPaymentDate(business.getPaymentDate());
         dto.setTotalValue(business.getTotalValue());
+        dto.setFinalValue(business.getFinalValue());
         dto.setTypePayment(typePaymentDTO);
         dto.setDeliveryStatus(deliveryDto);
         dto.setAddress(addressDTO);
