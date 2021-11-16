@@ -55,4 +55,10 @@ public class Product {
     @Column(columnDefinition = "TEXT", name = "IMAGEM")
     private String image;
 
+    @Column(nullable = false, name = "NOVIDADE")
+    private Boolean news;
+
+    @Column(nullable = false, name = "DESTAQUE")
+    private Boolean featured;
+
 }

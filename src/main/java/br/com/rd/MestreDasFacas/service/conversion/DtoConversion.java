@@ -587,6 +587,8 @@ public class DtoConversion {
         business.setCategory(category);
         business.setProductPrice(pp);
         business.setImage(dto.getImage());
+        business.setFeatured(dto.getFeatured());
+        business.setNews(dto.getNews());
 
 
         return business;
@@ -613,7 +615,8 @@ public class DtoConversion {
         dto.setCategory(categoryDto);
         dto.setProductPrice(pdDto);
         dto.setImage(business.getImage());
-
+        dto.setFeatured(business.getFeatured());
+        dto.setNews(business.getNews());
 
         return dto;
     }

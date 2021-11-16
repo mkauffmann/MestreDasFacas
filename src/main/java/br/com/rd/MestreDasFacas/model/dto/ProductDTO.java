@@ -20,5 +20,7 @@ public class ProductDTO {
     private CategoryDTO category;
     private ProductPriceDTO productPrice;
     private String image;
+    private Boolean news;
+    private Boolean featured;
 
 }
