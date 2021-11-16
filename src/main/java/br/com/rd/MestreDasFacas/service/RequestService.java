@@ -604,6 +604,14 @@ public class RequestService {
 
     ///////////////////////////////////
 
+    private Double calculateTotalValue(List<ItemRequest> items){
+        Double totalValue = 0.0;
+        for (ItemRequest item : items){
+            totalValue += item.getTotal_value();
+        }
+        return totalValue;
+    }
+
     private Request dtoToBusiness(RequestDTO dto) {
         Request business = new Request();
         DeliveryStatus deliveryStatus = deliveryDtoToBusiness(dto.getDeliveryStatus());
@@ -622,6 +630,7 @@ public class RequestService {
         business.setCustomer(customer);
         business.setItemrequests(itemRequests);
 
+        business.setTotalValue(calculateTotalValue(itemRequests));
 
         return business;
     }
@@ -642,6 +651,7 @@ public class RequestService {
         dto.setFreightFixed(business.getFreightFixed());
         dto.setPurchaseDate(business.getPurchaseDate());
         dto.setPaymentDate(business.getPaymentDate());
+        dto.setTotalValue(business.getTotalValue());
         dto.setTypePayment(typePaymentDTO);
         dto.setDeliveryStatus(deliveryDto);
         dto.setAddress(addressDTO);
