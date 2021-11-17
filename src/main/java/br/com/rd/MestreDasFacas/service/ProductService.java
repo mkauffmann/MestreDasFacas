@@ -153,6 +153,23 @@ public class ProductService {
         return dtoConversion.productListToDto(productList);
     }
 
+    // Método para listar produtos destaque:
+
+    public List<ProductDTO> listProductsByFeatured() {
+        List<Product> productList = this.productRepository.myFindAllByFeatured();
+        return dtoConversion.productListToDto(productList);
+    }
+
+    // Método para listar produtos novidade:
+
+    public List<ProductDTO> listProductsByNews() {
+        List<Product> productList = this.productRepository.myFindAllByNews();
+        return dtoConversion.productListToDto(productList);
+    }
+
+    ////////////////////////////////////////////////////////
+
+
     // Métodos de conversão:
 
     // Métodos de conversão para Brand:

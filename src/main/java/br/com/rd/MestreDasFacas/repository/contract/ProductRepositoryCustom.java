@@ -20,4 +20,10 @@ public interface ProductRepositoryCustom {
     @Query(value = "select * from produto p inner join preco_produto pp on p.id_preco_produto = pp.id_preco_produto order by pp.valor_preco", nativeQuery = true)
     List<Product> myFindByPriceAsc();
 
+    @Query(value = "select * from produto where destaque = true", nativeQuery = true)
+    List<Product> myFindAllByFeatured();
+
+    @Query(value = "select * from produto where novidade = true", nativeQuery = true)
+    List<Product> myFindAllByNews();
+
 }

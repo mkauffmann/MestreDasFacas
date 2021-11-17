@@ -72,4 +72,18 @@ public class ProductController {
         return this.productService.listProductsByPriceAsc();
     }
 
+    // Listar Novidades:
+
+    @GetMapping("/news")
+    public List<ProductDTO> listNews() {
+        return this.productService.listProductsByNews();
+    }
+
+    // Listar Destaques:
+
+    @GetMapping("/featured")
+    public List<ProductDTO> listFeatured() {
+        return this.productService.listProductsByFeatured();
+    }
+
 }
