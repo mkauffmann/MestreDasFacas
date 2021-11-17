@@ -43,6 +43,11 @@ public class CreditCardService {
             if(dto.getCardNumber() != null){
                 updateCard.setCardNumber(dto.getCardNumber());
             }
+
+            if(dto.getCardValidDate() != null){
+                updateCard.setCardValidDate(dto.getCardValidDate());
+            }
+
             if(dto.getCpf() != null){
                 updateCard.setCpf(dto.getCpf());
             }

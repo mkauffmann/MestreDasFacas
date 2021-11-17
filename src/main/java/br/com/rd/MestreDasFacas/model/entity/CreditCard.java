@@ -15,6 +15,9 @@ public class CreditCard {
     @Column(name = "NUMERO_CARTAO", nullable = false)
     private String cardNumber;
 
+    @Column(name="VALIDADE", nullable = false)
+    private String cardValidDate;
+
     @Column(name = "CPF_TITULAR", nullable = false)
     private String cpf;
 
