@@ -75,166 +75,168 @@ insert into preco_produto (valor_preco) values (1399.99);
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Cutelo especializada em cortes pesados e profundos, em qualquer tipo de alimento', 2, 
-'https://ibb.co/4JN0rZS', 30, 'Faca Cutelo Tramontina Cabo Amarelo 30cm', 270, 8, 2, 2, 3, false, false);
+'https://i.ibb.co/st3XYv1/1.jpg', 30, 'Faca Cutelo Tramontina Cabo Amarelo 30cm', 270, 8, 2, 2, 3, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca de mesa com dentes polidos, os quais trazem mais conforto nos cortes', 2, 
-'https://ibb.co/nmgF5fG', 20, 'Faca de Mesa Tramontina Aço Inox Continental', 35, 1.5, 2, 2, 1, false, false);
+'https://i.ibb.co/yPfrb59/2.jpg', 20, 'Faca de Mesa Tramontina Aço Inox Continental', 35, 1.5, 2, 2, 1, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca de chef especializada e eficiente para qualquer alimento ', 5, 
-'https://ibb.co/6tzDy72', 30, 'Faca Chef Tramontina com Cabo Branco Master', 127, 2, 2, 2, 3, false, false);
+'https://i.ibb.co/2MxcF1w/3.jpg', 30, 'Faca Chef Tramontina com Cabo Branco Master', 127, 2, 2, 2, 3, false, false);
 
 -- 4
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca de churrasco com cabo longo, para manuseio seguro e confortável ', 2, 
-'https://ibb.co/N7tKjhW', 20, 'Faca Churrasco Brinox com Cabo longo', 30, 2, 4, 1, 2, false, false);
+'https://i.ibb.co/WsGfy9B/4.jpg', 20, 'Faca Churrasco Brinox com Cabo longo', 30, 2, 4, 1, 2, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca para sobremesa com corte preciso e perfeito', 1.3, 
-'https://ibb.co/WGz1PQW', 18, 'Faca para Sobremesa Brinox ', 36, 1.5, 4, 2, 1, false, false);
+'https://i.ibb.co/jbwFWdv/5.jpg', 18, 'Faca para Sobremesa Brinox ', 36, 1.5, 4, 2, 1, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca corta asas com qualidade e durabilidade para qualquer ingrediente', 2.5, 
-'https://ibb.co/bWqdq0y', 28, 'Faca Corte de Asa Tramontina Cabo Amarelo ', 100, 4.5, 2, 2, 4, false, false);
+'https://i.ibb.co/cgMTMBp/6.jpg', 28, 'Faca Corte de Asa Tramontina Cabo Amarelo ', 100, 4.5, 2, 2, 4, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca de chef especializada, resistente e eficiente para qualquer alimento', 2, 
-'https://ibb.co/MgqM5BD', 32, 'Faca Chef Tramontina com Cabo Madeira Marrom', 238, 4, 2, 2, 6, false, false);
+'https://i.ibb.co/b6pzRbg/7.jpg', 32, 'Faca Chef Tramontina com Cabo Madeira Marrom', 238, 4, 2, 2, 6, false, false);
 
 -- 8
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca para churrasco eficiente, resistente e segura', 2, 
-'https://ibb.co/Mf25h62', 22, 'Faca para Churrasco Tramontina Century', 200, 4, 2, 1, 5, false, false);
+'https://i.ibb.co/qCyFn5y/8.jpg', 22, 'Faca para Churrasco Tramontina Century', 200, 4, 2, 1, 5, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca especializada com precição e alta performance para culinária oriental', 2.3, 
-'https://ibb.co/TY84CLk', 30, 'Faca Nakiri Tramontina Cabo Preto', 190, 5, 2, 1, 7, false, false);
+'https://i.ibb.co/VJSgKmt/9.jpg', 30, 'Faca Nakiri Tramontina Cabo Preto', 190, 5, 2, 1, 7, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Réplica das lâminas do caos, usado por Kratos no game God Of War', 3, 
-'https://ibb.co/qxtpF5f', 62, 'Lâminas Kratos God of War', 500, 12, 1, 4, 8, false, false);
+'https://i.ibb.co/25DdYNQ/10.jpg', 62, 'Lâminas Kratos God of War', 500, 12, 1, 4, 8, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca de chef especializada, resistente e eficiente para qualquer tipo de alimento', 2, 
-'https://ibb.co/kGwJTr0', 32, 'Faca Chef Tramontina com Cabo Vermelho', 238, 4, 2, 2, 6, false, false);
+'https://i.ibb.co/L0cryq6/11.jpg', 32, 'Faca Chef Tramontina com Cabo Vermelho', 238, 4, 2, 2, 6, false, false);
 
 -- 12
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca dessosa com corte perfeito para separação da carne dos ossos', 2.5, 
-'https://ibb.co/Y079Lvc', 28, 'Faca Dessosa Tramontina Cabo Azul ', 100, 4.5, 2, 2, 4, false, false);
+'https://i.ibb.co/RjpnDL3/12.jpg', 28, 'Faca Dessosa Tramontina Cabo Azul ', 100, 4.5, 2, 2, 4, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Cutelo especializada em cortes pesados e profundos, em qualquer tipo de alimento', 2, 
-'https://ibb.co/VYXG4q5', 28, 'Faca Cutelo Zakharov Cabo Madeira', 250, 8, 3, 2, 3, false, false);
+'https://i.ibb.co/4RBLrV3/13.jpg', 28, 'Faca Cutelo Zakharov Cabo Madeira', 250, 8, 3, 2, 3, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca de pão resistentes, confortáveis e seguras', 2.5, 
-'https://ibb.co/zNtVWVj', 33, 'Faca de Pão Brinox Cabo Branco', 197, 38, 4, 2, 3, false, false);
+'https://i.ibb.co/HX9TLT1/14.jpg', 33, 'Faca de Pão Brinox Cabo Branco', 197, 38, 4, 2, 3, false, false);
+
+-- 15 - Arrumando apartir daqui:
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca dessosa com corte perfeito para separação da carne dos ossos', 3.6, 
-'https://ibb.co/J7kMM2Y', 27.2, 'Faca Dessosa Tramontina Cabo Madeira', 89, 1.8, 2, 2, 2, false, false);
+'https://i.ibb.co/Snv990k/15.jpg', 27.2, 'Faca Dessosa Tramontina Cabo Madeira', 89, 1.8, 2, 2, 2, false, false);
 
 -- 16
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca corta asas com qualidade e durabilidade para qualquer ingrediente', 2.2, 
-'https://ibb.co/zn7pDfN', 26, 'Faca Corte de Asa Tramontina Cabo Azul ', 93, 4.3, 2, 2, 1, false, false);
+'https://i.ibb.co/zn7pDfN/16.jpg', 26, 'Faca Corte de Asa Tramontina Cabo Azul ', 93, 4.3, 2, 2, 1, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca dessosa com corte perfeito para separação da carne dos ossos', 2.5, 
-'https://ibb.co/HGKQQqf', 28, 'Faca Dessosa Tramontina Cabo Vermelho ', 100, 4.5, 2, 2, 4, false, false);
+'https://i.ibb.co/YfNGGhF/17.jpg', 28, 'Faca Dessosa Tramontina Cabo Vermelho ', 100, 4.5, 2, 2, 4, false, false);
 
 -- 18
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Réplica da Kunai do anime Naruto', 23, 
-'https://ibb.co/WB3KtMT', 22, 'Kunai Naruto', 12 , 12, 1, 4, 1, false, false);
+'https://i.ibb.co/zP5fJBk/18.jpg', 22, 'Kunai Naruto', 12 , 12, 1, 4, 1, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca de chef especializada, resistente e eficiente para qualquer tipo de alimento', 2, 
-'https://ibb.co/TrBX61H', 32, 'Faca Chef J.A. Henckels Cabo Branco', 180, 4.5, 5, 2, 5, false, false);
+'https://i.ibb.co/CW5dg6n/19.jpg', 32, 'Faca Chef J.A. Henckels Cabo Branco', 180, 4.5, 5, 2, 5, false, false);
 
 -- 20 - FEITA:
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca preparada para todas as situações, desde cozinha até caça / pesca', 2.2, 
-'https://ibb.co/JqnFr3K', 24, 'Faca Esportiva Hunter Zakharov', 185, 3.5, 3, 3, 9, false, false);
+'https://i.ibb.co/yp0Bg4X/20.jpg', 24, 'Faca Esportiva Hunter Zakharov', 185, 3.5, 3, 3, 9, false, false);
 
 -- 21 - FEITA:
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca especial preparada para churrasco e cozinha', 2.8, 
-'https://ibb.co/Pxc4GHR', 38, 'Faca Churrasco e Cozinha Zakharov Premium', 260, 3.8, 3, 3, 7, false, false);
+'https://i.ibb.co/cJ6thnP/21.jpg', 38, 'Faca Churrasco e Cozinha Zakharov Premium', 260, 3.8, 3, 3, 7, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Réplica da espada Frostmourne do game World Of Warcraft', 25, 
-'https://ibb.co/4RZpyxY', 107, 'Frostmourne World Of Warcraft', 300 , 25, 1, 4, 11, false, false);
+'https://i.ibb.co/MkD7TLG/22.jpg', 107, 'Frostmourne World Of Warcraft', 300 , 25, 1, 4, 11, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca perfeita e prática para o corte suave do tomate', 2.4, 
-'https://ibb.co/6H1gg3h', 50, 'Faca para Tomate Brinox', 35, 23, 4, 3, 1, false, false);
+'https://i.ibb.co/tqx887f/23.jpg', 50, 'Faca para Tomate Brinox', 35, 23, 4, 3, 1, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Réplica da espada Master Sword do game Zelda', 89, 
-'https://ibb.co/VBBrMPf', 89, 'Espada Master Sword Zelda', 100 , 25, 1, 4, 10, false, false);
+'https://i.ibb.co/YjjYfqH/24.jpg', 89, 'Espada Master Sword Zelda', 100 , 25, 1, 4, 10, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca para frutas e legumes, corte perfeito e com bastante qualidade.', 1.4, 
-'https://ibb.co/4jHFp9g', 20.7, 'Faca de Legume Tramontina Cabo Branco ', 40, 2.3, 2, 2, 1, false, false);
+'https://i.ibb.co/K9J5WRz/25.jpg', 20.7, 'Faca de Legume Tramontina Cabo Branco ', 40, 2.3, 2, 2, 1, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca prática e resistente, perfeita para ervas e temperos.', 1.5, 
-'https://ibb.co/v4X44MR', 25, 'Mezzaluna Tramontina Polywood com Lâmina em Aço', 320, 15, 2, 2, 3, false, false);
+'https://i.ibb.co/nMPMMKt/26.jpg', 25, 'Mezzaluna Tramontina Polywood com Lâmina em Aço', 320, 15, 2, 2, 3, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca perfeita para um almoço em família, ao trazer qualidade e destaque a mesa.', 0.6, 
-'https://ibb.co/0y8TgjM', 23, 'Faca Churrasco Tramontina Aço Inox', 234, 9, 2, 1, 1, false, false);
+'https://i.ibb.co/Jj0VfR7/27.jpg', 23, 'Faca Churrasco Tramontina Aço Inox', 234, 9, 2, 1, 1, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Réplica da espada Sandai Kitetsu do personagem Zoro do anime One Piece', 10, 
-'https://ibb.co/hyS0VFG', 110, 'Espada Zoro One Piece', 1200, 10, 1, 4, 7, false, false);
+'https://i.ibb.co/s2Z7q9T/28.jpg', 110, 'Espada Zoro One Piece', 1200, 10, 1, 4, 7, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Faca preparada para todas as situações, desde cozinha até caça / pesca', 12.5, 
-'https://ibb.co/sC5gcfg', 31, 'Faca De Caça/Churrasco Zakharov', 150, 18, 3, 3, 2, false, false);
+'https://i.ibb.co/BG4fvpf/29.jpg', 31, 'Faca De Caça/Churrasco Zakharov', 150, 18, 3, 3, 2, false, false);
 
 insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
 peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Espada Katana decorativa, perfeita para fantasias e/ou cosplays', 8, 
-'https://ibb.co/VtWTX73', 105, 'Espada Katana Decorativa', 736, 8, 1, 4, 7, false, false);
+'https://i.ibb.co/pxvdCtn/30.jpg', 105, 'Espada Katana Decorativa', 736, 8, 1, 4, 7, false, false);
 
 
 
@@ -285,4 +287,10 @@ insert into status_pedido (descricao_status_pedido) values ('AGUARDANDO APROVAÇÃ
 insert into status_pedido (descricao_status_pedido) values ('PAGAMENTO APROVADO');
 insert into status_pedido (descricao_status_pedido) values ('CONCLUIDO');
 insert into status_pedido (descricao_status_pedido) values ('CANCELADO');
+
+
+
+
+
+
 
