@@ -21,7 +21,7 @@ public class Request {
     @Column(nullable = false, name = "DATA_COMPRA")
     private Date purchaseDate;
 
-    @Column(nullable = false, name = "DATA_PAGAMENTO")
+    @Column(nullable = true, name = "DATA_PAGAMENTO")
     private Date paymentDate;
 
     @Column(nullable = false, name = "VALOR_TOTAL")
