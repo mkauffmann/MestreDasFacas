@@ -39,6 +39,10 @@ public class Request {
     private TypePayment typePayment;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "ID_CARTAO_CREDITO")
+    private CreditCard creditCard;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ID_ENDERECO")
     private Address address;
 

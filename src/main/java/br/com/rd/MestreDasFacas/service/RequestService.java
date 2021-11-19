@@ -633,6 +633,11 @@ public class RequestService {
         business.setTotalValue(calculateTotalValue(itemRequests));
         business.setFinalValue(business.getFreightFixed() + business.getTotalValue());
 
+        if(dto.getCreditCard() != null){
+            CreditCard creditCard = conversion.creditCardDtoToBusiness(dto.getCreditCard());
+            business.setCreditCard(creditCard);
+        }
+
         return business;
     }
 
@@ -659,6 +664,11 @@ public class RequestService {
         dto.setAddress(addressDTO);
         dto.setCustomer(customerDTO);
         dto.setItemRequest(itemRequestDTO);
+
+        if(business.getCreditCard() != null){
+            CreditCardDTO creditCard = conversion.creditCardBusinessToDto(business.getCreditCard());
+            dto.setCreditCard(creditCard);
+        }
 
         return dto;
     }
