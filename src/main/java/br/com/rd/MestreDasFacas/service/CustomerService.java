@@ -13,6 +13,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,21 +48,26 @@ public class CustomerService {
 
 
 
-    public CustomerDTO add(CustomerDTO dto){
+    public CustomerDTO add(CustomerDTO dto) throws SQLIntegrityConstraintViolationException {
         Customer newCustomer = conversion.customerDtoToBusiness(dto);
 
         //encriptar senha
         String passwordCrypt = encoder.encode(dto.getPassword());
         newCustomer.setPassword(passwordCrypt);
 
-        newCustomer = customerRepository.save(newCustomer);
-        sendSignUpEmail(newCustomer);
-        return conversion.customerBusinessToDto(newCustomer);
+        try {
+            newCustomer = customerRepository.save(newCustomer);
+            sendSignUpEmail(newCustomer);
+            return conversion.customerBusinessToDto(newCustomer);
+        } catch (Exception e){
+            throw new SQLIntegrityConstraintViolationException("Email já cadastrado em outro usuário", e.getCause());
+        }
+
 
 
     }
 
-    public CustomerDTO update(Long id, CustomerDTO dto) {
+    public CustomerDTO update(Long id, CustomerDTO dto) throws Exception {
         Optional<Customer> op = customerRepository.findById(id);
         if(op.isPresent()){
             Customer update = op.get();
@@ -77,20 +84,43 @@ public class CustomerService {
             if(dto.getBirthDate() != null){
                 update.setBirthDate(dto.getBirthDate());
             }
-            if(dto.getPassword() != null){
-                //encriptar senha
-                String passwordCrypt = encoder.encode(dto.getPassword());
-                update.setPassword(passwordCrypt);
-            }
+//            if(dto.getPassword() != null){
+//                //encriptar senha
+//                String passwordCrypt = encoder.encode(dto.getPassword());
+//                update.setPassword(passwordCrypt);
+//            }
             if(dto.getGender() != null){
                 Gender gender = conversion.genderDtoToBusiness(dto.getGender());
                 update.setGender(gender);
             }
 
-            update = customerRepository.save(update);
-            return conversion.customerBusinessToDto(update);
+            try{
+                update = customerRepository.save(update);
+                return conversion.customerBusinessToDto(update);
+            } catch (Exception e){
+                throw new Exception("Email já cadastrado em outro usuário", e);
+            }
+
         }
         return null;
+    }
+
+    public boolean changePassword(PasswordDTO dto){
+        Optional<Customer> op = customerRepository.findById(dto.getCustomerId());
+
+        if (op.isPresent()){
+            Customer customer = op.get();
+
+           if(encoder.matches(dto.getCurrentPassword(), customer.getPassword())){
+               //encriptar senha
+               String newPasswordCrypt = encoder.encode((dto.getPassword()));
+               customer.setPassword(newPasswordCrypt);
+               customer = customerRepository.save(customer);
+               return true;
+           }
+
+        }
+        return false;
     }
 
     public CustomerDTO findById(Long id){
