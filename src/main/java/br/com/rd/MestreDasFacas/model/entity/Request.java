@@ -21,7 +21,7 @@ public class Request {
     @Column(nullable = false, name = "DATA_COMPRA")
     private Date purchaseDate;
 
-    @Column(nullable = false, name = "DATA_PAGAMENTO")
+    @Column(nullable = true, name = "DATA_PAGAMENTO")
     private Date paymentDate;
 
     @Column(nullable = false, name = "VALOR_TOTAL")
@@ -37,6 +37,10 @@ public class Request {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ID_TIPO_PAGAMENTO")
     private TypePayment typePayment;
+
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "ID_CARTAO_CREDITO")
+    private CreditCard creditCard;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ID_ENDERECO")

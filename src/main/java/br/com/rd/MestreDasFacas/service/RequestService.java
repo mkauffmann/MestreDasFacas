@@ -622,7 +622,9 @@ public class RequestService {
 
 
         business.setFreightFixed(dto.getFreightFixed());
-        business.setPaymentDate(dto.getPaymentDate());
+        if(dto.getPaymentDate() != null) {
+            business.setPaymentDate(dto.getPaymentDate());
+        }
         business.setPurchaseDate(dto.getPurchaseDate());
         business.setDeliveryStatus(deliveryStatus);
         business.setTypePayment(typePayment);
@@ -632,6 +634,11 @@ public class RequestService {
 
         business.setTotalValue(calculateTotalValue(itemRequests));
         business.setFinalValue(business.getFreightFixed() + business.getTotalValue());
+
+        if(dto.getCreditCard() != null){
+            CreditCard creditCard = conversion.creditCardDtoToBusiness(dto.getCreditCard());
+            business.setCreditCard(creditCard);
+        }
 
         return business;
     }
@@ -651,7 +658,9 @@ public class RequestService {
         dto.setId(business.getId());
         dto.setFreightFixed(business.getFreightFixed());
         dto.setPurchaseDate(business.getPurchaseDate());
-        dto.setPaymentDate(business.getPaymentDate());
+        if(business.getPaymentDate() != null){
+            dto.setPaymentDate(business.getPaymentDate());
+        }
         dto.setTotalValue(business.getTotalValue());
         dto.setFinalValue(business.getFinalValue());
         dto.setTypePayment(typePaymentDTO);
@@ -659,6 +668,11 @@ public class RequestService {
         dto.setAddress(addressDTO);
         dto.setCustomer(customerDTO);
         dto.setItemRequest(itemRequestDTO);
+
+        if(business.getCreditCard() != null){
+            CreditCardDTO creditCard = conversion.creditCardBusinessToDto(business.getCreditCard());
+            dto.setCreditCard(creditCard);
+        }
 
         return dto;
     }
