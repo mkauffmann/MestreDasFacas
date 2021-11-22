@@ -5,6 +5,7 @@ import br.com.rd.MestreDasFacas.enums.StatusEmail;
 import br.com.rd.MestreDasFacas.model.dto.*;
 import br.com.rd.MestreDasFacas.model.entity.*;
 import br.com.rd.MestreDasFacas.repository.contract.*;
+import br.com.rd.MestreDasFacas.security.JWTConfiguration;
 import br.com.rd.MestreDasFacas.service.conversion.DtoConversion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
@@ -324,6 +325,35 @@ public class CustomerService {
 
 
     }
+
+    public void updateResetPasswordToken(String token, String email) throws CustomerNotFoundException {
+       Optional <Customer> customer = customerRepository.findByEmail(email);
+       Customer customer1 = new Customer();
+
+       if (customer != null){
+           customer1.setResetPasswordToken(token);
+           customerRepository.save(customer1);
+       }else {
+           throw new CustomerNotFoundException("Could not find any customer with email " + email);
+       }
+    }
+
+    public Customer get (String resetPasswordToken){
+        return customerRepository.findByResetPasswordToken(resetPasswordToken);
+    }
+
+    public void updatePassword(Customer customer, String newPassword){
+
+        String passwordEncoder = encoder.encode(newPassword);
+        customer.setPassword(passwordEncoder);
+        customer.setResetPasswordToken(null);
+        customerRepository.save(customer);
+
+
+
+    }
+
+
     ///// recuperar senhas
 
 
