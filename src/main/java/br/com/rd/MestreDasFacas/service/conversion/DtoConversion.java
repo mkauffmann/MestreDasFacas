@@ -58,6 +58,9 @@ public class DtoConversion {
     @Autowired
     InventoryRepository inventoryRepository;
 
+    @Autowired
+    PasswordEncoder encoder;
+
     /*
     *
     * CONVERSORES CUSTOMER INICIO
@@ -228,7 +231,13 @@ public class DtoConversion {
         CreditCardDTO dto = new CreditCardDTO();
 
         dto.setId(creditCard.getId());
-        dto.setCardNumber(creditCard.getCardNumber());
+        //não exibir número do cartão no dto
+//        dto.setCardNumber(creditCard.getCardNumber());
+
+        //enviar apenas últimos quatro digitos
+        dto.setLastFourDigits((creditCard.getLastFourDigits()));
+
+
         dto.setCardValidDate(creditCard.getCardValidDate());
         dto.setCpf(creditCard.getCpf());
         dto.setHolderName(creditCard.getHolderName());
@@ -397,7 +406,19 @@ public class DtoConversion {
         creditCard.setCardBrand(brandDto);
         creditCard.setHolderName(dto.getHolderName());
         creditCard.setCpf(dto.getCpf());
-        creditCard.setCardNumber(dto.getCardNumber());
+
+        //pegar últimos quatro dígitos
+        String[] numberArr = dto.getCardNumber().split(" ");
+        creditCard.setLastFourDigits(numberArr[3]);
+
+        //encodar numero do cartao
+        String criptoNumber = encoder.encode(dto.getCardNumber());
+        creditCard.setCardNumber(criptoNumber);
+
+        //encodar cvv
+        String criptoCvv = encoder.encode(dto.getCvv());
+        creditCard.setCvv(criptoCvv);
+
         creditCard.setCardValidDate(dto.getCardValidDate());
 
         return creditCard;

@@ -40,13 +40,13 @@ public class CreditCardService {
         if(op.isPresent()){
             CreditCard updateCard = op.get();
 
-            if(dto.getCardNumber() != null){
-                updateCard.setCardNumber(dto.getCardNumber());
-            }
-
-            if(dto.getCardValidDate() != null){
-                updateCard.setCardValidDate(dto.getCardValidDate());
-            }
+//            if(dto.getCardNumber() != null){
+//                updateCard.setCardNumber(dto.getCardNumber());
+//            }
+//
+//            if(dto.getCardValidDate() != null){
+//                updateCard.setCardValidDate(dto.getCardValidDate());
+//            }
 
             if(dto.getCpf() != null){
                 updateCard.setCpf(dto.getCpf());
@@ -54,10 +54,10 @@ public class CreditCardService {
             if(dto.getHolderName() != null){
                 updateCard.setHolderName(dto.getHolderName());
             }
-            if(dto.getCardBrand() != null){
-                CardBrand updateBrand = conversion.cardBrandDtoToBusiness(dto.getCardBrand());
-                updateCard.setCardBrand(updateBrand);
-            }
+//            if(dto.getCardBrand() != null){
+//                CardBrand updateBrand = conversion.cardBrandDtoToBusiness(dto.getCardBrand());
+//                updateCard.setCardBrand(updateBrand);
+//            }
 
             updateCard = creditCardRepository.save(updateCard);
             return conversion.creditCardBusinessToDto(updateCard);
