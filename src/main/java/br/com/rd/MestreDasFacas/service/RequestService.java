@@ -632,10 +632,15 @@ public class RequestService {
         business.setCustomer(customer);
         business.setItemrequests(itemRequests);
 
-        business.setTotalValue(calculateTotalValue(itemRequests));
-        business.setFinalValue(business.getFreightFixed() + business.getTotalValue());
+        // Lógica para valor total parcelado:
 
         business.setInstallments(dto.getInstallments());
+
+        Double valorTotal = calculateTotalValue(itemRequests);
+        Double valorTotalParcelado = valorTotal / dto.getInstallments();
+
+        business.setTotalValue(valorTotalParcelado);
+        business.setFinalValue(business.getFreightFixed() + business.getTotalValue());
 
         if(dto.getCreditCard() != null){
             CreditCard creditCard = conversion.creditCardDtoToBusiness(dto.getCreditCard());
