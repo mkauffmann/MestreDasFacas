@@ -21,6 +21,6 @@ public class RequestDTO {
     private AddressDTO address;
     private CustomerDTO customer;
     private List<ItemRequestDTO> itemRequest;
-
+    private Integer installments;
 
 }

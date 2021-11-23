@@ -30,6 +30,11 @@ public class Request {
     @Column(nullable = false, name = "VALOR_FINAL")
     private Double finalValue;
 
+    // Inserção de 23/11 - Parcelamento:
+
+    @Column(nullable = false, name = "QUANTIDADE_PARCELAS")
+    private Integer installments;
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ID_STATUS_PEDIDO")
     private DeliveryStatus deliveryStatus;

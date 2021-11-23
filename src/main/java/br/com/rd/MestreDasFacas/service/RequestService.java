@@ -635,6 +635,8 @@ public class RequestService {
         business.setTotalValue(calculateTotalValue(itemRequests));
         business.setFinalValue(business.getFreightFixed() + business.getTotalValue());
 
+        business.setInstallments(dto.getInstallments());
+
         if(dto.getCreditCard() != null){
             CreditCard creditCard = conversion.creditCardDtoToBusiness(dto.getCreditCard());
             business.setCreditCard(creditCard);
@@ -668,6 +670,8 @@ public class RequestService {
         dto.setAddress(addressDTO);
         dto.setCustomer(customerDTO);
         dto.setItemRequest(itemRequestDTO);
+
+        dto.setInstallments(business.getInstallments());
 
         if(business.getCreditCard() != null){
             CreditCardDTO creditCard = conversion.creditCardBusinessToDto(business.getCreditCard());
