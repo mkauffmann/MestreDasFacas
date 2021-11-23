@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -19,10 +20,10 @@ public class Request {
     private Double freightFixed;
 
     @Column(nullable = false, name = "DATA_COMPRA")
-    private Date purchaseDate;
+    private LocalDate purchaseDate;
 
     @Column(nullable = true, name = "DATA_PAGAMENTO")
-    private Date paymentDate;
+    private LocalDate paymentDate;
 
     @Column(nullable = false, name = "VALOR_TOTAL")
     private Double totalValue;
