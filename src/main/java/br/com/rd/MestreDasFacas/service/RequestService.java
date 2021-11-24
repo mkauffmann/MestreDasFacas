@@ -639,8 +639,9 @@ public class RequestService {
         Double valorTotal = calculateTotalValue(itemRequests);
         Double valorTotalParcelado = valorTotal / dto.getInstallments();
 
-        business.setTotalValue(valorTotalParcelado);
-        business.setFinalValue(business.getFreightFixed() + business.getTotalValue());
+        business.setInstallmentsValue(valorTotalParcelado);
+        business.setTotalValue(valorTotal);
+        business.setFinalValue(business.getFreightFixed() + valorTotal);
 
         if(dto.getCreditCard() != null){
             CreditCard creditCard = conversion.creditCardDtoToBusiness(dto.getCreditCard());
@@ -677,6 +678,7 @@ public class RequestService {
         dto.setItemRequest(itemRequestDTO);
 
         dto.setInstallments(business.getInstallments());
+        dto.setInstallmentsValue(business.getInstallmentsValue());
 
         if(business.getCreditCard() != null){
             CreditCardDTO creditCard = conversion.creditCardBusinessToDto(business.getCreditCard());

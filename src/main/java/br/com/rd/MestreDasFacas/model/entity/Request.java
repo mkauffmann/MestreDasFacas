@@ -25,8 +25,12 @@ public class Request {
     @Column(nullable = true, name = "DATA_PAGAMENTO")
     private LocalDate paymentDate;
 
+    // Valor total = soma de todos items:
+
     @Column(nullable = false, name = "VALOR_TOTAL")
     private Double totalValue;
+
+    // Valor final = valor total + frete
 
     @Column(nullable = false, name = "VALOR_FINAL")
     private Double finalValue;
@@ -35,6 +39,11 @@ public class Request {
 
     @Column(nullable = false, name = "QUANTIDADE_PARCELAS")
     private Integer installments;
+
+    // Inserção de 24/11 - Valor Parcela = valor total / parcelas:
+
+    @Column(nullable = false, name = "VALOR_PARCELAS")
+    private Double installmentsValue;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ID_STATUS_PEDIDO")

@@ -23,5 +23,6 @@ public class RequestDTO {
     private CustomerDTO customer;
     private List<ItemRequestDTO> itemRequest;
     private Integer installments;
+    private Double installmentsValue;
 
 }
