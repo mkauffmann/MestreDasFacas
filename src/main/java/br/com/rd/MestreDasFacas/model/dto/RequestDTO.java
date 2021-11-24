@@ -4,6 +4,7 @@ import br.com.rd.MestreDasFacas.model.entity.CreditCard;
 import lombok.Data;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -11,8 +12,8 @@ public class RequestDTO {
 
     private Long id;
     private Double freightFixed;
-    private Date purchaseDate;
-    private Date paymentDate;
+    private LocalDate purchaseDate;
+    private LocalDate paymentDate;
     private Double totalValue;
     private Double finalValue;
     private TypePaymentDTO typePayment;
@@ -21,6 +22,7 @@ public class RequestDTO {
     private AddressDTO address;
     private CustomerDTO customer;
     private List<ItemRequestDTO> itemRequest;
-
+    private Integer installments;
+    private Double installmentsValue;
 
 }

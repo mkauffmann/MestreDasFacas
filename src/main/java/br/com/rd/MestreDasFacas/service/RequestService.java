@@ -632,8 +632,16 @@ public class RequestService {
         business.setCustomer(customer);
         business.setItemrequests(itemRequests);
 
-        business.setTotalValue(calculateTotalValue(itemRequests));
-        business.setFinalValue(business.getFreightFixed() + business.getTotalValue());
+        // Lógica para valor total parcelado:
+
+        business.setInstallments(dto.getInstallments());
+
+        Double valorTotal = calculateTotalValue(itemRequests);
+        Double valorTotalParcelado = valorTotal / dto.getInstallments();
+
+        business.setInstallmentsValue(valorTotalParcelado);
+        business.setTotalValue(valorTotal);
+        business.setFinalValue(business.getFreightFixed() + valorTotal);
 
         if(dto.getCreditCard() != null){
             CreditCard creditCard = conversion.creditCardDtoToBusiness(dto.getCreditCard());
@@ -668,6 +676,9 @@ public class RequestService {
         dto.setAddress(addressDTO);
         dto.setCustomer(customerDTO);
         dto.setItemRequest(itemRequestDTO);
+
+        dto.setInstallments(business.getInstallments());
+        dto.setInstallmentsValue(business.getInstallmentsValue());
 
         if(business.getCreditCard() != null){
             CreditCardDTO creditCard = conversion.creditCardBusinessToDto(business.getCreditCard());

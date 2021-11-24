@@ -8,6 +8,7 @@ import br.com.rd.MestreDasFacas.model.entity.Telephone;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +18,7 @@ public class CustomerDTO {
     private String name;
     private String email;
     private String cpf;
-    private Date birthDate;
+    private LocalDate birthDate;
     private String password;
     private GenderDTO gender;
     private List<TelephoneDTO> telephones;

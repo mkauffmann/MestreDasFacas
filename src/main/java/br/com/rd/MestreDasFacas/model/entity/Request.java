@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -19,16 +20,30 @@ public class Request {
     private Double freightFixed;
 
     @Column(nullable = false, name = "DATA_COMPRA")
-    private Date purchaseDate;
+    private LocalDate purchaseDate;
 
     @Column(nullable = true, name = "DATA_PAGAMENTO")
-    private Date paymentDate;
+    private LocalDate paymentDate;
+
+    // Valor total = soma de todos items:
 
     @Column(nullable = false, name = "VALOR_TOTAL")
     private Double totalValue;
 
+    // Valor final = valor total + frete
+
     @Column(nullable = false, name = "VALOR_FINAL")
     private Double finalValue;
+
+    // Inserção de 23/11 - Parcelamento:
+
+    @Column(nullable = false, name = "QUANTIDADE_PARCELAS")
+    private Integer installments;
+
+    // Inserção de 24/11 - Valor Parcela = valor total / parcelas:
+
+    @Column(nullable = false, name = "VALOR_PARCELAS")
+    private Double installmentsValue;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ID_STATUS_PEDIDO")
