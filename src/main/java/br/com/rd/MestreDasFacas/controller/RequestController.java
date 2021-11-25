@@ -18,7 +18,7 @@ public class RequestController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public RequestDTO create(@RequestBody RequestDTO dto) {
+    public RequestDTO create(@RequestBody RequestDTO dto) throws Exception {
         return this.requestService.addRequest(dto);
     }
 
