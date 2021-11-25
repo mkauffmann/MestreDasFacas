@@ -60,6 +60,10 @@ public class Customer {
     private List<CreditCard> creditCards;
 
 
+    @Column ( name = "reset_password_token")
+    private String resetPasswordToken;
+
+
 
 
 }

@@ -24,5 +24,6 @@ public class CustomerDTO {
     private List<TelephoneDTO> telephones;
     private List<AddressDTO> addresses;
     private List<CreditCardDTO> creditCards;
+    private String resetPasswordToken;
 
 }

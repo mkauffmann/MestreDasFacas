@@ -5,6 +5,7 @@ import br.com.rd.MestreDasFacas.enums.StatusEmail;
 import br.com.rd.MestreDasFacas.model.dto.*;
 import br.com.rd.MestreDasFacas.model.entity.*;
 import br.com.rd.MestreDasFacas.repository.contract.*;
+import br.com.rd.MestreDasFacas.security.JWTConfiguration;
 import br.com.rd.MestreDasFacas.service.conversion.DtoConversion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
@@ -13,6 +14,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.validation.constraints.Email;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDateTime;
@@ -302,7 +304,7 @@ public class CustomerService {
         email.setEmailTo(newCustomer.getEmail());
         email.setEmailFrom("mestredasfacas2021@gmail.com");
         email.setSubject("Bem-vido(a) a Mestre das facas");
-        email.setText(String.format("Ola, %s, seja bem-vindo(a) à Mestre Das Facas! Espero que goste.", newCustomer.getName()));
+        email.setText(String.format(" Ola, %s, seja bem-vindo(a) à Mestre Das Facas! Espero que goste.", newCustomer.getName()));
 
         try{
             SimpleMailMessage message = new SimpleMailMessage();
@@ -324,8 +326,85 @@ public class CustomerService {
 
 
     }
-    ///// recuperar senhas
 
+
+    public void updateResetPasswordToken(String token, String email) throws CustomerNotFoundException {
+       Optional <Customer> customer = customerRepository.findByEmail(email);
+       if (customer.isPresent()){
+           customer.get().setResetPasswordToken(token);
+           customerRepository.save(customer.get());
+       }else {
+           throw new CustomerNotFoundException("Não foi possivel encontrar nenhum usuario com o e-mail " + email);
+       }
+    }
+
+    public CustomerDTO get (String resetPasswordToken){
+        return conversion.customerBusinessToDto(customerRepository.findByResetPasswordToken(resetPasswordToken));
+    }
+
+    public void updatePassword(CustomerDTO customerDTO, String newPassword){
+
+        Customer customer = conversion.customerDtoToBusiness(customerDTO);
+
+        customer.setId(customerDTO.getId());
+        customer.setPassword(encoder.encode(newPassword));
+        customer.setResetPasswordToken(null);
+
+        customerRepository.save(customer);
+
+
+
+    }
+
+
+    public void sendPasswordRecoveryEmail(String email, String resetPasswordLink){
+
+        Optional <Customer> customer = customerRepository.findByEmail(email);
+
+
+
+        EmailModel newEmail = new EmailModel();
+
+
+        newEmail.setSendDateEmail(LocalDateTime.now());
+        newEmail.setOwnerRef(customer.get().getId());
+        newEmail.setEmailTo(email);
+        newEmail.setEmailFrom("mestredasfacas2021@gmail.com");
+        newEmail.setText(
+                "<p> Olá, </p>"
+                + "<p>Você solicitou a redefinição </p> "
+                + "<p> Clique no link abaixo para resetar sua senha: </p>"
+                + "<p> <b> <a href=\"" + resetPasswordLink + "\" > Resetar minha senha</a><b></p>"
+                + "<p> Caso não tenha sido você que tenha feito esta solicitação por favor ignore este email </p>");
+
+
+
+
+        try{
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(newEmail.getEmailFrom());
+            message.setTo(newEmail.getEmailTo());
+            message.setSubject(newEmail.getSubject());
+            message.setText(newEmail.getText());
+
+            emailSender.send(message);
+            newEmail.setStatusEmail(StatusEmail.SENT);
+        }catch (MailException e ) {
+            newEmail.setStatusEmail(StatusEmail.ERROR);
+
+        }finally {
+            emailRepository.save(newEmail);
+        }
+
+
+
+}
+
+
+    public CustomerDTO getByResetPasswordToken(String token) {
+
+        return conversion.customerBusinessToDto(customerRepository.findByResetPasswordToken(token));
+    }
 
 
 
