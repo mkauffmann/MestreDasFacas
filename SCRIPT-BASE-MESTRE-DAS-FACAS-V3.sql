@@ -54,7 +54,9 @@ insert into marca (descricao_marca) values ('ToyShow');
 insert into marca (descricao_marca) values ('Tramontina');
 insert into marca (descricao_marca) values ('Zakharov');
 insert into marca (descricao_marca) values ('Brinox');
-insert into marca (descricao_marca) values ('J.A. Henckels');
+insert into marca (descricao_marca) values ('Zwilling J.A. Henckels');
+insert into marca (descricao_marca) values ('Cascavel');
+insert into marca (descricao_marca) values ('Alma Campeira');
 
 -- tabela preco_produto:
 
@@ -69,6 +71,7 @@ insert into preco_produto (valor_preco) values (559.99);
 insert into preco_produto (valor_preco) values (729.99);
 insert into preco_produto (valor_preco) values (1099.99);
 insert into preco_produto (valor_preco) values (1399.99);
+insert into preco_produto (valor_preco) values (7320.99);
 
 -- tabela produtos
 
@@ -238,7 +241,37 @@ peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
 values ('Espada Katana decorativa, perfeita para fantasias e/ou cosplays', 8, 
 'https://i.ibb.co/pxvdCtn/30.jpg', 105, 'Espada Katana Decorativa', 736, 8, 1, 4, 7, false, false);
 
+-- 31:
 
+insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
+peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
+values ('Faca ideal para corte de carne de médio e grande porte e cozinha em geral.', 12.5, 
+'https://i.ibb.co/bvD5CcC/31.jpg', 34.5, 'Faca Churrasco e Cozinha Cascavel Osso Madeira', 243, 4.1, 6, 1, 5, false, false);
+
+insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
+peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
+values ('Faca feita artesanalmente e aprovada por rigorosos testes de qualidade.', 25, 
+'https://i.ibb.co/Vtj08pg/32.jpg', 38, 'Faca Churrasco 10 Alma Campeira Cabo Resina Verde', 243, 4.5, 7, 1, 6, false, false);
+
+insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
+peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
+values ('Faca com corte preciso e boa qualidade, inspirado na cor da natureza.', 2, 
+'https://i.ibb.co/wgyXVFx/33.jpg', 33, 'Faca Chef Zwilling com Cabo Azul', 130, 4.5, 5, 2, 6, false, false);
+
+insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
+peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
+values ('Faca ideal para as tarefas diárias de cozinha, para alimentos duros ou macios.', 1, 
+'https://i.ibb.co/BfWX1Df/34.jpg', 22, 'Faca Universal Zwilling com Cabo Vermelho Twin Grip', 26, 1.7, 5, 2, 1, false, false);
+
+insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
+peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
+values ('Concebemos o projeto de design Bob Kramer, faca de autenticidade excepcional, nitidez e beleza.', 5, 
+'https://i.ibb.co/0tj742s/35.jpg', 33, 'Faca Chef Zwilling Bob Kramer Euro Stainless Damascus 8', 275, 2.5, 5, 3, 12, false, false);
+
+insert into produto (descricao_produto, altura, imagem, comprimento, nome_produto, 
+peso, largura, id_marca, id_categoria, id_preco_produto, destaque, novidade)
+values ('Réplica da faca Karambit do game CS:GO', 10, 
+'https://i.ibb.co/L1fjNyF/36.jpg', 230, 'Karambit CS:GO', 230, 20, 1, 4, 3, false, false);
 
 -- tabela estoque
 
@@ -272,7 +305,12 @@ insert into estoque (id_produto, quantidade_estoque) values (27, 30);
 insert into estoque (id_produto, quantidade_estoque) values (28, 10);
 insert into estoque (id_produto, quantidade_estoque) values (29, 10);
 insert into estoque (id_produto, quantidade_estoque) values (30, 10);
-
+insert into estoque (id_produto, quantidade_estoque) values (31, 30);
+insert into estoque (id_produto, quantidade_estoque) values (32, 20);
+insert into estoque (id_produto, quantidade_estoque) values (33, 30);
+insert into estoque (id_produto, quantidade_estoque) values (34, 30);
+insert into estoque (id_produto, quantidade_estoque) values (35, 10);
+insert into estoque (id_produto, quantidade_estoque) values (36, 10);
 
 -- tabela tipo_pagamento
 
