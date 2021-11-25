@@ -139,6 +139,34 @@ public class ProductService {
         return dtoConversion.productListToDto(productList);
     }
 
+    // Método para ordenar produtos pelo preço e categoria decrescente:
+
+    public List<ProductDTO> listProductsByPriceDescCatg(Long id) {
+        List<Product> productList = this.productRepository.myFindByPriceDescCatg(id);
+        return dtoConversion.productListToDto(productList);
+    }
+
+    // Método para ordenar produtos pelo preço e categoria crescente:
+
+    public List<ProductDTO> listProductsByPriceAscCatg(Long id) {
+        List<Product> productList = this.productRepository.myFindByPriceAscCatg(id);
+        return dtoConversion.productListToDto(productList);
+    }
+
+    // Método para ordenar produtos pelo preço e pesquisa decrescente:
+
+    public List<ProductDTO> listProductsByPriceDescSearch(String search) {
+        List<Product> productList = this.productRepository.myFindByPriceDescSearch(search);
+        return dtoConversion.productListToDto(productList);
+    }
+
+    // Método para ordenar produtos pelo preço e pesquisa crescente:
+
+    public List<ProductDTO> listProductsByPriceAscSearch(String search) {
+        List<Product> productList = this.productRepository.myFindByPriceAscSearch(search);
+        return dtoConversion.productListToDto(productList);
+    }
+
     // Método para ordenar produtos pelo preço decrescente:
 
     public List<ProductDTO> listProductsByPriceDesc() {

@@ -58,6 +58,34 @@ public class ProductController {
         return this.productService.listProductByCategory(id);
     }
 
+    // Ordenar em Decrescente Categoria:
+
+    @GetMapping("/orderDescCatg/{id}")
+    public List<ProductDTO> listDescCatg(@PathVariable("id") Long id) {
+        return this.productService.listProductsByPriceDescCatg(id);
+    }
+
+    // Ordenar em Crescente Categoria:
+
+    @GetMapping("/orderAscCatg/{id}")
+    public List<ProductDTO> listAscCatg(@PathVariable("id") Long id) {
+        return this.productService.listProductsByPriceAscCatg(id);
+    }
+
+    // Ordenar em Decrescente Pesquisa:
+
+    @GetMapping("/orderDescSearch/{search}")
+    public List<ProductDTO> listDescSearch(@PathVariable("search") String search) {
+        return this.productService.listProductsByPriceDescSearch(search);
+    }
+
+    // Ordenar em Crescente Pesquisa:
+
+    @GetMapping("/orderAscSearch/{search}")
+    public List<ProductDTO> listAscSearch(@PathVariable("search") String search) {
+        return this.productService.listProductsByPriceAscSearch(search);
+    }
+
     // Ordenar em Decrescente:
 
     @GetMapping("/orderDesc")
