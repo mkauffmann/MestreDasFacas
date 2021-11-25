@@ -73,7 +73,6 @@ public class RequestService {
 
     public RequestDTO addRequest(RequestDTO dto) throws Exception {
         Request newRequest = dtoToBusiness(dto);
-        newRequest = requestRepository.save(newRequest);
 
         for (ItemRequest i : newRequest.getItemrequests()) {
             Product product = i.getProduct();
@@ -87,6 +86,7 @@ public class RequestService {
                     obj.setQuantityInventory(qtdEstoque - qtdCompra);
 //                inventoryRepository.myInventoryUpdate(obj.getId());
                     inventoryRepository.save(obj);
+                    newRequest = requestRepository.save(newRequest);
                 } else {
                     throw new Exception("Quantidade insuficiente do produto " + product.getProductName() + " em estoque");
                 }
