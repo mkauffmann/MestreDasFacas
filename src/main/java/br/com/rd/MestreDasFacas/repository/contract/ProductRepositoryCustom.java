@@ -25,6 +25,6 @@ public interface ProductRepositoryCustom {
 
     @Query(value = "select * from produto p inner join preco_produto pp on p.id_preco_produto = pp.id_preco_produto order by pp.valor_preco;", nativeQuery = true)
     List<Product> myFindByPriceAsc();
-    
+
 
 }
