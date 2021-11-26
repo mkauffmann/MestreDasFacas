@@ -128,14 +128,14 @@ public class ProductService {
     // Método para barra de busca:
 
     public List<ProductDTO> listProductsSearch(String search) {
-        List<Product> productList = this.productRepository.myFindAllBySearch(search);
+        List<Product> productList = this.productRepository.findByProductNameContaining(search);
         return dtoConversion.productListToDto(productList);
     }
 
     // Método para listar produtos pelo id de categoria:
 
     public List<ProductDTO> listProductByCategory(Long id) {
-        List<Product> productList = this.productRepository.myFindAllByIdCategory(id);
+        List<Product> productList = this.productRepository.findByCategoryIdEquals(id);
         return dtoConversion.productListToDto(productList);
     }
 
@@ -184,14 +184,14 @@ public class ProductService {
     // Método para listar produtos destaque:
 
     public List<ProductDTO> listProductsByFeatured() {
-        List<Product> productList = this.productRepository.myFindAllByFeatured();
+        List<Product> productList = this.productRepository.findByFeaturedTrue();
         return dtoConversion.productListToDto(productList);
     }
 
     // Método para listar produtos novidade:
 
     public List<ProductDTO> listProductsByNews() {
-        List<Product> productList = this.productRepository.myFindAllByNews();
+        List<Product> productList = this.productRepository.findByNewsTrue();
         return dtoConversion.productListToDto(productList);
     }
 
