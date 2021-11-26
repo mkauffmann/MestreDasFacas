@@ -68,37 +68,35 @@ public class RequestService {
     InventoryRepository inventoryRepository;
 
 
-
     // Create
 
     public RequestDTO addRequest(RequestDTO dto) throws Exception {
         Request newRequest = dtoToBusiness(dto);
 
-        for (ItemRequest i : newRequest.getItemrequests()) {
-            Product product = i.getProduct();
-            Optional<Inventory> op = inventoryRepository.myFindById(product.getId());
+        if(validateInventory(newRequest.getItemrequests())){
+            for (ItemRequest i : newRequest.getItemrequests()) {
+                Product product = i.getProduct();
+                Optional<Inventory> op = inventoryRepository.myFindById(product.getId());
 
-            if(op.isPresent()) {
-                Inventory obj = op.get();
-                Integer qtdEstoque = obj.getQuantityInventory();
-                Integer qtdCompra = Math.toIntExact(i.getQuantity());
-                if(qtdCompra <= qtdEstoque){
+                if (op.isPresent()) {
+                    Inventory obj = op.get();
+                    Integer qtdEstoque = obj.getQuantityInventory();
+                    Integer qtdCompra = Math.toIntExact(i.getQuantity());
+
                     obj.setQuantityInventory(qtdEstoque - qtdCompra);
-//                inventoryRepository.myInventoryUpdate(obj.getId());
+//                  inventoryRepository.myInventoryUpdate(obj.getId());
                     inventoryRepository.save(obj);
-                    //
-                } else {
-                    throw new Exception("Quantidade insuficiente do produto " + product.getProductName() + " em estoque");
                 }
-
-            }
 
 //            Product product = i.getProduct();
 //            inventoryRepository.findById(id);
-        }
-        newRequest = requestRepository.save(newRequest);
+            }
+            newRequest = requestRepository.save(newRequest);
 
-        return businessToDto(newRequest);
+            return businessToDto(newRequest);
+        }
+        return null;
+
     }
 
     // Show all
@@ -139,18 +137,18 @@ public class RequestService {
                 TypePayment newPayment = typePaymentDtoToBusiness(dto.getTypePayment());
                 obj.setTypePayment(newPayment);
 
-            }if(dto.getAddress() !=null){
+            }
+            if (dto.getAddress() != null) {
                 Address newAdress = conversion.addressDtoToBusiness(dto.getAddress());
                 obj.setAddress(newAdress);
             }
-            if(dto.getItemRequest() !=null){
+            if (dto.getItemRequest() != null) {
                 List<ItemRequest> itemRequest = conversion.itemRequestListFromDto(dto.getItemRequest());
                 List<ItemRequest> listUpdate = obj.getItemrequests();
 
-                for(ItemRequest i : itemRequest) {
+                for (ItemRequest i : itemRequest) {
                     i = itemRequestRepository.save(i);
                     listUpdate.add(i);
-
 
 
                 }
@@ -242,7 +240,6 @@ public class RequestService {
         return business;
 
     }
-
 
 
     private TypePaymentDTO typePaymentBusinessToDto(TypePayment business) {
@@ -610,9 +607,9 @@ public class RequestService {
 
     ///////////////////////////////////
 
-    private Double calculateTotalValue(List<ItemRequest> items){
+    private Double calculateTotalValue(List<ItemRequest> items) {
         Double totalValue = 0.0;
-        for (ItemRequest item : items){
+        for (ItemRequest item : items) {
             totalValue += item.getTotal_value();
         }
         return totalValue;
@@ -628,7 +625,7 @@ public class RequestService {
 
 
         business.setFreightFixed(dto.getFreightFixed());
-        if(dto.getPaymentDate() != null) {
+        if (dto.getPaymentDate() != null) {
             business.setPaymentDate(dto.getPaymentDate());
         }
         business.setPurchaseDate(dto.getPurchaseDate());
@@ -649,7 +646,7 @@ public class RequestService {
         business.setTotalValue(valorTotal);
         business.setFinalValue(business.getFreightFixed() + valorTotal);
 
-        if(dto.getCreditCard() != null){
+        if (dto.getCreditCard() != null) {
             CreditCard creditCard = conversion.creditCardDtoToBusiness(dto.getCreditCard());
             business.setCreditCard(creditCard);
         }
@@ -664,15 +661,13 @@ public class RequestService {
         DeliveryStatusDTO deliveryDto = deliveryBusinessToDto(business.getDeliveryStatus());
         CustomerDTO customerDTO = conversion.customerBusinessToDto(business.getCustomer());
         AddressDTO addressDTO = conversion.addressBusinessToDto(business.getAddress());
-        List <ItemRequestDTO> itemRequestDTO = conversion.itemRequestListToDto(business.getItemrequests());
-
-
+        List<ItemRequestDTO> itemRequestDTO = conversion.itemRequestListToDto(business.getItemrequests());
 
 
         dto.setId(business.getId());
         dto.setFreightFixed(business.getFreightFixed());
         dto.setPurchaseDate(business.getPurchaseDate());
-        if(business.getPaymentDate() != null){
+        if (business.getPaymentDate() != null) {
             dto.setPaymentDate(business.getPaymentDate());
         }
         dto.setTotalValue(business.getTotalValue());
@@ -686,7 +681,7 @@ public class RequestService {
         dto.setInstallments(business.getInstallments());
         dto.setInstallmentsValue(business.getInstallmentsValue());
 
-        if(business.getCreditCard() != null){
+        if (business.getCreditCard() != null) {
             CreditCardDTO creditCard = conversion.creditCardBusinessToDto(business.getCreditCard());
             dto.setCreditCard(creditCard);
         }
@@ -704,11 +699,23 @@ public class RequestService {
         return listDto;
     }
 
+    private boolean validateInventory(List<ItemRequest> items) throws Exception {
 
+        for (ItemRequest i : items) {
+            Product product = i.getProduct();
+            Optional<Inventory> op = inventoryRepository.myFindById(product.getId());
 
+            if (op.isPresent()) {
+                Inventory obj = op.get();
+                Integer qtdEstoque = obj.getQuantityInventory();
+                Integer qtdCompra = Math.toIntExact(i.getQuantity());
 
+                if (qtdCompra > qtdEstoque) {
+                    throw new Exception("Quantidade insuficiente do produto " + product.getProductName() + " em estoque");
+                }
 
-
-
-
+            }
+        }
+        return true;
+    }
 }
