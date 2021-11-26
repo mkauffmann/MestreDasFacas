@@ -31,12 +31,6 @@ public class ItemRequestService {
     @Autowired
     ItemRequestRepository itemRequestRepository;
 
-    @Autowired
-    EmailRepository emailRepository;
-
-    @Autowired
-    private JavaMailSender emailSender;
-
 
 //    @Autowired
 //    InventoryRepository inventoryRepository;
@@ -46,7 +40,7 @@ public class ItemRequestService {
 
         newItemRequest = itemRequestRepository.save(newItemRequest);
 
-//        sendNewRequestEmail(newItemRequest);
+//
 //        inventoryRepository.myInventoryUpdate(newItemRequest.getProduct().getId());
         return conversion.itemRequestbusinessToDto(newItemRequest);
     }
@@ -95,35 +89,6 @@ public class ItemRequestService {
 
 
     }
-
-
-//    public void sendNewRequestEmail(ItemRequest teste2){
-//
-//        Customer teste = new Customer();
-//
-//        EmailModel email = new EmailModel();
-//        email.setSendDateEmail(LocalDateTime.now());
-//        email.setOwnerRef(teste.getId());
-//        email.setEmailTo(teste.getEmail());
-//        email.setEmailFrom("mestredasfacas2021@gmail.com");
-//        email.setSubject("Detalhes sobre seu pedido: ");
-//        email.setText(String.format(" Ola, %s, seja bem-vindo(a) à Mestre Das Facas! Espero que goste.", teste.getName()));
-//
-//        try{
-//            SimpleMailMessage message = new SimpleMailMessage();
-//            message.setFrom(email.getEmailFrom());
-//            message.setTo(email.getEmailTo());
-//            message.setSubject(email.getSubject());
-//            message.setText(email.getText());
-//            emailSender.send(message);
-//            email.setStatusEmail(StatusEmail.SENT);
-//        }catch (MailException e ) {
-//            email.setStatusEmail(StatusEmail.ERROR);
-//
-//        }finally {
-//            emailRepository.save(email);
-//        }
-
 
 
 
