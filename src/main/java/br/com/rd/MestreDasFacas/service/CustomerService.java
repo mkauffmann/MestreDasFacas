@@ -86,11 +86,7 @@ public class CustomerService {
             if(dto.getBirthDate() != null){
                 update.setBirthDate(dto.getBirthDate());
             }
-//            if(dto.getPassword() != null){
-//                //encriptar senha
-//                String passwordCrypt = encoder.encode(dto.getPassword());
-//                update.setPassword(passwordCrypt);
-//            }
+
             if(dto.getGender() != null){
                 Gender gender = conversion.genderDtoToBusiness(dto.getGender());
                 update.setGender(gender);
