@@ -324,7 +324,7 @@ public class DtoConversion {
         }
 
         //checar se telefone existe
-        Optional<Telephone> op = telephoneRepository.findTelephone(dto.getDdd(), dto.getPhoneNumber());
+        Optional<Telephone> op = telephoneRepository.findByDddAndPhoneNumber(dto.getDdd(), dto.getPhoneNumber());
         if(op.isPresent()){
             return op.get();
         } else {
@@ -373,7 +373,7 @@ public class DtoConversion {
         }
 
         //checar se cidade já existe na base
-        Optional<City> op = cityRepository.findCityByName(dto.getCityName());
+        Optional<City> op = cityRepository.findByCityNameEquals(dto.getCityName());
         if(op.isPresent()){
             return op.get();
         } else {

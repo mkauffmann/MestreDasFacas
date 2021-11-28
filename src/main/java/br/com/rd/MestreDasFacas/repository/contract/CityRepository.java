@@ -10,6 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface CityRepository extends JpaRepository<City, Long> {
-    @Query(value = "SELECT * FROM CIDADE WHERE NOME_CIDADE = :name", nativeQuery = true)
-    Optional<City> findCityByName(@Param("name") String name);
+
+    Optional<City> findByCityNameEquals(String name);
+
+//    @Query(value = "SELECT * FROM CIDADE WHERE NOME_CIDADE = :name", nativeQuery = true)
+//    Optional<City> findCityByName(@Param("name") String name);
 }
