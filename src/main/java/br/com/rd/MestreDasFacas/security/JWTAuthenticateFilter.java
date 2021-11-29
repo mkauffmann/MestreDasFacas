@@ -5,6 +5,7 @@ import br.com.rd.MestreDasFacas.model.entity.Customer;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,9 +22,8 @@ import java.util.Date;
 
 public class JWTAuthenticateFilter extends UsernamePasswordAuthenticationFilter {
 
-    public static final int TOKEN_EXPIRES = 1_800_000; //30min
-    public static final String TOKEN_PASSWORD = "193f3ed4-fe82-4e24-88ef-5ab7579707d3"; //guid generator, não deve estar no código fonte
-
+    public static int TOKEN_EXPIRES;
+    public static String TOKEN_PASSWORD;
     private AuthenticationManager authenticationManager;
 
     public JWTAuthenticateFilter(AuthenticationManager authenticationManager) {

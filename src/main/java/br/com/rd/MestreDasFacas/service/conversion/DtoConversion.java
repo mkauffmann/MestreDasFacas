@@ -6,6 +6,7 @@ import br.com.rd.MestreDasFacas.repository.contract.BrandRepository;
 //import br.com.rd.MestreDasFacas.repository.contract.CableColorRepository;
 import br.com.rd.MestreDasFacas.repository.contract.ProductRepository;
 import br.com.rd.MestreDasFacas.repository.contract.*;
+import br.com.rd.MestreDasFacas.security.AESEncryptionDecryption;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -43,9 +44,6 @@ public class DtoConversion {
     @Autowired
     BrandRepository brandRepository;
 
-//    @Autowired
-//    CableColorRepository cableColorRepository;
-
     @Autowired
     CategoryRepository categoryRepository;
 
@@ -60,6 +58,9 @@ public class DtoConversion {
 
     @Autowired
     PasswordEncoder encoder;
+
+    @Autowired
+    AESEncryptionDecryption aesCrypt;
 
     /*
     *
@@ -231,9 +232,15 @@ public class DtoConversion {
         CreditCardDTO dto = new CreditCardDTO();
 
         dto.setId(creditCard.getId());
-        //não exibir número do cartão no dto
-//        dto.setCardNumber(creditCard.getCardNumber());
 
+        //TESTE DE DECRIPTAR DADOS
+//        String cardNumberdecrypt = aesCrypt.decrypt(creditCard.getCardNumber());
+//        dto.setCardNumber(cardNumberdecrypt);
+//
+//        String cvvDecrypt = aesCrypt.decrypt(creditCard.getCvv());
+//        dto.setCvv(cvvDecrypt);
+
+        //não exibir número do cartão no dto
         //enviar apenas últimos quatro digitos
         dto.setLastFourDigits((creditCard.getLastFourDigits()));
 
@@ -324,7 +331,7 @@ public class DtoConversion {
         }
 
         //checar se telefone existe
-        Optional<Telephone> op = telephoneRepository.findTelephone(dto.getDdd(), dto.getPhoneNumber());
+        Optional<Telephone> op = telephoneRepository.findByDddAndPhoneNumber(dto.getDdd(), dto.getPhoneNumber());
         if(op.isPresent()){
             return op.get();
         } else {
@@ -373,7 +380,7 @@ public class DtoConversion {
         }
 
         //checar se cidade já existe na base
-        Optional<City> op = cityRepository.findCityByName(dto.getCityName());
+        Optional<City> op = cityRepository.findByCityNameEquals(dto.getCityName());
         if(op.isPresent()){
             return op.get();
         } else {
@@ -412,11 +419,11 @@ public class DtoConversion {
         creditCard.setLastFourDigits(numberArr[3]);
 
         //encodar numero do cartao
-        String criptoNumber = encoder.encode(dto.getCardNumber());
+        String criptoNumber = aesCrypt.encrypt(dto.getCardNumber());
         creditCard.setCardNumber(criptoNumber);
 
         //encodar cvv
-        String criptoCvv = encoder.encode(dto.getCvv());
+        String criptoCvv = aesCrypt.encrypt(dto.getCvv());
         creditCard.setCvv(criptoCvv);
 
         creditCard.setCardValidDate(dto.getCardValidDate());
