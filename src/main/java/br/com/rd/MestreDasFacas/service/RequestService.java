@@ -734,8 +734,8 @@ public class RequestService {
         email.setEmailTo(newRequest.getCustomer().getEmail());
         email.setEmailFrom("mestredasfacas2021@gmail.com");
         email.setSubject("Recebemos seu pedido ");
-        email.setText(String.format("Ola, %s, Recebemos o seu pedido :) \n"
-                +"Aguarde aprovação! O Numero do seu pedido é:   " + newRequest.getId()  , newRequest.getCustomer().getName()));
+        email.setText(String.format("Olá, %s, Recebemos o seu pedido :) \n"
+                +"Aguarde aprovação! O Numero do seu pedido é:   " + newRequest.getId() , newRequest.getCustomer().getName()));
 
         try{
             SimpleMailMessage message = new SimpleMailMessage();
