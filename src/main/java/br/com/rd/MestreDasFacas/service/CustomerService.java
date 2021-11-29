@@ -298,7 +298,7 @@ public class CustomerService {
         email.setEmailTo(newCustomer.getEmail());
         email.setEmailFrom("mestredasfacas2021@gmail.com");
         email.setSubject("Bem-vido à Mestre das Facas");
-        email.setText(String.format(" Ola, %s, seja bem-vindo(a) à Mestre Das Facas \n"
+        email.setText(String.format(" Ola, %s, seja bem-vindo(a) ao Mestre Das Facas \n"
                 +"Nossa missão é entregar a nossos clientes uma satisfação ao fazer um churrasco, ou aquele tão desejado almoço, janta e ainda um corte sensacional nos pães pela manhã.", newCustomer.getName()));
 
         try{

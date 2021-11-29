@@ -13,14 +13,6 @@ import java.util.Optional;
 
 public interface InventoryRepositoryCustom {
 
-    // Antigas queries para update de estoque:
-
-//    @Transactional
-//    @Modifying(clearAutomatically=true, flushAutomatically=true)
-//    @Query(value = "update estoque set quantidade_estoque = quantidade_estoque - 1 where id_produto = :id", nativeQuery = true)
-//    void myInventoryUpdate(@Param("id") Long id);
-
-//    List<Inventory> myInventoryUpdate(Long id);
 
     // Query de seleção do estoque por id de produto:
 

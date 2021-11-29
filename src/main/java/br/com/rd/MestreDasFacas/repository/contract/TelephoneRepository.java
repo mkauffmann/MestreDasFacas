@@ -13,6 +13,4 @@ public interface TelephoneRepository extends JpaRepository<Telephone, Long> {
 
     Optional<Telephone> findByDddAndPhoneNumber(String ddd, String tel);
 
-//    @Query(value = "SELECT * FROM TELEFONE WHERE DDD = :ddd AND NUMERO_TELEFONE = :tel", nativeQuery = true)
-//    Optional<Telephone> findTelephone(@Param("ddd") String ddd, @Param("tel") String tel);
 }

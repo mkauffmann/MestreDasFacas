@@ -32,16 +32,12 @@ public class ItemRequestService {
     ItemRequestRepository itemRequestRepository;
 
 
-//    @Autowired
-//    InventoryRepository inventoryRepository;
-
     public ItemRequestDTO addItem(ItemRequestDTO dto) {
         ItemRequest newItemRequest = conversion.itemRequestDtoToBusiness(dto);
 
         newItemRequest = itemRequestRepository.save(newItemRequest);
 
-//
-//        inventoryRepository.myInventoryUpdate(newItemRequest.getProduct().getId());
+
         return conversion.itemRequestbusinessToDto(newItemRequest);
     }
 
