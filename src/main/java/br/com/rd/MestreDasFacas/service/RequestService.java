@@ -73,6 +73,8 @@ public class RequestService {
     public RequestDTO addRequest(RequestDTO dto) throws Exception {
         Request newRequest = dtoToBusiness(dto);
 
+        sendNewRequestEmail(newRequest);
+
         if(validateInventory(newRequest.getItemrequests())){
             for (ItemRequest i : newRequest.getItemrequests()) {
                 Product product = i.getProduct();
@@ -721,4 +723,33 @@ public class RequestService {
         }
         return true;
     }
-}
+
+
+    // METODO PARA ENVIAR EMAIL DE BOAS VINDAS PARA O CLIENTE.
+    public void sendNewRequestEmail(Request newRequest){
+
+        EmailModel email = new EmailModel();
+        email.setSendDateEmail(LocalDateTime.now());
+        email.setOwnerRef(newRequest.getId());
+        email.setEmailTo(newRequest.getCustomer().getEmail());
+        email.setEmailFrom("mestredasfacas2021@gmail.com");
+        email.setSubject("Recebemos seu pedido ");
+        email.setText(String.format("Ola, %s, Recebemos o seu pedido :) \n"
+                +"Aguarde aprovação! O Numero do seu pedido é:   " + newRequest.getId()  , newRequest.getCustomer().getName()));
+
+        try{
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(email.getEmailFrom());
+            message.setTo(email.getEmailTo());
+            message.setSubject(email.getSubject());
+            message.setText(email.getText());
+            emailSender.send(message);
+            email.setStatusEmail(StatusEmail.SENT);
+        }catch (MailException e ) {
+            email.setStatusEmail(StatusEmail.ERROR);
+
+        }finally {
+            emailRepository.save(email);
+        }
+
+    }}

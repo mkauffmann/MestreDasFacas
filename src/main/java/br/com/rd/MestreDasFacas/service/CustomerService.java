@@ -1,12 +1,10 @@
 package br.com.rd.MestreDasFacas.service;
-
-
 import br.com.rd.MestreDasFacas.enums.StatusEmail;
 import br.com.rd.MestreDasFacas.model.dto.*;
 import br.com.rd.MestreDasFacas.model.entity.*;
 import br.com.rd.MestreDasFacas.repository.contract.*;
-import br.com.rd.MestreDasFacas.security.JWTConfiguration;
 import br.com.rd.MestreDasFacas.service.conversion.DtoConversion;
+import org.apache.logging.log4j.message.StringFormattedMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -14,11 +12,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Email;
-import java.sql.SQLException;
+import javax.swing.text.html.HTML;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -296,6 +292,8 @@ public class CustomerService {
         return null;
 
     }
+
+    // METODO PARA ENVIAR EMAIL DE BOAS VINDAS PARA O CLIENTE.
     public void sendSignUpEmail(Customer newCustomer){
 
         EmailModel email = new EmailModel();
@@ -303,8 +301,9 @@ public class CustomerService {
         email.setOwnerRef(newCustomer.getId());
         email.setEmailTo(newCustomer.getEmail());
         email.setEmailFrom("mestredasfacas2021@gmail.com");
-        email.setSubject("Bem-vido(a) a Mestre das facas");
-        email.setText(String.format(" Ola, %s, seja bem-vindo(a) à Mestre Das Facas! Espero que goste.", newCustomer.getName()));
+        email.setSubject("Bem-vido à Mestre das Facas");
+        email.setText(String.format(" Ola, %s, seja bem-vindo(a) à Mestre Das Facas \n"
+                +"Nossa missão é entregar a nossos clientes uma satisfação ao fazer um churrasco, ou aquele tão desejado almoço, janta e ainda um corte sensacional nos pães pela manhã.", newCustomer.getName()));
 
         try{
             SimpleMailMessage message = new SimpleMailMessage();
@@ -327,7 +326,7 @@ public class CustomerService {
 
     }
 
-
+    // METODO PARA ENVIAR O EMAIL DE RESET SENHA PARA O USUARIO
     public void updateResetPasswordToken(String token, String email) throws CustomerNotFoundException {
        Optional <Customer> customer = customerRepository.findByEmail(email);
        if (customer.isPresent()){
@@ -356,7 +355,7 @@ public class CustomerService {
 
     }
 
-
+    // METODO PARA ENVIAR O EMAIL DE RESET SENHA PARA O USUARIO
     public void sendPasswordRecoveryEmail(String email, String resetPasswordLink){
 
         Optional <Customer> customer = customerRepository.findByEmail(email);
@@ -370,12 +369,15 @@ public class CustomerService {
         newEmail.setOwnerRef(customer.get().getId());
         newEmail.setEmailTo(email);
         newEmail.setEmailFrom("mestredasfacas2021@gmail.com");
-        newEmail.setText(
-                "<p> Olá, </p>"
-                + "<p>Você solicitou a redefinição </p> "
-                + "<p> Clique no link abaixo para resetar sua senha: </p>"
-                + "<p> <b> <a href=\"" + resetPasswordLink + "\" > Resetar minha senha</a><b></p>"
-                + "<p> Caso não tenha sido você que tenha feito esta solicitação por favor ignore este email </p>");
+        newEmail.setSubject("Lembrete de senha ");
+
+
+        String bodyText = " Ops, você esqueceu sua senha, mas não se preocupe, você já pode alterá-la. ;) \n"
+                +"\n Segue o Link para redefinir sua senha: "
+                +resetPasswordLink;
+
+
+        newEmail.setText (bodyText);
 
 
 
