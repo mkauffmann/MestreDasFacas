@@ -19,7 +19,7 @@
             <h3>Hello <span th:text="${name}" th:remove="tag"></span>!</h3>
             <p>Welcome to Perfume online store.</p>
             <p>To complete registration please follow the link: </p>
-
+            <a th:href="@{${registrationUrl}}">confirm registration</a>
         </td>
     </tr>
 </table>

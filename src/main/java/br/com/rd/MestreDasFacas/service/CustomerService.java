@@ -5,7 +5,6 @@ import br.com.rd.MestreDasFacas.enums.StatusEmail;
 import br.com.rd.MestreDasFacas.model.dto.*;
 import br.com.rd.MestreDasFacas.model.entity.*;
 import br.com.rd.MestreDasFacas.repository.contract.*;
-import br.com.rd.MestreDasFacas.security.JWTConfiguration;
 import br.com.rd.MestreDasFacas.service.conversion.DtoConversion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
@@ -14,11 +13,9 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Email;
-import java.sql.SQLException;
+import java.io.File;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -296,15 +293,28 @@ public class CustomerService {
         return null;
 
     }
+
+
+
     public void sendSignUpEmail(Customer newCustomer){
+
 
         EmailModel email = new EmailModel();
         email.setSendDateEmail(LocalDateTime.now());
         email.setOwnerRef(newCustomer.getId());
         email.setEmailTo(newCustomer.getEmail());
         email.setEmailFrom("mestredasfacas2021@gmail.com");
-        email.setSubject("Bem-vido(a) a Mestre das facas");
-        email.setText(String.format(" Ola, %s, seja bem-vindo(a) à Mestre Das Facas! Espero que goste.", newCustomer.getName()));
+        email.setSubject("Seja muito Bem-vido(a) a Mestre das facas");
+
+
+
+
+        String html = "Olá, "  + newCustomer.getName() +
+                "Ficamos felizes com seu cadastro\n " +
+                "Agora você pode realizar sua primeira compra!";
+
+
+        email.setText(html);
 
         try{
             SimpleMailMessage message = new SimpleMailMessage();

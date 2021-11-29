@@ -88,6 +88,7 @@ public class RequestService {
                     inventoryRepository.save(obj);
                 }
 
+
 //            Product product = i.getProduct();
 //            inventoryRepository.findById(id);
             }
@@ -646,7 +647,7 @@ public class RequestService {
 
         business.setInstallmentsValue(valorTotalParcelado);
         business.setTotalValue(valorTotal);
-        
+
 
 
         if (dto.getCreditCard() != null) {
@@ -721,4 +722,38 @@ public class RequestService {
         }
         return true;
     }
+
+
+//    public void sendNewRequestEmail(Customer newcustomer){
+//
+//
+//        EmailModel newEmailRequest = new EmailModel();
+//        newEmailRequest.setSendDateEmail(LocalDateTime.now());
+//        newEmailRequest.setOwnerRef(newcustomer.getId());
+//        newEmailRequest.setEmailTo(newcustomer.getEmail());
+//
+//        newEmailRequest.setEmailFrom("mestredasfacas2021@gmail.com");
+//        newEmailRequest.setSubject("Bem-vido(a) a Mestre das facas");
+//        newEmailRequest.setText(String.format(" Ola, seja bem-vindo(a) à Mestre Das Facas! Espero que goste."));
+//
+//        try{
+//            SimpleMailMessage message = new SimpleMailMessage();
+//            message.setFrom(newEmailRequest.getEmailFrom());
+//            message.setTo(newEmailRequest.getEmailTo());
+//            message.setSubject(newEmailRequest.getSubject());
+//            message.setText(newEmailRequest.getText());
+//            emailSender.send(message);
+//            newEmailRequest.setStatusEmail(StatusEmail.SENT);
+//        }catch (MailException e ) {
+//            newEmailRequest.setStatusEmail(StatusEmail.ERROR);
+//
+//        }finally {
+//            emailRepository.save(newEmailRequest);
+//        }
+//
+//
+
+
+
+
 }
