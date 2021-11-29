@@ -186,7 +186,7 @@ public class RequestService {
     }
 
     public List<RequestDTO> listAllByCustomers(Long id) {
-        List<Request> requestList = this.requestRepository.myFindAllRequestByCustomer(id);
+        List<Request> requestList = this.requestRepository.findByCustomerIdEquals(id);
         return listToDto(requestList);
     }
 
