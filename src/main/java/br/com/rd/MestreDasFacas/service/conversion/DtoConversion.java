@@ -2,8 +2,13 @@ package br.com.rd.MestreDasFacas.service.conversion;
 
 import br.com.rd.MestreDasFacas.model.dto.*;
 import br.com.rd.MestreDasFacas.model.entity.*;
+import br.com.rd.MestreDasFacas.repository.contract.BrandRepository;
+//import br.com.rd.MestreDasFacas.repository.contract.CableColorRepository;
+import br.com.rd.MestreDasFacas.repository.contract.ProductRepository;
 import br.com.rd.MestreDasFacas.repository.contract.*;
+import br.com.rd.MestreDasFacas.security.AESEncryptionDecryption;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -35,6 +40,22 @@ public class DtoConversion {
 
     @Autowired
     GenderRepository genderRepository;
+
+    @Autowired
+    BrandRepository brandRepository;
+
+    @Autowired
+    CategoryRepository categoryRepository;
+
+    @Autowired
+    ProductPriceRepository productPriceRepository;
+
+    @Autowired
+    ProductRepository productRepository;
+
+
+    @Autowired
+    AESEncryptionDecryption aesCrypt;
 
     /*
     *
@@ -206,7 +227,15 @@ public class DtoConversion {
         CreditCardDTO dto = new CreditCardDTO();
 
         dto.setId(creditCard.getId());
-        dto.setCardNumber(creditCard.getCardNumber());
+
+
+
+        //não exibir número do cartão no dto
+        //enviar apenas últimos quatro digitos
+        dto.setLastFourDigits((creditCard.getLastFourDigits()));
+
+
+        dto.setCardValidDate(creditCard.getCardValidDate());
         dto.setCpf(creditCard.getCpf());
         dto.setHolderName(creditCard.getHolderName());
 
@@ -292,7 +321,7 @@ public class DtoConversion {
         }
 
         //checar se telefone existe
-        Optional<Telephone> op = telephoneRepository.findTelephone(dto.getDdd(), dto.getPhoneNumber());
+        Optional<Telephone> op = telephoneRepository.findByDddAndPhoneNumber(dto.getDdd(), dto.getPhoneNumber());
         if(op.isPresent()){
             return op.get();
         } else {
@@ -341,7 +370,7 @@ public class DtoConversion {
         }
 
         //checar se cidade já existe na base
-        Optional<City> op = cityRepository.findCityByName(dto.getCityName());
+        Optional<City> op = cityRepository.findByCityNameEquals(dto.getCityName());
         if(op.isPresent()){
             return op.get();
         } else {
@@ -374,7 +403,20 @@ public class DtoConversion {
         creditCard.setCardBrand(brandDto);
         creditCard.setHolderName(dto.getHolderName());
         creditCard.setCpf(dto.getCpf());
-        creditCard.setCardNumber(dto.getCardNumber());
+
+        //pegar últimos quatro dígitos
+        String[] numberArr = dto.getCardNumber().split(" ");
+        creditCard.setLastFourDigits(numberArr[3]);
+
+        //encodar numero do cartao
+        String criptoNumber = aesCrypt.encrypt(dto.getCardNumber());
+        creditCard.setCardNumber(criptoNumber);
+
+        //encodar cvv
+        String criptoCvv = aesCrypt.encrypt(dto.getCvv());
+        creditCard.setCvv(criptoCvv);
+
+        creditCard.setCardValidDate(dto.getCardValidDate());
 
         return creditCard;
 
@@ -407,4 +449,297 @@ public class DtoConversion {
      * CONVERSORES CUSTOMER FIM
      *
      */
+
+
+
+
+
+    // Métodos de conversão para Brand:
+
+    public Brand brandDtoToBusiness(BrandDTO dto) {
+        Brand business = new Brand();
+
+        if(dto.getId() != null) {
+            Long brandId = dto.getId();
+            if (brandRepository.existsById(brandId)) {
+                business = brandRepository.getById(brandId);
+            } else {
+                business.setBrand(dto.getBrand());
+            }
+        } else {
+            business.setBrand(dto.getBrand());
+        }
+        return business;
+    }
+
+    public BrandDTO brandBusinessToDto(Brand business) {
+
+        BrandDTO dto = new BrandDTO();
+
+        dto.setId(business.getId());
+        dto.setBrand(business.getBrand());
+
+        return dto;
+
+    }
+
+
+    // Métodos de conversão para Category:
+
+    public Category categoryDtoToBusiness(CategoryDTO dto) {
+        Category business = new Category();
+
+        if(dto.getId() != null) {
+            Long ctgId = dto.getId();
+
+            if (categoryRepository.existsById(ctgId)) {
+                business = categoryRepository.getById(ctgId);
+            } else {
+                business.setDescription_category(dto.getDescription_category());
+            }
+        } else {
+            business.setDescription_category(dto.getDescription_category());
+        }
+        return business;
+    }
+
+    public CategoryDTO categoryBusinessToDto(Category business) {
+
+        CategoryDTO dto = new CategoryDTO();
+
+        dto.setId(business.getId());
+        dto.setDescription_category(business.getDescription_category());
+
+        return dto;
+
+    }
+
+    // Métodos de conversão para Preço do Produto:
+
+    public ProductPrice productPriceDtoToBusiness(ProductPriceDTO dto) {
+        ProductPrice business = new ProductPrice();
+
+        if(dto.getId() != null) {
+            Long ppId = dto.getId();
+
+            if (productPriceRepository.existsById(ppId)) {
+                business = productPriceRepository.getById(ppId);
+            } else {
+                business.setValue(dto.getValue());
+            }
+        } else {
+            business.setValue(dto.getValue());
+        }
+        return business;
+    }
+
+    public ProductPriceDTO productPriceBusinessToDto(ProductPrice business) {
+
+        ProductPriceDTO dto = new ProductPriceDTO();
+
+        dto.setId(business.getId());
+        dto.setValue(business.getValue());
+
+        return dto;
+    }
+
+    // Métodos de conversão para Produto:
+
+
+
+
+
+    public Product productDtoToBusiness(ProductDTO dto) {
+        if(dto.getId() != null){
+            Optional<Product> op = productRepository.findById(dto.getId());
+            if(op.isPresent()){
+                return op.get();
+
+            }
+
+        }
+        Product business = new Product();
+        Brand brand = brandDtoToBusiness(dto.getBrand());
+        Category category = categoryDtoToBusiness(dto.getCategory());
+        ProductPrice pp = productPriceDtoToBusiness(dto.getProductPrice());
+
+
+        business.setProductName(dto.getProductName());
+        business.setDescriptionProduct(dto.getDescriptionProduct());
+        business.setWeight(dto.getWeight());
+        business.setLength(dto.getLength());
+        business.setHeight(dto.getHeight());
+        business.setWidth(dto.getWidth());
+        business.setBrand(brand);
+        business.setCategory(category);
+        business.setProductPrice(pp);
+        business.setImage(dto.getImage());
+        business.setFeatured(dto.getFeatured());
+        business.setNews(dto.getNews());
+
+
+        return business;
+    }
+
+    public ProductDTO productBusinessToDto(Product business) {
+
+        ProductDTO dto = new ProductDTO();
+        BrandDTO brandDto = brandBusinessToDto(business.getBrand());
+        CategoryDTO categoryDto = categoryBusinessToDto(business.getCategory());
+        ProductPriceDTO pdDto = productPriceBusinessToDto(business.getProductPrice());
+
+
+        dto.setId(business.getId());
+        dto.setProductName(business.getProductName());
+        dto.setDescriptionProduct(business.getDescriptionProduct());
+        dto.setHeight(business.getHeight());
+        dto.setLength(business.getLength());
+        dto.setWeight(business.getWeight());
+        dto.setWidth(business.getWidth());
+        dto.setBrand(brandDto);
+        dto.setCategory(categoryDto);
+        dto.setProductPrice(pdDto);
+        dto.setImage(business.getImage());
+        dto.setFeatured(business.getFeatured());
+        dto.setNews(business.getNews());
+
+        return dto;
+    }
+
+    public List<ProductDTO> productListToDto(List<Product> list) {
+        List<ProductDTO> listDto = new ArrayList<>();
+
+        for(Product p : list) {
+            listDto.add(productBusinessToDto(p));
+        }
+
+        return listDto;
+    }
+
+    // Conversões de Estoque (Inventory):
+
+    public Inventory inventoryDtoToBusiness(InventoryDTO dto) {
+        Inventory business = new Inventory();
+        business.setQuantityInventory(dto.getQuantityInventory());
+
+        if (dto.getProduct() != null) {
+            Product product = productDtoToBusiness(dto.getProduct());
+            business.setProduct(product);
+        }
+
+        return business;
+    }
+
+    public InventoryDTO inventoryBusinessToDto(Inventory business) {
+        InventoryDTO dto = new InventoryDTO();
+
+        dto.setId(business.getId());
+        dto.setQuantityInventory(business.getQuantityInventory());
+
+        if(business.getProduct() != null) {
+            ProductDTO productDTO = productBusinessToDto(business.getProduct());
+            dto.setProduct(productDTO);
+        }
+
+        return dto;
+    }
+
+    public List<InventoryDTO> inventoryListToDto(List<Inventory> list) {
+        List<InventoryDTO> listDto = new ArrayList<>();
+
+        for (Inventory iv : list) {
+            listDto.add(inventoryBusinessToDto(iv));
+        }
+
+        return listDto;
+    }
+
+
+
+
+
+
+    //ITEM REQUEST CONVERSOES:
+
+
+
+
+
+    public ItemRequest itemRequestDtoToBusiness(ItemRequestDTO dto) {
+        ItemRequest business = new ItemRequest();
+
+        business.setQuantity(dto.getQuantity());
+        if(dto.getProduct() != null){
+            Product product =  productDtoToBusiness(dto.getProduct());
+            business.setProduct(product);
+
+            Double precoProduto = product.getProductPrice().getValue();
+            Double precoTotal = precoProduto * dto.getQuantity();
+            business.setTotal_value(precoTotal);
+
+        }
+
+        return business;
+    }
+
+    public ItemRequestDTO itemRequestbusinessToDto(ItemRequest business) {
+
+        ItemRequestDTO dto = new ItemRequestDTO();
+        dto.setId(business.getId());
+        dto.setQuantity(business.getQuantity());
+        dto.setTotal_value(business.getTotal_value());
+
+        if(business.getProduct() != null){
+            ProductDTO pdto = productBusinessToDto(business.getProduct());
+            dto.setProduct(pdto);
+
+            Double precoProduto = pdto.getProductPrice().getValue();
+            Double precoTotal = precoProduto * business.getQuantity();
+            dto.setTotal_value(precoTotal);
+
+        }
+
+        return dto;
+    }
+
+    public List<ItemRequestDTO> itemRequestListToDto(List<ItemRequest> list) {
+        List<ItemRequestDTO> listDto = new ArrayList<>();
+
+        for(ItemRequest i : list) {
+            listDto.add(itemRequestbusinessToDto(i));
+        }
+
+        return listDto;
+    }
+
+    public List<ItemRequest> itemRequestListFromDto(List<ItemRequestDTO> listDTO) {
+        List<ItemRequest> list = new ArrayList<>();
+
+        for(ItemRequestDTO i : listDTO) {
+            list.add(itemRequestDtoToBusiness(i));
+        }
+
+        return list;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

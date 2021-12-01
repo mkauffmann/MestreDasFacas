@@ -5,8 +5,11 @@ import lombok.Data;
 @Data
 public class ContactDTO {
     private Long id;
-    private String nome;
+    private String cpf;
+    private String complete_name;
     private String email;
-    private String titulo;
-    private String mensagem;
+    private Long tel;
+    private String  motivo;
+    private Long pd_numero;
+    private String msg;
 }

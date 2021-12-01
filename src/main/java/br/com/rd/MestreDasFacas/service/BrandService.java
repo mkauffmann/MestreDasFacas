@@ -2,7 +2,7 @@ package br.com.rd.MestreDasFacas.service;
 
 import br.com.rd.MestreDasFacas.model.dto.BrandDTO;
 import br.com.rd.MestreDasFacas.model.entity.Brand;
-import br.com.rd.MestreDasFacas.repository.BrandRepository;
+import br.com.rd.MestreDasFacas.repository.contract.BrandRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

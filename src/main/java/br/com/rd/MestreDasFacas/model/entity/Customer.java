@@ -4,6 +4,7 @@ package br.com.rd.MestreDasFacas.model.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -25,8 +26,7 @@ public class Customer {
     private String cpf;
 
     @Column(name = "DATA_NASCIMENTO")
-    @Temporal(TemporalType.DATE)
-    private Date birthDate;
+    private LocalDate birthDate;
 
     @Column(name = "SENHA", nullable = false)
     private String password;
@@ -58,5 +58,12 @@ public class Customer {
             inverseJoinColumns = {@JoinColumn(name = "ID_CARTAO_CREDITO")}
     )
     private List<CreditCard> creditCards;
+
+
+    @Column ( name = "reset_password_token")
+    private String resetPasswordToken;
+
+
+
 
 }

@@ -10,6 +10,7 @@ import java.util.Optional;
 
 @Repository
 public interface TelephoneRepository extends JpaRepository<Telephone, Long> {
-    @Query(value = "SELECT * FROM TELEFONE WHERE DDD = :ddd AND NUMERO_TELEFONE = :tel", nativeQuery = true)
-    Optional<Telephone> findTelephone(@Param("ddd") String ddd, @Param("tel") String tel);
+
+    Optional<Telephone> findByDddAndPhoneNumber(String ddd, String tel);
+
 }

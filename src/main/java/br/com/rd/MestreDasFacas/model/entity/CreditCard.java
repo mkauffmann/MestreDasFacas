@@ -15,6 +15,15 @@ public class CreditCard {
     @Column(name = "NUMERO_CARTAO", nullable = false)
     private String cardNumber;
 
+    @Column(name = "ULTIMOS_QUATRO_DIGITOS", nullable = false)
+    private String lastFourDigits;
+
+    @Column(name="VALIDADE", nullable = false)
+    private String cardValidDate;
+
+    @Column(name="CVV", nullable = false)
+    private String cvv;
+
     @Column(name = "CPF_TITULAR", nullable = false)
     private String cpf;
 

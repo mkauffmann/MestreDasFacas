@@ -18,7 +18,7 @@ public class RequestController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public RequestDTO create(@RequestBody RequestDTO dto) {
+    public RequestDTO create(@RequestBody RequestDTO dto) throws Exception {
         return this.requestService.addRequest(dto);
     }
 
@@ -43,6 +43,9 @@ public class RequestController {
         return this.requestService.findById(id);
     }
 
-
+    @GetMapping("/customer/{id}")
+    public List<RequestDTO> showListAllByCustomer(@PathVariable("id") Long id) {
+        return this.requestService.listAllByCustomers(id);
+    }
 
 }
